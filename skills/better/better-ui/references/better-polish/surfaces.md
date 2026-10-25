@@ -25,13 +25,7 @@ Derive the outer radius from tokens so the pair stays concentric when either cha
 }
 ```
 
-```tsx
-// Tailwind: 16px outer radius, 8px padding, 8px inner radius
-<div className="rounded-2xl p-2">
-  <div className="rounded-lg">...</div>
-</div>
-// Bad: rounded-xl on both, so the inner corners look pinched
-```
+The same radius on both layers is the common miss: the inner corners look pinched.
 
 Past about `24px` of padding the curves no longer read as related; choose each radius
 independently. Where the padding is deliberately asymmetric, keep the component's tokens.
@@ -49,13 +43,6 @@ Start the icon side at `2px` less padding than the text side, then judge by eye.
 }
 ```
 
-```tsx
-<button className="ps-4 pe-3.5 flex items-center gap-2">
-  <span>Continue</span>
-  <ArrowRightIcon />
-</button>
-```
-
 ### Play triangles
 
 A triangle's geometric center sits behind its visual center, so shift it toward its point:
@@ -70,7 +57,7 @@ A triangle's geometric center sits behind its visual center, so shift it toward 
 
 Stars, arrows and carets carry uneven weight. Fix the `viewBox` or path in the SVG so
 no component needs an offset. Where the asset cannot change, nudge a wrapper
-(`translate-x-px`), never the layout around it.
+(`translate: 1px 0`), never the layout around it.
 
 ## Shadow rings
 
@@ -174,16 +161,8 @@ opaque token there; see [better-colors](../better-colors.md).
 }
 ```
 
-```tsx
-<img
-  className="outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10"
-  src={src}
-  alt={alt}
-/>
-```
-
-Never `outline-slate-*`, `outline-zinc-*`, a palette near-black such as `#111827` or the
-accent: the tint shows as a colored fringe on the photo's edge. Skip transparent artwork
+Never a tinted gray from the palette (slate, zinc), a near-black such as `#111827` or
+the accent: the tint shows as a colored fringe on the photo's edge. Skip transparent artwork
 and deliberately borderless full-bleed photography. `outline` never changes the image's
 size, and at `-1px` offset it sits inside the edge and follows the corner radius.
 

@@ -4,7 +4,7 @@ Focus rings, focus not obscured, skip links, tabindex, focus trapping, the APG k
 
 ## Focus rings
 
-The browser shows `:focus-visible` for keyboard and assistive-tech focus. It suppresses it for mouse clicks on buttons and links but still shows it in text inputs. An `outline: none` or `focus:outline-none` with no visible replacement leaves sighted keyboard users with no way to see where they are.
+The browser shows `:focus-visible` for keyboard and assistive-tech focus. It suppresses it for mouse clicks on buttons and links but still shows it in text inputs. An `outline: none` (or a utility that sets it) with no visible replacement leaves sighted keyboard users with no way to see where they are.
 
 The browser's unmodified indicator adapts to platform and forced-color settings without the author predicting every background. Adding only `outline-offset` preserves it. A custom `outline: 2px solid` with no color renders `currentColor`, which may fail against the colors the outline crosses. The preference order:
 
@@ -21,20 +21,13 @@ The browser's unmodified indicator adapts to platform and forced-color settings 
 }
 ```
 
-```tsx
-// Tailwind: use the project's focus token or established focus-ring utility
-<button className="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus-ring)]">
-  Save
-</button>
-```
-
 Check the whole perimeter of a custom indicator against every adjacent color it crosses. That means component fills, page surfaces, images, gradients and hover and selected states. A token, brand color or `currentColor` passes only when that rendered check does.
 
 ### Forced colors
 
 In `forced-colors: active` (Windows High Contrast), keep the default color adjustment or name a system color such as `Highlight`. `forced-color-adjust: none` freezes the authored color, so use it only where you have checked the control stays perceivable.
 
-Forced colors also drop `box-shadow`, so a ring built only from a shadow, including Tailwind's `ring-*` utilities, disappears. Keep the shadow if the design wants it and add a transparent outline, which the system repaints in a visible color:
+Forced colors also drop `box-shadow`, so a ring built only from a shadow, including utility `ring` classes, disappears. Keep the shadow if the design wants it and add a transparent outline, which the system repaints in a visible color:
 
 ```css
 :focus-visible {
@@ -42,8 +35,6 @@ Forced colors also drop `box-shadow`, so a ring built only from a shadow, includ
   outline: 2px solid transparent;
 }
 ```
-
-Tailwind v4: pair `focus-visible:ring-2` with `focus-visible:outline-hidden`, which keeps a transparent outline under forced colors. `outline-none` removes it everywhere.
 
 Group focus styles with `:focus-within` when a wrapper should light up while an inner input has focus, such as a search box with an icon inside the border.
 
@@ -74,7 +65,7 @@ Target `<main id="main">` and visually hide the link until focused:
 </body>
 ```
 
-Tailwind: `sr-only focus:not-sr-only` on the link. Give in-page anchor targets `scroll-margin-block-start`, such as `80px` under a sticky header, so the target isn't hidden when jumped to.
+Give in-page anchor targets `scroll-margin-block-start`, such as `80px` under a sticky header, so the target isn't hidden when jumped to.
 
 ## tabindex rules
 
@@ -86,19 +77,22 @@ Tailwind: `sr-only focus:not-sr-only` on the link. Give in-page anchor targets `
 
 Composite widgets, meaning tabs, menus, toolbars and radio groups, occupy one Tab stop. The active item has `tabindex="0"`, all others `tabindex="-1"`, and arrow keys move both focus and the `0`:
 
-```tsx
-<div role="tablist">
-  {tabs.map((tab, i) => (
-    <button
-      role="tab"
-      tabIndex={i === activeIndex ? 0 : -1}
-      aria-selected={i === activeIndex}
-      onKeyDown={handleArrowKeys} // ArrowLeft/ArrowRight move activeIndex, wrapping
-    >
-      {tab.label}
-    </button>
-  ))}
+```html
+<div role="tablist" aria-label="Account">
+  <button role="tab" aria-selected="true" tabindex="0">Profile</button>
+  <button role="tab" aria-selected="false" tabindex="-1">Billing</button>
 </div>
+```
+
+```js
+tablist.addEventListener("keydown", (e) => {
+  const tabs = [...tablist.querySelectorAll('[role="tab"]')];
+  const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key]; // reverse under dir="rtl"
+  if (!step) return;
+  const next = tabs[(tabs.indexOf(document.activeElement) + step + tabs.length) % tabs.length];
+  tabs.forEach((t) => (t.tabIndex = t === next ? 0 : -1));
+  next.focus(); // automatic activation also sets aria-selected and shows its panel
+});
 ```
 
 A combobox keeps DOM focus in its input instead. Point `aria-activedescendant` on the input at the `id` of the highlighted option and update it on arrow keys.
@@ -107,24 +101,23 @@ A combobox keeps DOM focus in its input instead. Point `aria-activedescendant` o
 
 Native `<dialog>` with `showModal()` makes everything behind it inert and closes on Escape:
 
-```tsx
-dialogRef.current.showModal(); // on open
-dialogRef.current.close(); // on close
-triggerRef.current?.focus(); // return focus to the element that opened it
+```js
+dialog.showModal(); // on open
+dialog.close(); // on close
+trigger.focus(); // return focus explicitly; the opener may have re-rendered
 ```
 
 A custom overlay that can't use `<dialog>` needs `role="dialog"`, `aria-modal="true"` and an accessible name via `aria-labelledby`. Put `inert` on everything behind it, which removes background content from the tab order and from assistive tech in one move:
 
-```tsx
+```js
 // On open
 document.getElementById("app-content").inert = true;
-const dialog = dialogRef.current;
 (dialog.querySelector("[autofocus]") ??
   dialog.querySelector("button, [href], input, select, textarea"))?.focus();
 
 // On close
 document.getElementById("app-content").inert = false;
-triggerRef.current?.focus();
+trigger.focus();
 ```
 
 Either way:

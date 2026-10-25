@@ -32,9 +32,10 @@ interaction can happen many times a minute, it stays silent.
 ## Default to restraint
 
 A brochure site needs at most one or two sounds, on its most deliberate clicks,
-such as the primary contact action. A good calibration: a sound on the contact
-button and a playful one on the wordmark, nothing on background clicks, no
-success fanfare for sending an email. Ship fewer; a removed sound is never missed.
+such as the primary contact action: nothing on background clicks, no success
+fanfare for sending an email. Ship fewer; a removed sound is never missed. A worked
+example of what to keep and what to cut is in
+[when-to-use.md](better-sound/when-to-use.md#calibration-a-restrained-brochure-site).
 
 ## Match weight to the action
 

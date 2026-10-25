@@ -93,7 +93,7 @@ Support: Chrome 120, Firefox 117, Safari 17.2 for nesting without a leading `&`.
 - `@scope` matches by proximity: when two scopes match, the nearer root wins at equal specificity. The root adds no weight to the rules inside; `:scope` adds a class's weight and `&` the root selector's.
 - Without `@scope` support, the same intent is a child combinator from the root class, such as `.card > p`.
 
-Support: `@scope` in Chrome 118, Safari 17.4 and Firefox 146.
+Support: `@scope` arrived in Chromium and Safari well before Firefox; check the project's targets before relying on it, and keep the child-combinator fallback where it is missing.
 
 ## Make tokens custom properties
 
@@ -152,4 +152,4 @@ Leave these out:
 - `text-box` trimming on `*`. It shrinks every text block and every button; trim only single-line labels, as [better-typography](../better-typography.md) describes.
 - Resets that put every element in one grid cell or set `display: contents` on containers. They remove the boxes that layouts and components style.
 - `text-rendering: optimizeLegibility` on body text. It costs rendering time for long text and `auto` is the recommended default.
-- A global rule that forces every duration to `0.01ms` for reduced motion. Build the static state first and add motion inside the query; see [better-accessibility](../better-accessibility.md).
+- A global rule that forces every duration to `0.01ms` for reduced motion, in a new project. Build the static state first and add motion inside the query; the kill switch is only a retrofit fallback for an existing codebase ([motion-and-zoom.md](../better-accessibility/motion-and-zoom.md#prefers-reduced-motion)).

@@ -77,9 +77,9 @@ Reserve `primary` for exactly one meaning. `--color-text-primary` for body text 
 
 Every one of them is a case of **Use a token only in its role**. See [color-usage.md](color-usage.md).
 
-## In Tailwind projects
+## Optional: Tailwind v4 projects
 
-Tailwind v4 generates utilities from `@theme`, so names declared there become the API. Declare primitives and semantics in the same block; the `--color-*` namespace is what produces `bg-*`, `text-*` and `border-*`. Tailwind's default palette is already `oklch()` primitives under `--color-{hue}-{step}`, so a custom scale written in `oklch()` sits beside it in one notation:
+Read this only in a Tailwind project; the tiers above hold in any styling system. Tailwind v4 generates utilities from `@theme`, so names declared there become the API. Declare primitives and semantics in the same block; the `--color-*` namespace is what produces `bg-*`, `text-*` and `border-*`. Tailwind's default palette is already `oklch()` primitives under `--color-{hue}-{step}`, so a custom scale written in `oklch()` sits beside it in one notation:
 
 ```css
 @theme {

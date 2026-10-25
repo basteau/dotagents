@@ -11,10 +11,11 @@ code is in [recipes.md](recipes.md), presence and exit lifecycles in
 
 ## Press feedback
 
-For a control that benefits from physical feedback, scale it to about 97% of rest
-over 100–160ms; keep an established nearby value such as 96%. Respond on press-down,
-not on release, and let a cancelled press (dragged away, interrupted) return without
-activating. Scaling the visual must not shrink the hit area. Not every control needs
+For a control that benefits from physical feedback, scale it to the project's press
+value over 100–160ms; where the project has none, use 0.97 and stay within
+0.95–0.98. Show the pressed state on press-down and activate on release, so a
+cancelled press (dragged away, interrupted) returns without activating. Scaling the
+visual must not shrink the hit area. Not every control needs
 it; give the component an opt-out where motion distracts, and never scale a
 disabled control. Under reduced motion, keep scale unchanged and use color, surface,
 or label feedback. Hover styling is optional and only for hover-capable input.
@@ -117,10 +118,10 @@ path between its two states. Keep semantic state independent of decorative copie
 View transitions follow the same timing rules: a root crossfade around 150–250ms
 with a gentle ease, a shared element moving between positions with ease-in-out,
 around 250–350ms, using the project's tokens. Keep them short: the snapshot layer
-covers live content and intercepts pointer input until it finishes, and a new
-transition skips the running one, so nothing a person may reverse mid-flight
-belongs there. Under
-reduced motion, drop group movement and resizing and keep at most the crossfade.
+covers live content until it finishes, so input may not reach the page in the
+meantime, and a new transition skips the running one. Nothing a person may reverse
+mid-flight belongs there. Under reduced motion, drop group movement and resizing and
+keep at most the crossfade.
 Naming, cleanup, and styling mechanics are in
 [better-polish/pseudo-elements.md](../better-polish/pseudo-elements.md).
 

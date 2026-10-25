@@ -16,6 +16,26 @@ working configuration, plugins, tokens, and component composition conventions.
   `p-4 px-6` and breakpoint/state overrides. Class-string order does not control
   CSS precedence; use the project's existing override mechanism.
 
+## Utility equivalents for the domain references
+
+The domain references write plain CSS; these are the v4 utilities that carry the
+same rules. Check generated CSS before adding config.
+
+| Rule | Utilities |
+| --- | --- |
+| Gate hover by capability | v4 `hover:` already compiles to `@media (hover: hover)`; v3 needs `future.hoverOnlyWhenSupported` |
+| Name transitioned properties | `transition-[scale,opacity]`; `transition-transform` covers `transform`, `translate`, `scale` and `rotate` |
+| Individual transforms | v4 `scale-*`, `translate-*` and `rotate-*` write the individual properties; v3 writes `transform`, so name `transform` there |
+| Press feedback | `transition-transform duration-150 ease-out enabled:active:scale-[0.97]`, or the project's press value |
+| Reduced motion | Prefix movement, scale and blur with `motion-safe:`; `motion-reduce:` holds overrides for the preference |
+| Focus ring that survives forced colors | `focus-visible:ring-2` plus `focus-visible:outline-hidden` (a transparent outline); `outline-none` removes the outline everywhere |
+| Visually hidden text, skip link | `sr-only`; `sr-only focus:not-sr-only` on the skip link |
+| Decorative layer | `pointer-events-none` |
+| Hit area larger than the visual | `relative after:absolute after:top-1/2 after:left-1/2 after:size-11 after:-translate-1/2` |
+| Concentric radius | Outer `rounded-*` = inner radius + padding, as `rounded-2xl p-2` around `rounded-lg` |
+| Image outline | `outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10` |
+| Directional icon in RTL | `rtl:-scale-x-100`, and no second flip on the same element |
+
 ## Missing styles
 
 Distinguish incomplete class strings, excluded source files, unsupported utilities,

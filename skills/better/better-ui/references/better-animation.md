@@ -82,8 +82,8 @@ the curves, duration table, and spring starting values in
 Prefer transform and opacity; name every animated property and never transition
 `all`. Use layout animation only for a genuine layout change, and measure it. Never
 enter from `scale(0)`: start from 0.9–0.97 with opacity, or a plain fade when
-movement adds nothing. Grow anchored surfaces from their trigger and keep dialogs
-centered. Rendering cost, frame budgets, and diagnosis live in
+movement adds nothing. Press feedback uses the project's press scale, or 0.97 where
+it has none. Grow anchored surfaces from their trigger and keep dialogs centered. Rendering cost, frame budgets, and diagnosis live in
 [timing-and-performance.md](better-animation/timing-and-performance.md).
 
 ## Keep motion continuous
@@ -101,7 +101,7 @@ only small, infrequent groups.
 | Mount, unmount, presence, exit modes, nested exits | [enter-exit.md](better-animation/enter-exit.md) |
 | Icon swaps and shape morphs | [icons-and-morphing.md](better-animation/icons-and-morphing.md) |
 | Drag, swipe, momentum, rubber-banding | [gestures.md](better-animation/gestures.md) |
-| Ready-made web implementations | [recipes.md](better-animation/recipes.md) |
+| Copy-ready CSS and JavaScript for the patterns above | [recipes.md](better-animation/recipes.md) |
 
 ## Ship reduced motion and input gating with it
 

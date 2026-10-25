@@ -18,7 +18,7 @@ One neutral ramp, one accent ramp and only the status ramps the product actually
 
 ## Every step has a job
 
-A ramp is not a gradient to pick from by eye. Each step exists because a role needs it: page background, component hover, border, solid fill, body text. Do not generate a step no role consumes. Both the Tailwind `50`–`950` and Radix `1`–`12` conventions map to those roles ([palette-structure.md](better-colors/palette-structure.md)).
+A ramp is not a gradient to pick from by eye. Each step exists because a role needs it: page background, component hover, border, solid fill, body text. Do not generate a step no role consumes. Both common numbering conventions, by lightness (`50`–`950`, as in Tailwind) and by role (`1`–`12`, as in Radix), map to those roles ([palette-structure.md](better-colors/palette-structure.md)).
 
 ## Name primitives by hue, semantics by role
 
@@ -64,7 +64,7 @@ The space is a look, not a correctness setting. Default to `in oklab` for even b
 | --- | --- |
 | A hex, `rgb(` or `oklch(` literal in a component file where a token exists | Reuse or add the role token, in the project's notation |
 | One `oklch(` value in a codebase otherwise written in hex | Write it in the established notation unless a migration is in scope |
-| `var(--blue-600)` or `bg-blue-600` in a component file | Point a semantic token at the primitive and use that |
+| A primitive (`var(--blue-600)`, or a utility class built from one) in a component file | Point a semantic token at the primitive and use that |
 | A semantic name containing a hue or a component, as in `--color-blue-button` or `--color-sidebar-gray` | Rename it for its role: `--color-accent-solid`, `--color-bg-surface` |
 | `--color-primary` and `--color-text-primary` both defined | Rename the brand token `accent` |
 | A `border` or `separator` token inside `color:`, or a `text` token inside `background:` | Add a token for the missing role |
@@ -76,8 +76,8 @@ The space is a look, not a correctness setting. Default to `in oklab` for even b
 | Color tokens set under both `prefers-color-scheme` and a `.dark` class | Pick one switching mechanism and use it throughout |
 | A contrast fix that changes hue and leaves lightness | Change `L`, the channel contrast responds to |
 | `prefers-contrast: more` overriding a color for both appearances in one block | Give each appearance its own increased-contrast value |
-| Text on a color with alpha, such as `/50`, `rgba(` or `color-mix(` with `transparent` | Measure the rendered result, or use a solid token |
-| `text-white` on a Tailwind `500` fill | Measure it; white on most `500` hues fails 4.5:1, so move the fill to `600` |
+| Text on a color with alpha, such as `rgba(`, `color-mix(` with `transparent` or a utility's `/50` modifier | Measure the rendered result, or use a solid token |
+| White text on a mid-ramp (`500`) fill | Measure it; white on most `500` hues fails 4.5:1, so move the fill a step darker |
 | `oklch()` chroma beyond sRGB with no sRGB value declared before it | Declare the sRGB value first, then the vivid one inside `@media (color-gamut: p3)` |
 | A gray converted to `oklch(L 0.0001 89.9)` | Write `oklch(L 0 0)` |
 | An unsupported color function inside a custom property, on a matrix that needs fallbacks | Guard the token definition with `@supports` |

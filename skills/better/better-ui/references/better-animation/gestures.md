@@ -3,8 +3,7 @@
 An interface feels alive when motion starts from what is on screen now, inherits the
 person's velocity, projects momentum forward, and can be grabbed and reversed at any
 instant. Use the platform's gesture system and springs; the web examples use Pointer
-Events and plain math. General spring settings live in
-[timing-and-performance.md](timing-and-performance.md#springs).
+Events and plain math, and the library section at the end is optional.
 
 ## Respond on contact
 
@@ -40,29 +39,21 @@ follows the finger instead of finishing first.
 - **Decompose 2D motion** into independent horizontal and vertical springs. One
   spring on a 2D distance desyncs when the axes have different velocities.
 
-## Springs: damping and response
+## Settle with a spring
 
-Think in two parameters: damping ratio (1 settles without overshoot, below 1
-overshoots; lower is bouncier) and response (how quickly the value arrives, not a
-duration; a spring's settle time emerges from its parameters).
-
-| Interaction | Damping ratio | Response |
-| --- | --- | --- |
-| Default UI, reposition (picture-in-picture) | `1.0` | `0.4s` |
-| Rotation | `0.8` | `0.4s` |
-| Drawer or sheet after a drag | `0.8` | `0.3s` |
-
-Default to critical damping. Add bounce only when the gesture itself carried
-momentum: overshoot on a flicked card feels right; on a menu that faded in it feels
-wrong. In Motion, `bounce` plus `duration` maps closely to damping plus response.
+Settle released or interrupted motion with a spring, using the damping ratio and
+response values in [timing-and-performance.md](timing-and-performance.md#springs).
+Default to critical damping; drop to a ratio around 0.8 only when the gesture itself
+carried momentum: overshoot on a flicked card feels right, on a menu that faded in
+it feels wrong.
 
 ## Hand off velocity at release
 
 When the finger lifts, the animation continues at the finger's exact velocity, so
 there is no seam between dragging and animating. This is the detail that most
-separates fluid from fine. APIs that take absolute velocity (Motion's `velocity`, in
-px/s) get the raw value. APIs that want relative velocity normalize by the remaining
-distance:
+separates fluid from fine. APIs that take absolute velocity (for example Motion's
+`velocity`, in px/s) get the raw value. APIs that want relative velocity normalize by
+the remaining distance:
 
 ```js
 relativeVelocity = releaseVelocity / (target - current);

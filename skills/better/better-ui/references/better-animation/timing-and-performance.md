@@ -51,7 +51,7 @@ sharpening the curve.
 
 | Interaction | Curve | Starting duration |
 | --- | --- | --- |
-| Press feedback (scale 0.97) | Ease-out | 100–160ms |
+| Press feedback (project scale, default 0.97) | Ease-out | 100–160ms |
 | Hover color or opacity | `ease` | 120–180ms |
 | Small state change: switch, checkbox, toggle | Ease-out or `ease` | 180–260ms |
 | Tooltip or small popover | Ease-out | 125–200ms |
@@ -80,25 +80,34 @@ shorter, and tooltips after the first open can skip both delay and animation.
 
 ## Springs
 
-Keep ordinary controls critically damped or nearly so. Visible bounce (0.1–0.3)
-belongs to drag release, dismissal, and deliberately playful moments.
+Think in two parameters: damping ratio (1 settles without overshoot; lower bounces
+more) and response (roughly how long the value takes to arrive; the settle time
+emerges from the parameters). Keep ordinary controls critically damped or nearly
+so; visible bounce belongs to drag release, dismissal, and deliberately playful
+moments.
 
-| Use | Motion (`motion.dev`) starting config | Feel |
-| --- | --- | --- |
-| Drag release, snap back, swipe settle | `stiffness: 500, damping: 30` | Firm, settles quickly |
-| Interruptible position toggle | `stiffness: 400, damping: 25` | Responsive, slight give |
-| Element that should feel alive | `duration: 0.5, bounce: 0.2` | Easy to reason about; one setting per feel |
-| Decorative pointer or scroll tracking | `stiffness: 100, damping: 10, mass: 1` | Soft and visibly springy; decorative only |
-| No overshoot allowed | `bounce: 0`, or damping ratio 1 | Settles without oscillation |
+| Use | Damping ratio | Response | Feel |
+| --- | --- | --- | --- |
+| Default UI, reposition, no overshoot allowed | `1.0` | `0.4s` | Settles without oscillation |
+| Drag release, snap back, sheet or drawer settle | `0.8` | `0.3s` | Firm, carries the flick |
+| Rotation, interruptible position toggle | `0.8`–`0.9` | `0.3`–`0.4s` | Responsive, slight give |
+| Element that should feel alive | `0.8` | `0.5s` | A visible but brief overshoot |
+| Decorative pointer or scroll tracking | `0.5` | `0.6s` | Soft, visibly springy; decorative only |
 
 Spring parameters are not portable. Engines differ in units and precedence for mass,
-stiffness, damping, damping ratio, response, duration, and bounce. For a
-physics-style spring, damping ratio ≈ `damping / (2 × √(stiffness × mass))`: 1 settles
-without overshoot, lower bounces. Check the trajectory in the target engine, avoid
-very high stiffness with very low damping, and clamp where a boundary must never be
-crossed. Pass gesture release velocity into the spring so a fast flick travels
-faster than a slow one. Tying a value directly to the pointer feels artificial;
-smoothing it through a spring adds momentum, but only for decoration, never for data.
+stiffness, damping, damping ratio, response, duration, and bounce; translate the
+table into the engine's terms and check the trajectory there. For a physics-style
+spring, damping ratio ≈ `damping / (2 × √(stiffness × mass))` and response ≈
+`2π × √(mass / stiffness)`. Avoid very high stiffness with very low damping, and
+clamp where a boundary must never be crossed. Pass gesture release velocity into the
+spring so a fast flick travels faster than a slow one. Smoothing a pointer-tied
+value through a spring adds momentum, but only for decoration, never for data.
+
+Optional, Motion (`motion.dev`): `bounce` is roughly `1 − damping ratio` and pairs
+with `visualDuration` (or `duration`) for response, as in
+`{ type: "spring", bounce: 0.2, visualDuration: 0.3 }` for a drag settle. In
+physics form, `stiffness: 500, damping: 30` (mass 1) gives a ratio near 0.67 and a
+response near 0.28s.
 
 ## Rendering cost
 
@@ -122,9 +131,7 @@ Support for the newer composite properties is uneven; test across engines. A sma
 color transition can be fine even though it repaints.
 
 Name the properties. `transition: all` animates whatever changes next, including
-layout properties and colors nobody meant to animate. In Tailwind, prefer
-`transition-[scale,opacity]`; `transition-transform` covers `transform`, `translate`,
-`scale`, and `rotate`.
+layout properties and colors nobody meant to animate.
 
 ### Where it runs
 
@@ -145,9 +152,10 @@ Traps that look correct:
   grows. Set `transform` on the animating element.
 - **Blur.** Keep animated `blur()` under 20px, especially for Safari; 2–5px is
   enough to soften a crossfade.
-- **Motion shorthands (optional, Motion for React).** `x`, `y`, `scale` props are
-  implemented through CSS variables and stay on the main thread. When the animation
-  must survive a busy page, animate a full string: `transform: "translateX(100px)"`.
+- **Library transform shorthands (optional, Motion).** `x`, `y`, `scale` props are
+  composed into `transform` on the main thread every frame. When the animation must
+  survive a busy page, animate a full string, `transform: "translateX(100px)"`,
+  which the library can hand to the browser's animation engine.
 
 ### Layer hints
 
@@ -170,7 +178,7 @@ Diagnose in order of likelihood, and name the cause before changing code:
 2. Does jank coincide with a busy main thread? Move to CSS or WAAPI.
 3. Is the framework rendering per frame?
 4. Does it worsen as content grows? Inherited variable or too many animating nodes.
-5. Is a CSS variable animated, directly or through a library shorthand?
+5. Is a CSS variable animated, or a library shorthand running on a busy main thread?
 6. Any animated blur above 20px?
 7. Still shifting at start or end? Only now add `will-change`.
 

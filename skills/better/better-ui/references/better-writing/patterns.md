@@ -12,7 +12,7 @@ Templates for destructive flows and status copy, and recipes for plurals and loc
 | Affects other people | Body names who: "The 8 members of Design lose access." |
 | Account, workspace or repository | Field label: "Type 'acme-web' to confirm". The button stays disabled until it matches |
 
-How long an undo toast stays on screen is [better-accessibility](../better-accessibility.md)'s.
+How long an undo toast stays and when its timer pauses is [better-interaction](../better-interaction/feedback-and-latency.md#transient-feedback)'s; the timing requirement behind it is [better-accessibility](../better-accessibility.md)'s.
 
 ## Status copy
 
@@ -28,7 +28,7 @@ Keep in-progress and done strings parallel, so "Saving changes…" resolves to "
 
 ## Plurals and placeholders
 
-Write one message per sentence in ICU MessageFormat, which most i18n libraries read. The variable sits inside the sentence and the translator moves it:
+Write one message per sentence with its variables inside it, so the translator can move them. ICU MessageFormat, which most i18n libraries read, is the usual syntax:
 
 ```text
 inbox.count = {count, plural,
@@ -43,7 +43,7 @@ invite.sent = {name} invited you to {project}
 
 ## Locale formatting
 
-Never hand-build a number, date or list. Pass the user's locale to `Intl`:
+Never hand-build a number, date or list; pass the user's locale to the platform's formatter. On the web that is `Intl`:
 
 | Value | Call | `en-US` output |
 | --- | --- | --- |

@@ -34,9 +34,7 @@ Variable-font controls, each with a four-letter tag. A font supports only the ax
 | Width | `wdth` | `font-stretch` | Glyph width |
 | Slant | `slnt` | `font-style: oblique 10deg` | Slant angle |
 | Italic | `ital` | `font-style: italic` | True italic forms |
-| Custom | e.g. `GRAD` (Roboto Flex) | none | Whatever the designer built |
-
-Inter's variable file exposes only `wght` and `opsz`.
+| Custom | e.g. `GRAD` (grade) | none | Whatever the designer built |
 
 `font-optical-sizing: auto` is the default: sturdier strokes and looser spacing at small sizes, finer detail at large ones. Never set it to `none` as a fix. Optical sizes predate variable fonts, and many families still ship them as separate `Text` and `Display` files instead of an `opsz` axis.
 
@@ -101,7 +99,7 @@ Common features have a `font-variant-*` property, and `font-feature-settings` is
 .table .id { font-feature-settings: "zero" 1; }
 ```
 
-Two `font-variant-numeric` declarations on one element behave the same way: the later wins. List every value in one declaration instead, `font-variant-numeric: tabular-nums slashed-zero`. Tailwind's numeric utilities compose through CSS variables, so `tabular-nums slashed-zero` as classes already combine. When raw tags are unavoidable, repeat the inherited ones.
+Two `font-variant-numeric` declarations on one element behave the same way: the later wins. List every value in one declaration instead, `font-variant-numeric: tabular-nums slashed-zero`. When raw tags are unavoidable, repeat the inherited ones.
 
 ## Numeric variants
 
@@ -119,7 +117,7 @@ A data column usually wants `lining-nums tabular-nums` in one declaration.
 
 ## Disambiguate characters people retype
 
-Where a reader copies a value by eye, such as a code, a coupon, an API key or a serial, `I`, `l`, `1` and `0`, `O` must not collide. `slashed-zero` covers the zero. Many fonts collect the rest in a disambiguation stylistic set, such as Inter's `ss02`. Check the font's docs for the slot, and scope it to those values rather than the whole interface.
+Where a reader copies a value by eye, such as a code, a coupon, an API key or a serial, `I`, `l`, `1` and `0`, `O` must not collide. `slashed-zero` covers the zero. Many fonts collect the rest in a disambiguation stylistic set (Inter's `ss02`, for example). Check the font's docs for the slot, and scope it to those values rather than the whole interface.
 
 ## Small caps, superscripts, subscripts
 
@@ -130,4 +128,4 @@ Both require the font to include the glyphs; without them the browser synthesize
 
 ## Stylistic sets and character variants
 
-`ss01` = stylistic set, slot 01. `cv11` = character variant, slot 11. What each slot does differs font to font, which is why they are numbered, not named. Check the font's docs. In Inter, `ss01` switches to open digits and `cv11` swaps in a single-story `a`.
+`ss01` = stylistic set, slot 01. `cv11` = character variant, slot 11. What each slot does differs font to font, which is why they are numbered, not named; check the font's docs before enabling one.

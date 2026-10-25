@@ -1,11 +1,10 @@
 # Better PWA
 
 Make a mobile web interface respond like an installed app to touch, browser chrome,
-and the software keyboard. Covers web apps in a browser tab and in installed
-standalone mode, not React Native. Most symptoms are one CSS declaration or meta
-tag at the platform layer; build or fix what was requested, keep reviews read-only,
-and inspect the project's browser support, metadata API, scroll containers, and
-existing primitives before changing anything.
+and the software keyboard, in a browser tab or installed standalone mode. Most
+symptoms are one CSS declaration or meta tag at the platform layer; inspect the
+project's browser support, metadata API, scroll containers, and existing primitives
+before changing anything.
 
 Motion, springs, and drag physics (velocity, momentum, rubber-banding, thresholds)
 belong to [better-animation](better-animation.md) and its
@@ -40,7 +39,7 @@ Code for every row is in [touch-and-input.md](better-pwa/touch-and-input.md) and
 ## Reach for CSS and metadata before JavaScript
 
 Media queries, `env()`, viewport units, and `touch-action` describe what the device
-can do; a `useIsTouchDevice()` hook or user-agent check guesses. Apply each fix where
+can do; a touch-detection script or user-agent check guesses. Apply each fix where
 its reason applies rather than as a global habit: `user-select: none` is correct on a
 button and a defect on body text. A starter baseline for new mobile-facing apps is in
 [baseline-and-testing.md](better-pwa/baseline-and-testing.md).
@@ -56,14 +55,14 @@ hover variant may already include the guard.
 
 ## Give press feedback on contact
 
-Native controls respond the instant a finger lands; feedback that waits for `click`
-reads as lag even at 0ms. Style `:active` (keep `:focus-visible`), or start feedback
-on `pointerdown` and clear it on release and `pointercancel`, while activation stays
-on native `click` so sliding away cancels and keyboards still work. Keep presses short
-(around 100-160ms ease-out, from the project's tokens) and never delay the action.
+Feedback that waits for `click` reads as lag even at 0ms. Style `:active` (keep
+`:focus-visible`), or start feedback on `pointerdown` and clear it on release and
+`pointercancel`, while activation stays on native `click` so sliding away cancels and
+keyboards still work. Keep presses short and never delay the action; scale and timing
+are in [better-animation](better-animation/patterns.md#press-feedback).
 `touch-action: manipulation` removes double-tap-zoom delay but cannot fix a slow
-handler; profile first. Haptics can only echo visible feedback: iOS Safari lacks
-vibration. Recipes are in [touch-and-input.md](better-pwa/touch-and-input.md).
+handler; profile first. Haptics can only echo visible feedback, and iOS Safari has no
+vibration API. Recipes are in [touch-and-input.md](better-pwa/touch-and-input.md).
 
 ## Strip the tap flash and text selection only from controls
 
@@ -102,7 +101,8 @@ the wrong fix for focus zoom. iOS zooms into fields whose computed font size is 
 
 Neither `dvh` nor safe-area insets guarantee clearance above the software keyboard,
 and browsers resize differently. Start with ordinary scrolling and the project's
-existing handling; `interactive-widget=resizes-content` helps where supported. Add
+existing handling; `interactive-widget=resizes-content` helps where supported (check
+current support). Add
 Visual Viewport logic only for a reproduced obstruction, then verify focus, typing,
 dismissal, and reaching the submit action with the keyboard open.
 

@@ -13,19 +13,19 @@ audio in [sound](better-sound.md), and mobile browser behavior in [PWA](better-p
 Landing pages start with [landing page](better-landing-page.md); audits use
 [review](better-ui-review.md). Load each only as its decisions arise.
 
-## Treat taste as trained judgment
+## Give every choice a reason from the product
 
-Taste is a trained instinct, not personal preference: the ability to see what
-elevates a surface and say why. Study interfaces that feel right, reverse-engineer
-the decision behind each detail, and apply the reason rather than the look. Justify
-every choice from the product, its users and the direction, never from "it looks cool".
+Each visible decision should have a one-line reason drawn from the product, its
+users or the direction; "it looks cool" and "it was the default" are not reasons.
+When borrowing from a reference, name the decision behind the detail and apply
+that, never the look alone.
 
 ## Do the work nobody notices
 
-Most good details are invisible: when something behaves exactly as people assume,
-they move on without a thought. Concentric radii, shared edges, stable numbers,
-preserved context and handled edge cases each go unnoticed; together they make a
-surface feel right. Do that unseen work anyway; it compounds.
+Fix the details people only see when they are wrong: concentric radii, shared
+edges, digits that keep their width, context preserved across changes, long and
+missing values handled. Check each in the render; none is worth a sentence in the
+report, and together they decide whether the surface feels right.
 
 ## Set the direction before composing
 
@@ -117,8 +117,8 @@ experience.
 ## Ship excellent defaults over options
 
 Most people never customize, so the default must be the good version. Prefer one
-well-chosen behavior to a setting that defers the decision, and keep component
-setup minimal.
+well-chosen behavior to a setting that defers the decision; add an option only
+when users with different needs would each be wrong with the other's default.
 
 ## Render, compare, refine
 

@@ -26,7 +26,7 @@ visibility. Where the project has no icon-swap convention, use this set as a uni
 | Scale | `0.25` | `1` |
 | Opacity | `0` | `1` |
 | Blur | `4px` | `0px` |
-| Timing | Spring, `duration: 0.3`, `bounce: 0`; or CSS `300ms cubic-bezier(0.2, 0, 0, 1)` | |
+| Timing | `300ms cubic-bezier(0.2, 0, 0, 1)`, or a critically damped spring of similar length | |
 
 The small starting scale makes the new icon grow out of the old one's center; a
 half-way value such as `0.5` reads as a resize instead. Keep bounce at zero: an icon
@@ -34,33 +34,37 @@ that overshoots on every swap draws attention to the chrome. Skip the animation 
 first render so the default icon does not animate in. Under reduced motion, keep only
 the opacity fade.
 
-Library choice: use `motion/react` when `motion` is installed, `framer-motion` when
-that is, and the nearest peers' imports when both are. With neither, use the CSS
-version; never add a dependency for an icon swap.
+Use the CSS version by default; never add a dependency for an icon swap. In a
+project already on Motion, match its import path (`motion/react` or
+`framer-motion`) and use the optional version below.
 
 ### CSS, both icons mounted
 
 Both icons share one grid cell, so enter and exit both animate and the larger icon
-sets the size.
+sets the size. Transitions do not run on first render, so the default icon never
+animates in.
 
-```tsx
-const layer = cn(
-  "[grid-area:1/1] transition-[opacity,filter,scale] duration-300",
-  "ease-[cubic-bezier(0.2,0,0,1)]",
-  "motion-reduce:scale-100 motion-reduce:blur-[0px]"
-);
-const shown = "scale-100 opacity-100 blur-[0px]";
-const hidden = "scale-[0.25] opacity-0 blur-[4px]";
-
-<span className="grid place-items-center" aria-hidden="true">
-  <span className={cn(layer, isActive ? shown : hidden)}><ActiveIcon /></span>
-  <span className={cn(layer, isActive ? hidden : shown)}><InactiveIcon /></span>
-</span>
+```html
+<button aria-pressed="false" aria-label="Like">
+  <span class="icon-swap" aria-hidden="true">
+    <svg class="icon-layer" data-icon="on">…</svg>
+    <svg class="icon-layer" data-icon="off">…</svg>
+  </span>
+</button>
 ```
-
-Tailwind 4's `scale-*` writes the `scale` property; Tailwind 3's writes `transform`,
-so name `transform` in the transition there. In plain CSS, the same two layers use
-`grid-area: 1 / 1` and transition `opacity, scale, filter`.
+```css
+.icon-swap { display: grid; place-items: center; }
+.icon-layer {
+  grid-area: 1 / 1;
+  transition: opacity 300ms, scale 300ms, filter 300ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+[aria-pressed="true"] [data-icon="off"],
+[aria-pressed="false"] [data-icon="on"] { opacity: 0; scale: 0.25; filter: blur(4px); }
+@media (prefers-reduced-motion: reduce) {
+  .icon-swap .icon-layer[data-icon] { scale: 1; filter: none; } /* fade only */
+}
+```
 
 ### Optional: Motion
 

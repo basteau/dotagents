@@ -18,11 +18,6 @@ Wrap animations in `@media (prefers-reduced-motion: no-preference)`, so users wh
 }
 ```
 
-```tsx
-// Tailwind: motion-safe / motion-reduce variants
-<div className="motion-safe:transition-transform motion-safe:hover:-translate-y-1" />
-```
-
 For an existing codebase where opt-in isn't feasible, the global kill switch is the fallback:
 
 ```css
@@ -66,6 +61,6 @@ Nothing flashes more than three times per second (2.3.1), with or without the pr
 
 ### rem vs px
 
-Respect how the codebase is set up. Where the project sizes in `px` or on an established Tailwind scale, stay consistent and never introduce mixed units into someone else's system. Where you have the choice, `rem` respects the user's base font size and `px` ignores it: `rem` for font sizes, text-container widths and spacing that should scale with text; `px` for borders, hairlines, focus outline width and offset, and fixed decorations.
+Respect how the codebase is set up. Where the project sizes in `px` or on an established utility scale, stay consistent and never introduce mixed units into someone else's system. Where you have the choice, `rem` respects the user's base font size and `px` ignores it: `rem` for font sizes, text-container widths and spacing that should scale with text; `px` for borders, hairlines, focus outline width and offset, and fixed decorations.
 
 Write media queries in `rem` or `em` where the codebase allows. At a larger browser font size such a query switches to the narrow layout when the text needs it, and a `px` query does not. Breakpoint placement belongs to [better-layout](../better-layout.md).

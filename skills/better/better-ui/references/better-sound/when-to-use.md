@@ -35,7 +35,7 @@ how much the action matters and how long it takes.
 | Action class | Character | Audible length | Layers | Starting gain |
 | --- | --- | --- | --- | --- |
 | Tick: toggle, select, minor tap | Filtered noise click or tiny sine blip | 5–15ms | 1 | 0.05–0.15 sine, about 0.3 filtered noise |
-| Pop: small positive, add, like | Sine with a short upward sweep | 40–80ms | 1 | 0.1–0.2 |
+| Pop: small positive, add, like | Sine with a short pitch sweep (down for a bubble pop) | 40–80ms | 1 | 0.1–0.2 |
 | Confirm: send, copy, save | Two notes, rising, the second slightly delayed | ≤200ms | 2 | 0.1–0.15 each |
 | Achievement: payment, long task done | Short major chord or arpeggio | ≤800ms | 2–3 | 0.12–0.16 each |
 | Error: blocked, failed | Lower, flat or falling, soft attack | 100–300ms | 1–2 | at or below confirm |

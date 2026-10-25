@@ -77,5 +77,5 @@ Between the two, the metrics disagree. At `oklch(0.65 0 0)`, black measures `6.4
 
 - **Every pair, in every appearance.** APCA scores mirrored pairs differently, so a pair passing in light mode can fail in dark.
 - **Translucent surfaces.** A color on a `backdrop-filter` header or an overlay shifts with whatever scrolls behind it. Test against the lightest and darkest content it can sit over, or make the surface opaque enough that the shift cannot break the pair.
-- **Computed colors.** `color-mix()`, relative color syntax, `light-dark()` and opacity modifiers such as Tailwind's `/50` resolve at render time; measure the rendered result, not the declaration.
+- **Computed colors.** `color-mix()`, relative color syntax, `light-dark()` and alpha modifiers on utility classes (such as `/50`) resolve at render time; measure the rendered result, not the declaration.
 - **Text over images.** There is no single background color. Measure the worst region, or guarantee one with a scrim.

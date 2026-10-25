@@ -35,8 +35,9 @@ Map the motion surface first:
 
 Useful sweeps on the web: `transition`, `animation`, `@keyframes`, `transition: all`,
 `transition-all`, `ease-in`, `scale(0)`, `transform-origin`, `will-change`,
-`prefers-reduced-motion`, `:hover`, `motion.`, `animate=`, `useSpring`,
-`requestAnimationFrame`, `setProperty('--`. For opportunities, also conditional
+`prefers-reduced-motion`, `:hover`, `requestAnimationFrame`, `setProperty('--`, and
+the motion library's own API names (in Motion projects, `motion.`, `animate=`,
+`useSpring`). For opportunities, also conditional
 renders without transitions, `display: none` toggles, press targets without an
 active state, disclosure markup, drag handlers, and list renders. Search hits are
 candidates; read their context before treating any as a finding.
@@ -75,8 +76,8 @@ Severity follows user impact and evidence, not a mismatched magic number:
 
 | Severity | Meaning | Examples |
 | --- | --- | --- |
-| High | Feel-breaking | Ease-in on UI, motion on keyboard or high-frequency actions, measured dropped frames, `scale(0)` entrances |
-| Medium | Noticeably off | Wrong origin, non-interruptible dynamic UI, missing reduced-motion handling, routine motion well over budget |
+| High | Feel-breaking or excluding | Ease-in on UI, motion on keyboard or high-frequency actions, measured dropped frames, `scale(0)` entrances, movement that ignores reduced motion |
+| Medium | Noticeably off | Wrong origin, non-interruptible dynamic UI, a reduced-motion path that removes all feedback, routine motion well over budget |
 | Low | Polish | Stagger, blur-masked crossfades, token consolidation |
 
 Keep observed jank separate from an unmeasured performance risk. Pure fades,
@@ -120,7 +121,8 @@ timing; origin, physicality, and cohesion; accessibility and input.
 Close a review with a decision:
 
 - **Block** on any feel-breaking regression, motion on a keyboard or high-frequency
-  action, `scale(0)` or ease-in on UI, or an expensive animation with an easy cheap fix.
+  action, `scale(0)` or ease-in on UI, movement that ignores reduced motion, or an
+  expensive animation with an easy cheap fix.
 - **Approve** when none of those remain, nothing obviously should be deleted, timing
   is within budget, interruption is handled where needed, and reduced motion is respected.
 
@@ -139,7 +141,7 @@ Expect to reject most candidates. Every proposal must pass all four questions:
 
 | Seam | Typical proposal |
 | --- | --- |
-| Pressable with no feedback | Scale 0.97 on press, 100–160ms ease-out |
+| Pressable with no feedback | The project's press scale (default 0.97), 100–160ms ease-out |
 | Destructive click with slip risk | Hold-to-confirm fill: ~2s linear, 200ms ease-out release |
 | Content that teleports | Fade and slight scale from 0.95–0.97, ease-out, retargeting transition |
 | Section that snaps open | Measured height plus opacity, about 200ms |

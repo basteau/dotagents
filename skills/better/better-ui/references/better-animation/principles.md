@@ -1,18 +1,13 @@
 # Motion principles
 
-The craft bar: motion that feels right, not motion that merely runs. A transition
-that works but feels sluggish, grows from the wrong point, fires too often, or drops
-frames is a regression. Restraint is the defining trait; the best result is
-sometimes no animation, and deciding that is a success rather than a dodge. Most of
-these details go unnoticed on purpose: when an interface behaves exactly as people
-assume, they move on, and the aggregate of that invisible correctness is what makes
-it feel loved.
+The reasoning behind the decision order in [better-animation](../better-animation.md).
+A transition that works but feels sluggish, grows from the wrong point, fires too
+often, or drops frames is a regression; deciding not to animate is a valid result.
 
 ## Decide in this order
 
-Each step gates the next. Do not choose a curve before knowing whether the element
-animates at all, and never offer motion options as a menu: make the call and state
-the reason in a line.
+Each step gates the next: do not choose a curve before knowing whether the element
+animates at all.
 
 | Step | Question | Stop or change course when |
 | --- | --- | --- |
@@ -60,8 +55,9 @@ belongs on a marketing page, not on a chart in a banking app.
   with transparency, or use a plain fade when movement adds nothing.
 - Grow anchored surfaces (popover, menu, tooltip, select) from their trigger, and
   follow the placement when it flips. Unanchored dialogs stay centered.
-- Keep deformation subtle: press feedback around 0.97 (0.95–0.98), any squash or
-  stretch within 0.95–1.05. Scaling a container scales its text and icons too.
+- Keep deformation subtle: press feedback at the project's press scale, or 0.97
+  where it has none (stay within 0.95–0.98); any squash or stretch within 0.95–1.05.
+  Scaling a container scales its text and icons too.
 - Exit the way it entered. Symmetric paths make swipe-to-dismiss feel obvious and
   keep the spatial story intact.
 - Real things slow before they stop: rising resistance past a boundary instead of a
@@ -94,8 +90,8 @@ Motion is part of the brand. A playful consumer product can afford a little boun
 a professional dashboard stays crisp and fast. A deliberately elegant component may
 run slightly slower on a softer curve, as long as the whole experience is in harmony:
 easing, duration, visual design, and even the name. One bouncy component in a crisp
-app is a cohesion defect. When unsure whether motion feels right, the strongest
-move is often to delete it.
+app is a cohesion defect. When a motion still feels wrong after tuning timing and
+origin, delete it.
 
 ## The twelve principles, for interfaces
 

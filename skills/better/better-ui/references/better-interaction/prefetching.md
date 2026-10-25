@@ -38,8 +38,8 @@ must each have a path. Expand the prediction area beyond the visible target (aro
   effects (logout, mark-as-read, add to cart) or counts as a page view.
 - Deduplicate in-flight requests and respect cache freshness; a prefetched response
   that is stale on arrival is wasted.
-- Cap concurrency and prefer low priority (`fetch(url, { priority: "low" })`, idle
-  callbacks) so speculation never delays the current page.
+- Cap concurrency and request at low priority (on the web, `fetch(url, { priority:
+  "low" })` or an idle callback) so speculation never delays the current page.
 - Back off on constrained networks: skip or downgrade when
   `navigator.connection?.saveData` is true or `effectiveType` reports a slow
   connection. These properties are not available in every browser; absence means
@@ -57,9 +57,10 @@ the gain is not noticeable.
 
 ## Platform: Speculation Rules
 
-For multi-page sites in Chromium-based browsers, the Speculation Rules API prefetches
-or prerenders from declared rules; other browsers ignore it, so it is a safe
-progressive enhancement:
+For multi-page sites, the Speculation Rules API prefetches or prerenders from
+declared rules. Support is uneven across engines (Chromium-based browsers led;
+check current support), and browsers without it ignore the script, so it is a
+safe progressive enhancement:
 
 ```html
 <script type="speculationrules">
@@ -72,9 +73,9 @@ progressive enhancement:
 </script>
 ```
 
-`conservative` speculates on pointer or touch down; `moderate` on hover intent;
-`eager` and `immediate` earlier and more often. Exact heuristics vary by browser
-version and device. Exclude any URL with side effects.
+Roughly, `conservative` speculates on pointer or touch down, `moderate` on hover
+intent, and `eager` and `immediate` earlier and more often; the exact heuristics
+vary by browser, version and device. Exclude any URL with side effects.
 
 ## Optional: hand-rolled intent prefetch
 
@@ -99,12 +100,13 @@ function prefetchOnIntent(link, prefetch, { hoverDelay = 80 } = {}) {
 ```
 
 `pointerdown` fires for touch as well, so the same listener covers touch devices.
-Trajectory prediction needs pointer-velocity tracking; use a maintained library for
-it rather than writing one, and confirm it falls back to touch and keyboard signals.
+Trajectory prediction needs pointer-velocity tracking; prefer a maintained
+implementation to a hand-rolled one, and confirm it falls back to touch and
+keyboard signals.
 
-## Optional: Next.js
+## Optional example: Next.js
 
-`<Link>` prefetches routes as they enter the viewport by default in production. For
-long lists, set `prefetch={false}` and call `router.prefetch(href)` from an intent
-signal instead. Check the installed version's documentation; defaults have changed
-between releases.
+In some versions `<Link>` prefetches routes as they enter the viewport in
+production. For long lists, disable that (`prefetch={false}`) and call
+`router.prefetch(href)` from an intent signal instead. Defaults have changed
+between releases, so check the installed version's documentation.

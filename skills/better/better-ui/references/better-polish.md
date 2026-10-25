@@ -66,7 +66,7 @@ Icons draw with `currentColor` and take hover, selected and disabled states from
 
 | Detection | Fix |
 | --- | --- |
-| Padded parent and child with the same `border-radius` or `rounded-*` | Add padding and border width to the outer radius |
+| Padded parent and child with the same radius value or utility | Add padding and border width to the outer radius |
 | `box-shadow: 0 0 0 1px` ring with no `border` beside it | Add `border: 1px solid transparent` |
 | One heavy single-layer shadow, or offsets pointing different ways | Layered shadows from the elevation scale, one light direction |
 | Hardcoded gray border (`#e5e5e5`) over tinted or image backgrounds | Alpha neutral border token |

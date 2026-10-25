@@ -21,14 +21,6 @@ Start with gaps between groups at 2× those within them, then check that the gro
 .form > * { margin-bottom: 12px; border-bottom: 1px solid var(--separator); }
 ```
 
-```html
-<!-- Tailwind -->
-<div class="space-y-6">
-  <div class="space-y-2">…field group…</div>
-  <div class="space-y-2">…field group…</div>
-</div>
-```
-
 Where a separator is genuinely needed, keep it a low-contrast hairline. Never pair it with a large gap that already did the job.
 
 ## Keep controls distinct from content
@@ -37,11 +29,15 @@ A control needs a signal static text lacks: a background, a border, an underline
 
 ```html
 <!-- Bad: the action looks exactly like the description beside it -->
-<p class="text-zinc-600">Your trial ends soon. Upgrade now</p>
+<p class="note">Your trial ends soon. Upgrade now</p>
 
 <!-- Good: the underline marks the action -->
-<p class="text-zinc-600">Your trial ends soon.</p>
-<button class="font-medium underline underline-offset-2">Upgrade now</button>
+<p class="note">Your trial ends soon.</p>
+<button class="text-action">Upgrade now</button>
+```
+
+```css
+.text-action { font-weight: 500; text-decoration: underline; text-underline-offset: 0.15em; }
 ```
 
 The inverse holds too. A non-clickable badge shaped exactly like the buttons beside it collects dead clicks.
@@ -79,14 +75,6 @@ Optical corrections to geometric alignment, such as nudging a play icon, are [be
 | `float: left` | `float: inline-start` |
 | `border-top-left-radius` | `border-start-start-radius` |
 
-```html
-<!-- Good: Tailwind logical utilities -->
-<div class="ms-4 pe-6 text-start">…</div>
-
-<!-- Bad: breaks in RTL -->
-<div class="ml-4 pr-6 text-left">…</div>
-```
-
 Flex rows and grid columns follow the inline direction, so they mirror under `dir="rtl"` on their own. Physical values inside them do not mirror, and neither do `translateX`, `background-position` or anything hand-positioned with `left` and `right`; give those a `[dir="rtl"]` override.
 
 Reserve physical properties for things tied to a physical screen side whatever the language, such as a device notch, a safe-area inset or a gesture direction.
@@ -100,15 +88,15 @@ Readers scan top-to-bottom and leading-to-trailing, and attention drops with dis
 ```html
 <!-- Good: primary fact first, detail demoted -->
 <div>
-  <p class="text-2xl font-semibold">$4,320.00</p>
-  <p class="text-sm text-zinc-500">Available balance</p>
+  <p class="figure">$4,320.00</p>
+  <p class="caption">Available balance</p>
 </div>
 
 <!-- Bad: the key fact sits last, below the metadata -->
 <div>
-  <p class="text-sm">Account 4402 · Opened 2019 · Standard tier</p>
-  <p class="text-sm">Last statement: June 30</p>
-  <p class="text-sm">Balance: $4,320.00</p>
+  <p class="caption">Account 4402 · Opened 2019 · Standard tier</p>
+  <p class="caption">Last statement: June 30</p>
+  <p class="caption">Balance: $4,320.00</p>
 </div>
 ```
 

@@ -12,7 +12,7 @@ A finding cites a WCAG 2.2 Level A or AA criterion by number, or a concrete task
 
 ## Native elements first
 
-The first rule of ARIA: don't use ARIA when a native element exists. `<button>` for actions, `<a href>` for navigation, never `<div onClick>`. A real link must support Cmd/Ctrl/middle-click. No ARIA is better than bad ARIA, and a role is a promise of the full keyboard model. See [semantics-and-aria.md](better-accessibility/semantics-and-aria.md) for landmarks and button-vs-link.
+The first rule of ARIA: don't use ARIA when a native element exists. `<button>` for actions, `<a href>` for navigation, never a `<div>` with a click handler. A real link must support Cmd/Ctrl/middle-click. No ARIA is better than bad ARIA, and a role is a promise of the full keyboard model. See [semantics-and-aria.md](better-accessibility/semantics-and-aria.md) for landmarks and button-vs-link.
 
 ## Disabled means unavailable
 
@@ -105,19 +105,19 @@ Text must survive 200% resize (1.4.4), and the page must reflow at 320px width w
 | Pattern | Fix |
 | --- | --- |
 | `outline: none` or `outline-none` with no `focus-visible` replacement nearby | Restore the browser ring or add a verified custom one |
-| Focus ring built only from `box-shadow` or Tailwind `ring` | Use `outline`, or add a transparent outline for forced colors |
-| `<div onClick` or `<span onClick` | Use `<button>`, or `<a href>` when it navigates |
-| `role="button"` or `role="tab"` with no `onKeyDown` | Use the native element, or implement the APG key map |
-| `tabIndex={1}` or any positive `tabindex` | Fix the DOM order and use `0` |
-| `disabled={!isValid}` on a submit button | Keep it enabled and validate on submit |
-| `{msg && <div role="status">`, region mounted with its text | Render the empty region first and update its text |
+| Focus ring built only from `box-shadow`, including utility `ring` classes | Use `outline`, or add a transparent outline for forced colors |
+| A click handler on a `<div>` or `<span>` (`onClick`, `@click`, `addEventListener`) | Use `<button>`, or `<a href>` when it navigates |
+| `role="button"` or `role="tab"` with no key handler | Use the native element, or implement the APG key map |
+| Any positive `tabindex` | Fix the DOM order and use `0` |
+| Submit disabled until the form is valid | Keep it enabled and validate on submit |
+| A live region inserted together with its text | Render the empty region first and update its text |
 | `aria-live="assertive"` on a success toast | `role="status"` |
 | `<img` with no `alt` attribute | `alt=""` if decorative, otherwise describe the purpose |
 | `aria-label` whose text omits the visible label | Start the name with the visible text |
 | `aria-hidden` on an ancestor of a button, link or input | Remove it, or make the subtree `inert` |
 | `maximum-scale=1` or `user-scalable=no` | Remove it |
-| `onPaste` that prevents default on a password or code field | Remove it |
-| `onDragStart` or a drag library with no button alternative | Add a single-pointer path to the same result |
+| A paste handler that prevents default on a password or code field | Remove it |
+| A drag handler or drag library with no button alternative | Add a single-pointer path to the same result |
 
 ## Reporting
 

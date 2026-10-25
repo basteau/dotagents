@@ -86,11 +86,11 @@ async function toggleStar(item) {
 Rapid repeated toggles also need the latest-wins guard from
 [races and retries](#races-and-retries).
 
-### Optional: React
+### Optional example: React
 
-`useOptimistic` shows the guess while an action is pending and falls back to the
-real state when it settles. A thrown error reverts the list, so still surface the
-failure:
+React's `useOptimistic` shows the guess while an action is pending and falls back
+to the real state when it settles. A thrown error reverts the list, so still
+surface the failure:
 
 ```tsx
 const [shown, addOptimistic] = useOptimistic(todos, (state, todo) => [
@@ -160,7 +160,7 @@ a failed submission and put the retry beside the error.
 ## Transient feedback
 
 - Toasts: one region, newest in a consistent place. Pause the dismiss timer on hover,
-  on focus within, and while `document.hidden` is true. Lengthen the timer for longer
+  on focus within, and while the page is hidden (`document.hidden` on the web). Lengthen the timer for longer
   text. Toasts with an action or an error persist until dismissed. Collapse repeats
   of the same message instead of stacking them.
 - Tooltips: a short open delay (around 300-500ms) prevents accidental triggers. Once

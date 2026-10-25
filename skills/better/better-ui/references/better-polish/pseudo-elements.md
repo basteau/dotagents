@@ -152,7 +152,7 @@ Without names, the whole page cross-fades as `root`.
 
 | Use view transitions | Keep the motion library |
 | --- | --- |
-| Route or page changes, including same-origin multi-page sites where both pages opt in with `@view-transition { navigation: auto; }` | Gesture-driven motion that follows a pointer |
+| Route or page changes, including same-origin multi-page sites where both pages opt in with `@view-transition { navigation: auto; }` (newer than same-document transitions; check support) | Gesture-driven motion that follows a pointer |
 | Shared-element moves where the DOM node is replaced, such as thumbnail to lightbox | Animations the user may reverse mid-flight; a new view transition skips the running one |
 | List reorders and filter results | In-component layout animation already built on the library |
 
@@ -183,7 +183,7 @@ function openLightbox(thumb: HTMLElement, update: () => void) {
 
 A static `view-transition-name` in a rule that matches several cards breaks uniqueness;
 derive names per item (`card-${id}`) or set them only on the active one. Group many
-names under one style with `view-transition-class`.
+names under one style with `view-transition-class` where the project's browsers support it.
 
 ### Styling
 

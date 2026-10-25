@@ -61,14 +61,14 @@ textarea {
 }
 ```
 
-- `dialog` and `popover` render in the top layer, above every `z-index`, with `Escape` and focus handling built in. Light-dismiss comes with `popover`, and with `closedby="any"` on `dialog` where supported.
-- A popover opened with a button's `popovertarget` anchors to that button. One opened by script needs its source: `menu.showPopover({ source: button })`.
+- `dialog` and `popover` render in the top layer, above every `z-index`, with `Escape` and focus handling built in. Light-dismiss comes with `popover`; on `dialog`, the newer `closedby="any"` adds it where supported, so keep a backdrop-click handler ([pseudo-elements.md](../better-polish/pseudo-elements.md#native-pseudo-elements)) as the fallback.
+- In engines with anchor positioning, a popover opened with a button's `popovertarget` anchors to that button. One opened by script needs its source, `menu.showPopover({ source: button })` where supported, or an explicit `position-anchor`.
 - Prefer `span-*` values in `position-area`; `center` can stop the fallbacks from flipping. Engines without anchor positioning ignore the `@supports` block and show the popover in the viewport center.
 - Give sibling `<details>` the same `name` to keep one open at a time. Put padding on an inner element, never on `::details-content`, which stays visible when closed.
 - Bound `field-sizing` with min and max sizes; past the maximum the textarea scrolls. Without support it stays a fixed, scrolling textarea.
 - Animate opening and closing with `@starting-style` and `allow-discrete` as [enter-exit.md](../better-animation/enter-exit.md#web-entering-from-display-none) describes.
 
-Support: `popover` Baseline 2024. Anchor positioning in Chrome 133, Firefox 147, Safari 26. `::details-content` in Chrome 131, Firefox 143, Safari 18.4. `field-sizing` in Chrome 123, Firefox 152, Safari 26.2.
+Support: `popover` is Baseline 2024. Anchor positioning, `::details-content` and `field-sizing` are newer and reached engines at different times; check each against the project's targets, and rely on the fallbacks above where one is missing.
 
 ## Contain stacking
 

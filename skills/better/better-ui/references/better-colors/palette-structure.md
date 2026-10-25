@@ -18,7 +18,7 @@ A second accent hue earns its place only when two things must be distinguishable
 
 Each step maps to a role. Generate the steps the roles below call for and skip the rest.
 
-| Role | Tailwind | Radix |
+| Role | By lightness (Tailwind-style) | By role (Radix-style) |
 | --- | --- | --- |
 | Page background | `50` | `1` |
 | Subtle background | `50` | `2` |
@@ -35,12 +35,12 @@ Each step maps to a role. Generate the steps the roles below call for and skip t
 
 The two conventions differ in kind, not only in numbering:
 
-- **Radix defines its 12 steps by role.** Step 9 is "the solid fill" in every ramp and appearance. The dark scale is a separate ramp reusing the same numbers, so `--accent-9` is the fill in both and component CSS never changes.
-- **Tailwind defines its 11 steps by lightness.** `50` is light, `950` is dark. The mapping above therefore holds in light mode and inverts in dark, with the page background at `950` and high-contrast text at `50`. Components either swap step numbers per appearance or read a semantic token that swaps once.
+- **Role-numbered ramps (Radix) define 12 steps by role.** Step 9 is "the solid fill" in every ramp and appearance. The dark scale is a separate ramp reusing the same numbers, so `--accent-9` is the fill in both and component CSS never changes.
+- **Lightness-numbered ramps (Tailwind) define 11 steps by lightness.** `50` is light, `950` is dark. The mapping above therefore holds in light mode and inverts in dark, with the page background at `950` and high-contrast text at `50`. Components either swap step numbers per appearance or read a semantic token that swaps once.
 
-Match whichever the project uses. For a new system prefer Radix's model, because a role-defined step survives a theme change that a lightness-defined step does not. On Tailwind, keep `50`–`950` and put the role mapping in the semantic tier.
+Match whichever the project uses. For a new system prefer role numbering, because a role-defined step survives a theme change that a lightness-defined step does not. On a lightness-numbered ramp, keep `50`–`950` and put the role mapping in the semantic tier.
 
-Solid fill sits on `600` because white text on most Tailwind `500` hues fails 4.5:1. Where the table repeats a step, those roles render identically. A design that needs, say, component hover and subtle border to differ needs a 12-step ramp.
+Solid fill sits on `600` because white text on most `500` hues of a lightness-numbered ramp fails 4.5:1. Where the table repeats a step, those roles render identically. A design that needs, say, component hover and subtle border to differ needs a 12-step ramp.
 
 ## Neutrals
 

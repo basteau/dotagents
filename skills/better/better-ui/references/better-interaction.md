@@ -95,7 +95,7 @@ Recipes are in [feedback-and-latency.md](better-interaction/feedback-and-latency
 ## Show progress and what remains
 
 In multi-step work, show where the person is, how much is left, and what is
-already done. Progress accelerates completion when it is honest. Surface an
+already done; progress never jumps backward or invents steps. Surface an
 unfinished state, such as a half-done setup, only when finishing benefits the
 user, and make the reminder dismissible.
 
@@ -116,8 +116,8 @@ instantly across neighbors. Recovery never lives only in something that vanishes
 ## Never let motion or sound carry feedback alone
 
 Every animated state change also needs a static cue: color, icon, label, or
-position. Motion stays subordinate to readiness; people can act as soon as the
-interface is ready, and repeated actions are not slowed by animation. Sound only
+position. People can act as soon as the interface is ready, mid-animation
+included, and repeated actions are never slowed by animation. Sound only
 supplements visible feedback; see [sound](better-sound.md).
 
 ## Prefetch on intent, after measuring
@@ -141,6 +141,7 @@ are in [prefetching.md](better-interaction/prefetching.md).
 | Confirmation dialog for a reversible action | Act at once and offer undo |
 | Redirect to home right after submit | Show success in place with the next useful step |
 | Every visible link prefetched | Prefetch on intent; respect data saver |
+| Toast with an error or action that auto-dismisses | Keep it until dismissed |
 
 ## Reporting
 

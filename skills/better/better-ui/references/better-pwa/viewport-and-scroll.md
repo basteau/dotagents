@@ -114,8 +114,9 @@ html { overscroll-behavior-y: none; }
 
 Use `contain` to keep local overscroll effects, `none` where those also conflict.
 Limit suppression to the conflicting axis so browsers that navigate history with
-horizontal overscroll keep doing so. Scrolling documents keep pull-to-refresh. Never use a non-passive
-`touchmove` listener with `preventDefault()`: it blocks scrolling and costs frames.
+horizontal overscroll keep doing so. Scrolling documents keep pull-to-refresh. Never
+use a non-passive `touchmove` listener with `preventDefault()`: it blocks scrolling
+and costs frames.
 Remove obsolete `-webkit-overflow-scrolling: touch`; momentum scrolling is default.
 
 Overscroll containment does not make a modal. Background scroll lock, focus trap,

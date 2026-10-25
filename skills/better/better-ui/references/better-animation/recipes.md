@@ -1,11 +1,13 @@
 # Web motion recipes
 
-Exact implementations for web projects, to start from rather than rebuild. Values
+Plain CSS and JavaScript for web projects, to start from rather than rebuild. Values
 are recipe-specific starting points: keep the project's motion tokens, component
-primitives, and styling system (Tailwind in a Tailwind project, the existing CSS
-approach otherwise). The behavior behind each recipe is in [patterns.md](patterns.md);
-the `--ease-*` curves are defined in [timing-and-performance.md](timing-and-performance.md).
-Attribute hooks such as `data-starting-style` are Base UI's; use the primitive's own.
+primitives, and styling system; utility-class equivalents are in
+[tailwind](../tailwind.md). The behavior behind each recipe is in
+[patterns.md](patterns.md); the `--ease-*` curves are defined in
+[timing-and-performance.md](timing-and-performance.md). State attributes such as
+`data-starting-style` stand in for the component primitive's own (these are Base
+UI's names).
 
 ## Transitions for state, keyframes for sequences
 
@@ -25,9 +27,9 @@ Transitions retarget mid-flight; keyframes restart. Never put `animation:` on
 .button:not(:disabled):active { scale: 0.97; }
 ```
 
-`:active` is a real press on touch, so it needs no hover gate. Tailwind:
-`transition-transform duration-150 ease-out enabled:active:scale-[0.97]`; Motion:
-`whileTap={{ scale: 0.97 }}` unless disabled. Opt out through a variant or `static` prop.
+Replace `0.97` with the project's press scale where it has one. `:active` is a real
+press on touch, so it needs no hover gate. Give the component an opt-out (a variant
+or `static` prop). Optional, Motion: `whileTap={{ scale: 0.97 }}` unless disabled.
 
 ## Popover, menu, tooltip, dialog
 
@@ -64,8 +66,10 @@ dialog[open], dialog[open]::backdrop { opacity: 1; transition-duration: 250ms; }
 ```
 
 A `[popover]` works the same with `:popover-open` for `[open]`; anchor its origin to
-the invoker. `@starting-style` and discrete `display` are Baseline 2024, `overlay`
-Chromium only; elsewhere it shows and hides instantly. Backdrop styling lives in
+the invoker. `@starting-style` and discrete `display` transitions are in current
+engines; `overlay` has narrower support, so check the project's targets. Where a
+piece is missing, the element shows and hides instantly, which is an acceptable
+fallback. Backdrop styling lives in
 [better-polish/pseudo-elements.md](../better-polish/pseudo-elements.md).
 
 ## Drawer and toast
@@ -92,37 +96,25 @@ after first paint. Dragging: [gestures.md](gestures.md#dismiss-on-distance-or-fl
 ```
 
 Measure the height (or let a headless primitive supply it, such as
-`--accordion-panel-height`) rather than transitioning to `auto`. Where supported,
-`interpolate-size: allow-keywords` lets `height: auto` transition natively; others
-snap, which is fine. For size that follows changing content, measure an inner
-element and animate an outer one:
+`--accordion-panel-height`) rather than transitioning to `auto`.
+`interpolate-size: allow-keywords` on `:root` lets `height: auto` transition
+natively where supported (check current support); elsewhere it snaps, which is
+fine. For size that follows changing content, measure an inner element and animate
+an outer one:
 
-```tsx
-function useMeasure() {
-  const [node, setNode] = useState<HTMLElement | null>(null);
-  const [bounds, setBounds] = useState({ width: 0, height: 0 });
-  const ref = useCallback((el: HTMLElement | null) => setNode(el), []); // callback ref
-  useEffect(() => {
-    if (!node) return;
-    const ro = new ResizeObserver(([e]) => setBounds(e.contentRect));
-    ro.observe(node);
-    return () => ro.disconnect();
-  }, [node]);
-  return [ref, bounds] as const;
-}
-function AnimatedHeight({ children }) {
-  const [ref, { height }] = useMeasure();
-  return (
-    <motion.div
-      animate={{ height: height > 0 ? height : "auto" }} // guard the first frame
-      transition={{ duration: 0.2, delay: 0.05 }}
-      style={{ overflow: "hidden" }}
-    >
-      <div ref={ref}>{children}</div>
-    </motion.div>
-  );
-}
+```css
+.outer { overflow: hidden; transition: height 200ms var(--ease-out) 50ms; } /* trails content */
 ```
+```js
+const ro = new ResizeObserver(([entry]) => {
+  const h = entry.borderBoxSize[0].blockSize;
+  if (h > 0) outer.style.height = `${h}px`; // guard the first frame: stay auto until measured
+});
+ro.observe(inner); // never the element being animated
+```
+
+Optional, Motion for React: the same split as a callback-ref hook that feeds
+`animate={{ height: height || "auto" }}` on an outer `motion.div`.
 
 ## Staggered entrance
 
@@ -171,8 +163,8 @@ insets, and give it `aria-hidden`, `inert`, and `pointer-events: none`:
 .compare-top { clip-path: inset(0 calc(100% - var(--split)) 0 0); } /* --split from drag */
 ```
 
-Set `data-visible` once from an `IntersectionObserver` (or `useInView` with
-`{ once: true, margin: "-100px" }`), and never remove it. Marketing pages only.
+Set `data-visible` once from an `IntersectionObserver` (optional, Motion: `useInView`
+with `{ once: true }`), and never remove it. Marketing pages only.
 
 ## Crossfade blur mask and programmatic motion
 
@@ -185,8 +177,7 @@ el.animate([{ clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0)" }],
   { duration: 600, easing: "cubic-bezier(0.77, 0, 0.175, 1)", fill: "forwards" });
 ```
 
-WAAPI gives CSS-grade performance and cancellation with no dependency. In Motion,
-prefer a full `transform` string over `x`/`y` shorthands when frames drop under load.
+WAAPI gives CSS-grade performance and cancellation with no dependency.
 
 ## Reduced-motion fallback
 
@@ -197,9 +188,10 @@ prefer a full `transform` string over `x`/`y` shorthands when frames drop under 
 }
 ```
 
-Tailwind: prefix movement, scale, and blur with `motion-safe:`. Motion:
-`<MotionConfig reducedMotion="user">` drops transform and layout animation but still
-runs `filter`, so branch on `useReducedMotion()` where blur animates.
+Script-driven motion reads `matchMedia("(prefers-reduced-motion: reduce)")` and
+listens for its `change` event. Optional, Motion: `<MotionConfig reducedMotion="user">`
+drops transform and layout animation but still runs `filter`, so branch on
+`useReducedMotion()` where blur animates.
 
 ## Suppress transitions on theme switch
 
@@ -217,4 +209,5 @@ function withoutTransitions(apply) {
 ```
 
 Call it around an in-app toggle, and from a `prefers-color-scheme` change listener
-for OS switches. `next-themes` ships this as `disableTransitionOnChange`.
+for OS switches. Theme libraries often ship this as an option (for example
+`next-themes`' `disableTransitionOnChange`).

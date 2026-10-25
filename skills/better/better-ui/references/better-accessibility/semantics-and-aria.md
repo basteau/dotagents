@@ -18,14 +18,14 @@ No ARIA is better than bad ARIA. A screen reader trusts your roles, so a wrong o
 | --- | --- | --- |
 | `<a href>` | Navigation: anything that goes somewhere or changes the URL | Free Cmd/Ctrl/middle-click, right-click → copy link, Enter activation |
 | `<button>` | Actions: submit, toggle, open, delete | Free focus, Enter *and* Space activation, form semantics |
-| `<div onClick>` | Nothing | No role, no focus, no keyboard; screen readers see plain text |
+| `<div>` with a click handler | Nothing | No role, no focus, no keyboard; screen readers see plain text |
 
-```tsx
-// Bad: invisible to keyboard and screen readers
-<div onClick={openSettings}>Settings</div>
+```html
+<!-- Bad: a script handles its click; keyboard and screen-reader users cannot reach it -->
+<div class="settings-trigger">Settings</div>
 
-// Good: focus, Enter/Space activation and semantics for free
-<button onClick={openSettings}>Settings</button>
+<!-- Good: focus, Enter/Space activation and semantics for free -->
+<button type="button" class="settings-trigger">Settings</button>
 ```
 
 If it looks clickable it must be clickable, and if it's clickable it must be a real interactive element. A "button" that navigates is a styled `<a>`, and a "link" that performs an action is a styled `<button>`.
@@ -47,16 +47,12 @@ Name precedence: `aria-labelledby` > `aria-label` > native label (`<label>`, tex
 - Icon-only buttons always need a name: `<button aria-label="Close">` with the icon `aria-hidden="true"`.
 - WCAG 2.5.3 Label in Name: a button showing "Send" with `aria-label="Submit message"` breaks voice control users who say "click Send".
 
-```tsx
-// Good: name from visible text, icon hidden
-<button>
-  <TrashIcon aria-hidden="true" /> Delete
-</button>
+```html
+<!-- Good: name from visible text, icon hidden -->
+<button type="button"><svg aria-hidden="true">…</svg> Delete</button>
 
-// Good: icon-only, explicit name
-<button aria-label="Delete">
-  <TrashIcon aria-hidden="true" />
-</button>
+<!-- Good: icon-only, explicit name -->
+<button type="button" aria-label="Delete"><svg aria-hidden="true">…</svg></button>
 ```
 
 Add `translate="no"` to brand names, code tokens and identifiers so auto-translation doesn't garble them. Declare the page language with `<html lang>` (3.1.1); the typography side is in [better-typography](../better-typography.md).

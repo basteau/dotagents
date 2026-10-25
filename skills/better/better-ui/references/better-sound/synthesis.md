@@ -137,7 +137,7 @@ order. For variety across rapid repeats, jitter pitch by 10 to 20 cents
 | Bandpass Q, clicks | 2–5 | Above about 10 rings harshly |
 | Bandpass Q, whoosh | 0.7–1.5 | Broad and airy |
 | Tone fundamental | 400–2000Hz | Laptop and phone speakers barely play below 200Hz; pure sines above 4kHz pierce |
-| Pitch sweep | 1.2–1.5× over 30–60ms | Up for positive, down for pops and dismissals |
+| Pitch sweep | 1.2–1.5× over 30–60ms | Up for confirm and enable, down for bubble pops and dismissals |
 | Gap between notes | 30–70ms | Shorter blurs, longer sounds like two events |
 | Tone attack | 1–3ms | 5ms or more for soft errors |
 | Gain per layer | 0.05–0.3 | Never above 1; summed layers under about 0.6 |

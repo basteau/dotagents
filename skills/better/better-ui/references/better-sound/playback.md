@@ -6,7 +6,7 @@ patterns describe what it should already do.
 
 ## One engine, one context
 
-Browsers limit how many `AudioContext`s a page can hold, and each costs a
+Browsers may cap how many `AudioContext`s a page can hold, and each costs a
 hardware stream. Create one lazily, route every sound through one master gain,
 and keep the user's preference in front of everything.
 

@@ -38,15 +38,12 @@ The role inventory in [token-naming.md](token-naming.md) is the list of roles a 
 
 Keep an established component hierarchy that already signals emphasis another way. Do not recolor controls merely to impose this recipe.
 
-```html
-<!-- Good: one filled primary action, neutral secondaries -->
-<button class="bg-accent-solid text-text-on-accent">Save</button>
-<button class="text-text-secondary">Cancel</button>
+```css
+/* Good: one filled primary action, neutral secondaries */
+.button-primary { background: var(--color-accent-solid); color: var(--color-text-on-accent); }
+.button-secondary { background: transparent; color: var(--color-text-secondary); }
 
-<!-- Bad: every action colored, so nothing is primary -->
-<button class="bg-accent-solid text-text-on-accent">Save</button>
-<button class="bg-accent-solid text-text-on-accent">Duplicate</button>
-<button class="bg-accent-solid text-text-on-accent">Export</button>
+/* Bad: Save, Duplicate and Export all use .button-primary, so nothing is primary */
 ```
 
 Selected states may use the accent on the glyph and label. An active tab or a checked segment is state, not emphasis.

@@ -51,7 +51,8 @@ visitor asks: what is this, is it for me, can I trust it, what does it take, how
 I start. Delete any section that carries no claim; the argument, not the stock run
 of hero, logos, three features, testimonial and pricing, sets the order. State the
 outline, hero copy and narrative choice before code, then build the hero, using
-[variants](better-craft/variants.md) while its direction is open, and work downward; see [narratives.md](better-landing-page/narratives.md#outline-before-building).
+[variants](better-craft/variants.md) while its direction is open, and work
+downward; see [narratives.md](better-landing-page/narratives.md#outline-before-building).
 
 ## Make the first screen say what, whose and what next
 
@@ -99,11 +100,10 @@ Never place competing primary actions in the opening. Secondary paths such as
 ## Spend ornament sparingly and substance generously
 
 Choose one or two signature moves drawn from the idea and keep chrome, navigation
-and controls quiet so they register. Never let that restraint thin the content:
-every section delivers its full information (the whole menu with prices, each room,
-every speaker), and space freed from ornament goes to larger type, whole color
-fields or real pictures. Marketing motion may stage content, but the page is
-finished without it.
+and controls quiet so they register. Every section still delivers its full
+information (the whole menu with prices, each room, every speaker); the general
+rule is in [craft](better-craft.md#restrain-ornament-be-generous-with-substance).
+Marketing motion may stage content, but the page is finished without it.
 
 ## Draft with real content and honest pictures
 

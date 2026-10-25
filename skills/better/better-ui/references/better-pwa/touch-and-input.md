@@ -19,8 +19,8 @@ assumes a mouse (reveal-on-hover, magnetic or scale effects). These queries desc
 the primary input only; `any-hover` and `any-pointer` describe all attached inputs.
 Never hide information or actions behind hover alone: touch needs another path.
 
-Tailwind (optional): v4's `hover:` variant already compiles to `@media (hover: hover)`;
-v3 needs `future.hoverOnlyWhenSupported`. Inspect output before adding config.
+A framework's hover variant may already compile to this guard; inspect its output
+before adding one ([tailwind](../tailwind.md) for v4).
 
 ## Press feedback on contact
 
@@ -29,7 +29,7 @@ v3 needs `future.hoverOnlyWhenSupported`. Inspect output before adding config.
   transition: transform 120ms var(--ease-out), background-color 120ms var(--ease-out);
 }
 .button:active {
-  transform: scale(0.97);
+  transform: scale(0.97); /* or the project's press scale */
   background: var(--surface-pressed);
 }
 ```
@@ -117,10 +117,11 @@ where it harms the value. Keep paste, autofill, and native validation working.
   content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
 ```
 
-`interactive-widget=resizes-content` asks supporting browsers (Chromium-based) to
-shrink the layout viewport for the keyboard, so `dvh` shells and bottom-pinned inputs
-move with it. Other browsers ignore it and resize only the visual viewport. Choose it
-only for keyboard-heavy shells; document pages usually read better without it.
+`interactive-widget=resizes-content` asks supporting browsers (Chromium-based ones at
+the time of writing; check current support) to shrink the layout viewport for the
+keyboard, so `dvh` shells and bottom-pinned inputs move with it. Other browsers
+ignore it and resize only the visual viewport. Choose it only for keyboard-heavy
+shells; document pages usually read better without it.
 
 Reach for the Visual Viewport API only after reproducing an obstruction on a device:
 

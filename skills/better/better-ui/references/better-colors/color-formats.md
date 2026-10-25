@@ -77,9 +77,9 @@ The sRGB boundary is irregular. Maximum chroma depends on hue and lightness toge
 
 The peak moves with lightness, so a ramp that copies one chroma across its steps fits the gamut at some steps and overshoots at others.
 
-A color more vivid than its display can render gets gamut-mapped, which in current browsers mostly means clipped channel by channel. Clipping flattens neighbouring steps into one rendered color and can shift hue and lightness too, so the top of a ramp loses its distinctions on an sRGB screen.
+A color more vivid than its display can render gets gamut-mapped, which in many browsers still means clipped channel by channel. Clipping flattens neighbouring steps into one rendered color and can shift hue and lightness too, so the top of a ramp loses its distinctions on an sRGB screen.
 
-The fix is to reduce chroma while holding `L` and `H`: `oklch(0.7 0.25 150)` is outside sRGB, `oklch(0.7 0.19 150)` is inside. culori's `clampChroma(color, 'oklch')` and colorjs.io's `toGamut()` find the boundary. Generate ramps against sRGB unless the product is display-restricted, and add P3 as an enhancement:
+The fix is to reduce chroma while holding `L` and `H`: `oklch(0.7 0.25 150)` is outside sRGB, `oklch(0.7 0.19 150)` is inside. A color library's gamut-mapping call finds the boundary (for example culori's `clampChroma(color, 'oklch')` or colorjs.io's `toGamut()`). Generate ramps against sRGB unless the product is display-restricted, and add P3 as an enhancement:
 
 ```css
 .success {
@@ -104,7 +104,7 @@ Order matters. The sRGB value comes first, so an sRGB screen shows a color you c
 | Gradient interpolation, as in `in oklab` | 2024 | Drops the whole gradient |
 | Relative color syntax, `light-dark()` | 2024 | Drops the declaration |
 
-Check the project's actual browser matrix before adding fallbacks. On a modern baseline they are dead weight. Where the matrix predates support, declare the old value first and layer the new one with `@supports`, nesting the P3 enhancement inside:
+Baseline years mark when the feature reached all major engines; check current support and the project's actual browser matrix before adding fallbacks. On a modern baseline they are dead weight. Where the matrix predates support, declare the old value first and layer the new one with `@supports`, nesting the P3 enhancement inside:
 
 ```css
 .accent {

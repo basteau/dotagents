@@ -14,7 +14,7 @@ Units, a starting type scale, fluid display sizes, the heading mapping, tracking
 
 ## Type scale
 
-Pick an existing scale or define one. Tailwind's `text-xs` through `text-9xl`, each pairing a size with a line height, is a solid ready-made choice.
+Use the project's scale, or a framework's ready-made one that pairs each size with a line height, or define one.
 
 A starting point for a product interface, named by role:
 
@@ -58,7 +58,7 @@ h2 { font-size: var(--text-title); }
 h3 { font-size: var(--text-heading); }
 ```
 
-In Tailwind, centralize the per-level classes in a component or `@layer base` rather than repeating them inline.
+In a utility-class codebase, centralize the per-level classes in base styles or a heading component rather than repeating them inline.
 
 ## Tracking by size
 
@@ -107,4 +107,4 @@ Values in `em`, so tracking follows the size it sits on.
 }
 ```
 
-Supported in Chromium 133+ and Safari 18.2+, not yet Firefox. Unsupported browsers keep the default leading.
+Support is recent and not yet universal; check current support. Unsupported browsers keep the default leading, so the trim is a progressive enhancement.

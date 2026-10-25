@@ -19,18 +19,13 @@ The widths are rendered pixels. A 24px-grid icon drawn at 16px scales its stroke
 option, such as Lucide's `absoluteStrokeWidth`, or set `vector-effect: non-scaling-stroke`
 on the SVG's shapes.
 
-```tsx
-// Good: stroke tuned to the semibold label
-<button className="flex items-center gap-2 font-semibold">
-  <Plus size={16} strokeWidth={2} absoluteStrokeWidth />
-  New project
-</button>
-
-// Bad: 1.5px stroke against a bold label
-<button className="flex items-center gap-2 font-bold">
-  <Plus size={16} strokeWidth={1.5} absoluteStrokeWidth />
-  New project
-</button>
+```css
+/* Stroke tuned to the semibold label, in rendered pixels at any icon size */
+.button { font-weight: 600; }
+.button svg :is(path, line, circle, rect, polyline) {
+  stroke-width: 2px;
+  vector-effect: non-scaling-stroke;
+}
 ```
 
 - **One library per surface.** Never mix icon libraries with different stroke or corner
@@ -52,16 +47,9 @@ with `currentColor` and let CSS state drive the color. Strip hardcoded fills suc
 ```css
 /* Use the project's color tokens */
 .icon-button { color: var(--icon-muted); }
-.icon-button:hover { color: var(--icon-strong); }
+@media (hover: hover) { .icon-button:hover { color: var(--icon-strong); } }
 .icon-button[aria-pressed="true"] { color: var(--icon-active); }
 .icon-button:disabled { opacity: 0.4; }
-```
-
-```html
-<!-- Tailwind, with the project's token names -->
-<button class="text-icon-muted hover:text-icon-strong aria-pressed:text-icon-active disabled:opacity-40">
-  <BookmarkIcon />
-</button>
 ```
 
 Muted icons still carry meaning: an icon that is the only indicator of a control's
@@ -76,13 +64,7 @@ Where a set offers outline and filled variants, use them as a state pair, never 
 | Outline | Default state in toolbars, list rows and inline text |
 | Fill | Selected or active state, such as the active tab, a toggled bookmark or a liked heart |
 
-```tsx
-// Good: variant communicates state
-<TabIcon variant={isActive ? "solid" : "outline"} />
-
-// Bad: filled everywhere, so the active tab has no state signal
-<TabIcon variant="solid" />
-```
+Filled everywhere is the common miss: the active tab then has no state signal.
 
 An infrequent swap, such as a bookmark or a like, may cross-fade; a high-frequency one,
 such as the active tab, swaps instantly. Values are in
@@ -114,11 +96,6 @@ compound back to unflipped.
 [dir="rtl"] .icon-directional {
   scale: -1 1;
 }
-```
-
-```tsx
-// Tailwind
-<ChevronRightIcon className="rtl:-scale-x-100" />
 ```
 
 Analyze composite icons part by part. A badge or slash overlay may keep its position

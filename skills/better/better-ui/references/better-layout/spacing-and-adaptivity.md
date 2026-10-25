@@ -40,19 +40,15 @@ Use the project's spacing tokens. Where none exist, define a small scale once an
 
 Nothing marks where one borderless target ends and the next begins, so the space is the boundary. Measure between what the user sees: a borderless button's own padding counts toward the `24px`. Preserve an established, usable density rather than expanding controls to match these values.
 
-```html
-<!-- Good: bordered buttons at 12px -->
-<div class="flex gap-3">
-  <button class="rounded-lg border px-4 py-2">Cancel</button>
-  <button class="rounded-lg bg-blue-600 px-4 py-2 text-white">Save</button>
-</div>
+```css
+/* Good: bordered buttons at 12px, borderless icon buttons at 24px between glyphs */
+.button-row { display: flex; gap: 12px; }
+.icon-row { display: flex; gap: 8px; }        /* plus 8px padding per side = 24px */
+.icon-row button { padding: 8px; }
 
-<!-- Bad: three borderless icon buttons packed at 4px -->
-<div class="flex gap-1">
-  <button><TrashIcon /></button>
-  <button><ArchiveIcon /></button>
-  <button><ShareIcon /></button>
-</div>
+/* Bad: borderless icon buttons packed at 4px with no padding */
+.icon-row { display: flex; gap: 4px; }
+.icon-row button { padding: 0; }
 ```
 
 Target sizes and hit-area expansion belong to [better-accessibility](../better-accessibility.md). Space controls so their expanded hit areas never overlap.
@@ -102,14 +98,6 @@ The item width sets the peek. With `100%` as the scroller's content box, item wi
   flex: 0 0 calc(100% - 12px); /* 100% + 24px padding - 12px gap - 24px peek */
   scroll-snap-align: start;
 }
-```
-
-```html
-<!-- Tailwind: the same 24px peek -->
-<div class="flex gap-3 overflow-x-auto px-6 scroll-px-6 snap-x snap-mandatory">
-  <div class="w-[calc(100%-12px)] shrink-0 snap-start">…</div>
-  <div class="w-[calc(100%-12px)] shrink-0 snap-start">…</div>
-</div>
 ```
 
 ## Content bleeds, controls float

@@ -6,7 +6,7 @@ Producing the values once the structure is decided. For which ramps to build and
 
 A brand color arrives as one value, usually a hex. Two decisions come before any ramp exists:
 
-**Which step does it occupy?** A brand color meant for buttons and links belongs on the solid-fill step, `600` in Tailwind and `9` in Radix. Then the primary button renders the actual brand color, not an approximation.
+**Which step does it occupy?** A brand color meant for buttons and links belongs on the solid-fill step: `600` on a lightness-numbered ramp, `9` on a role-numbered one. Then the primary button renders the actual brand color, not an approximation.
 
 **Is it pinned or snapped?** Pin a contractually fixed brand color. It stays exact, the ramp builds outward from it and that one step spaces slightly unevenly. Otherwise snap it onto the ramp so the spacing stays regular, which almost always looks better.
 
@@ -32,7 +32,7 @@ The properties above map onto the three channels directly, which is why OKLCH is
 2. **Hold `H`** at the brand color's hue.
 3. **Set `C` as a share of that step's maximum**, the most chroma sRGB allows at that `L` and `H`. The gamut narrows toward black and white, so even a constant share makes absolute chroma peak mid-ramp. Taper the share toward the dark end so the darks do not read as ink.
 
-Never compute these by hand or by eye. `culori`, `colorjs.io` and `chroma.js` all convert between notations, find the gamut boundary and interpolate perceptually:
+Never compute these by hand or by eye. Use a color library that converts between notations, finds the gamut boundary and interpolates perceptually. The example below uses `culori`; `colorjs.io` and `chroma.js` do the same job:
 
 ```js
 import { clampChroma, formatHex } from 'culori'
@@ -57,11 +57,11 @@ const ramp = Object.fromEntries(
 
 The numbers are a starting point. Check the output against the properties above, measure white text on the solid-fill step (`4.97:1` on this `600`), and adjust. The output format is the project's choice. Emit hex for a hex codebase, `oklch()` for a new system.
 
-Interpolating between a light, a brand and a dark stop also works (`interpolate([...], 'oklab')` then `samples(11)`), but linear sampling spaces lightness evenly within each segment, so tighten `50`–`200` by hand. For a ramp the interpolation space is not a style choice, because sRGB interpolation produces muddy mid-steps. Decorative gradients are the opposite case ([color-usage.md](color-usage.md#gradients)).
+Interpolating between a light, a brand and a dark stop in OKLab and sampling eleven steps also works, but linear sampling spaces lightness evenly within each segment, so tighten `50`–`200` by hand. For a ramp the interpolation space is not a style choice, because sRGB interpolation produces muddy mid-steps. Decorative gradients are the opposite case ([color-usage.md](color-usage.md#gradients)).
 
 ## A reference ramp
 
-Tailwind's blue in OKLCH shows every property, including the finer light end a linear generator lacks:
+Tailwind's default blue, converted to OKLCH, shows every property, including the finer light end a linear generator lacks:
 
 | Step | Hex | `L` | `C` | `H` | Share of max `C` |
 | --- | --- | --- | --- | --- | --- |

@@ -2,7 +2,7 @@
 
 Typography is mostly restraint: a sensible scale, comfortable spacing, enough contrast. A label, a table cell, a marketing headline and an article paragraph do not share one set of rules. When reviewing, read the rendered page; bad wrapping, lone last-line words and truncation only show up at real content lengths.
 
-Use the project's styling system and its type tokens. Values here are starting points tuned to the typeface, content and density, and verified at their rendered size. The [cheat sheet](better-typography/css-cheat-sheet.md) maps each declaration to its Tailwind utility.
+Use the project's styling system and its type tokens. Values here are starting points tuned to the typeface, content and density, and verified at their rendered size. The [declaration lookup](better-typography/css-cheat-sheet.md) lists every declaration named here, with an optional Tailwind v4 column for utility-class projects.
 
 The words belong to [better-writing](better-writing.md), semantic heading structure to [better-accessibility](better-accessibility.md), spatial RTL layout and the way back to truncated text to [better-layout](better-layout.md). Measure contrast with [better-colors](better-colors.md); whether it passes is better-accessibility's. Underline motion beyond color is [better-animation](better-animation.md)'s. This reference owns how text renders, wraps and behaves in mixed-direction content.
 
@@ -14,9 +14,9 @@ Tracking, pairing and scale ratios are heuristics. Report them only where they b
 
 ## Fewer fonts, sizes and weights
 
-Rarely use more than three fonts; marketing pages can carry more than apps. Weight and size carry hierarchy, so each extra one dilutes it. Pair for contrast: a serif headline over a sans body reads as deliberate, two near-identical sans-serifs read as a mistake.
+Default to one family per page and add a second only for a contrast you can name, such as a serif display over a sans body; two near-identical sans-serifs read as a mistake. Three families, a monospace for code included, is the ceiling for a whole system, not a target for a page. Within a page, a few sizes far apart (one very large, one small, little in between) carry hierarchy better than many close steps; each extra size or weight dilutes it.
 
-Below `18px`, use weight `400` or heavier. Weights `100`–`300` belong at `28px` and up, checked against the background even there. Categories, `Display` and `Text` cuts and fallback stacks are in [choosing-fonts.md](better-typography/choosing-fonts.md).
+Below `18px`, use weight `400` or heavier. Weights `100`–`300` belong at about `28px` and up, checked against the background even there. Categories, `Display` and `Text` cuts and fallback stacks are in [choosing-fonts.md](better-typography/choosing-fonts.md).
 
 ## Keep text visible while fonts load
 
@@ -69,7 +69,7 @@ Timers, counters, prices and numeric columns take `tabular-nums`, so digits keep
 
 ## Truncate with a way back
 
-One line: `overflow: hidden`, `text-overflow: ellipsis` and `white-space: nowrap` (Tailwind `truncate`). Several: `display: -webkit-box`, `-webkit-box-orient: vertical`, `-webkit-line-clamp` and `overflow: hidden` (Tailwind `line-clamp-*`). Keep the full value reachable; the affordance is better-layout's.
+One line: `overflow: hidden`, `text-overflow: ellipsis` and `white-space: nowrap`. Several: `display: -webkit-box`, `-webkit-box-orient: vertical`, `-webkit-line-clamp` and `overflow: hidden`. Keep the full value reachable; the affordance is better-layout's.
 
 ## Natural case, typographic punctuation
 
@@ -81,7 +81,7 @@ Set `text-underline-position: from-font` and `text-decoration-thickness: from-fo
 
 ## Inputs at 16px on mobile
 
-iOS Safari zooms the page when an input's text is under `16px`. Two fixes hold `16px` and look different, so ask which the design wants: size the input up on mobile (`text-base sm:text-sm`), or keep `16px` and render the intended size with `transform: scale()`. Both recipes are in [forms and editable text](better-typography/details-and-accessibility.md#forms-and-editable-text).
+iOS Safari zooms the page when a focused input's text is under `16px`. Two fixes hold `16px` and look different, so ask which the design wants: set the input to `16px` below the mobile breakpoint and the design size above it, or keep `16px` everywhere and render the intended size with `transform: scale()`. Both recipes are in [forms and editable text](better-typography/details-and-accessibility.md#forms-and-editable-text).
 
 ## Size floors
 
@@ -89,7 +89,7 @@ Start long-form body text at `16px`. Move off it only for a reason you can name,
 
 ## Font smoothing on the root
 
-Apply `-webkit-font-smoothing: antialiased` and `-moz-osx-font-smoothing: grayscale` once on the root, never per component. Tailwind's `antialiased` sets both.
+Apply `-webkit-font-smoothing: antialiased` and `-moz-osx-font-smoothing: grayscale` once on the root, never per component. Both affect only macOS rendering; judge the result there.
 
 ## Language and bidi behavior
 
@@ -118,7 +118,7 @@ Build drop caps, gradient text, outlines and text shadows in CSS so the text sta
 | `font-feature-settings: "tnum"` or `"zero"` | `font-variant-numeric: tabular-nums` or `slashed-zero` |
 | `font-feature-settings` on a descendant of another | Repeat the inherited tags, or move common ones to properties |
 | `line-height` in `px` or `rem` | A unitless value |
-| `leading-none` or `leading-tight` on text that can wrap | `1.4` or more |
+| `line-height` under `1.4` on text that wraps to three or more lines | `1.4` or more |
 | `letter-spacing` in `px` | The same value in `em` |
 | Body `font-size` in `px`, or `font-size` in `vw` alone | `rem`; `clamp()` with a `rem` term for display text |
 | Weight `100`–`300` on text under `18px` | `400` or heavier |
@@ -129,8 +129,8 @@ Build drop caps, gradient text, outlines and text shadows in CSS so the text sta
 | Timer, counter, price or numeric column without `tabular-nums` | `font-variant-numeric: tabular-nums` |
 | `...`, `--` or a hyphenated range in rendered strings | `…`, an em dash or an en dash |
 | `text-decoration-skip-ink: none` | Remove it; set `text-underline-offset` or `from-font` |
-| `<input>` with `text-sm` or `14px` and no mobile override | One of the **Inputs at 16px on mobile** fixes |
-| `antialiased` or `-webkit-font-smoothing` inside a component | Move it to the root |
+| `<input>` text under `16px` with no mobile override | One of the **Inputs at 16px on mobile** fixes |
+| `-webkit-font-smoothing` set inside a component | Move it to the root |
 | Mixed-direction name, number or URL without `<bdi>` or `dir` | Wrap it in `<bdi>` |
 | `user-select: none` on a layout root or text container | Remove it; keep it only on a drag or gesture surface |
 

@@ -37,7 +37,7 @@ Name things the way the people doing the work do: "Waiting on the customer", "Of
 
 ## Build strings whole
 
-Never assemble a sentence from fragments around a variable (`"You have " + n + " new messages"`); word order changes per language. Write one message with placeholders and use the locale's plural rules, not `n === 1 ? "" : "s"`, because many languages have more than two forms. Format numbers, dates and lists through `Intl`. Recipes: [patterns.md](better-writing/patterns.md#plurals-and-placeholders).
+Never assemble a sentence from fragments around a variable (`"You have " + n + " new messages"`); word order changes per language. Write one message with placeholders and use the locale's plural rules, not `n === 1 ? "" : "s"`, because many languages have more than two forms. Format numbers, dates and lists with a locale-aware formatter (`Intl` on the web), never by hand. Recipes: [patterns.md](better-writing/patterns.md#plurals-and-placeholders).
 
 ## Verb-first buttons
 
@@ -67,9 +67,9 @@ An error is an instruction, and it sits beside the field that failed:
 
 No blame, no "oops", no exclamation marks. Phrase hints positively ("Use at least 8 characters"). Show a known requirement as helper text before input, not only in the error. When the same error keeps firing, redesign the interaction.
 
-## Undo beats confirmation
+## Confirmations name the action and object
 
-For a reversible, frequent action (archive, move, delete to trash), act at once and offer undo in the result: "Project archived. Undo". Confirm first only when the action is irreversible, affects other people or destroys many items. Then the dialog is answerable without reading the body:
+When to offer undo instead of a dialog is [better-interaction](better-interaction.md#prefer-undo-to-confirmation)'s; the undo copy names the result: "Project archived. Undo". A confirmation, kept for irreversible, shared or bulk destruction, is answerable without reading the body:
 
 - The title names action and object, "Delete 'Q3 report'?", never "Are you sure?".
 - The body says what is lost, with counts where they apply.
@@ -82,15 +82,9 @@ Templates: [patterns.md](better-writing/patterns.md#destructive-flows).
 
 An empty state says what this place is and how to fill it, and offers one next action:
 
-```html
-<!-- Bad: a shrug -->
-<p>No results.</p>
-
-<!-- Good: orientation plus a next step -->
-<p class="font-medium">No projects yet</p>
-<p class="text-sm text-zinc-500">Projects keep your tasks and files together.</p>
-<button class="mt-4">Create a project</button>
-```
+| Bad: a shrug | Good: orientation plus a next step |
+| --- | --- |
+| "No results." | Title "No projects yet", line "Projects keep your tasks and files together.", button `Create a project` |
 
 A filtered empty state names the query and offers an exit: "No results for 'quarterly'. Clear filters". Never park persistent information there; it disappears once content exists. Loading, saving and success copy: [patterns.md](better-writing/patterns.md#status-copy).
 
@@ -104,12 +98,12 @@ A placeholder shows a realistic value in the accepted format, `name@example.com`
 | --- | --- |
 | `Click here`, a link reading `here`, two identical `Learn more` links | Name the destination |
 | `Oops`, `Something went wrong` or `!` in an error | Say what failed and the next step |
-| `" + n + "`, a template literal holding a fragment, `=== 1 ? "" : "s"` | One ICU message with a plural argument |
+| `" + n + "`, a template literal holding a fragment, `=== 1 ? "" : "s"` | One message with a plural argument, such as ICU |
 | `OK`, `Yes` or `No` on a dialog button; `Are you sure` | Verb plus object; name the action and object |
 | `successfully`; `Please` in a routine instruction | Cut it: "Changes saved" |
 | Toggle label starting `Don't`, `Disable` or `Hide` | Describe the ON state |
 | `aria-label="Trash"`, `"Close icon"`, `"X"` | Name the action: "Delete project", "Close dialog" |
-| `toLocaleDateString()` with no locale; a date built from `getMonth()` | `Intl.DateTimeFormat` with the user's locale |
+| A date or number formatted with no locale, or assembled from parts (`getMonth()`) | A locale-aware formatter such as `Intl.DateTimeFormat`, given the user's locale |
 | `Save Changes` beside `Discard changes` | One case per element type |
 | `Items`, `Records`, `Data`, `Status` as a heading or column label | The product's own noun for the thing |
 

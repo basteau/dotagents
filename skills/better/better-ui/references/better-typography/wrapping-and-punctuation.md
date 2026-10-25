@@ -4,13 +4,13 @@ Line length, wrapping, justification, typographic characters and mixed-direction
 
 ## Measure (line length)
 
-Any unit works. `65ch` measures characters directly, one `ch` being the width of the `0` in the current font, and a pixel or rem cap is just as good. At a `16px` body size the 60–75 character range lands roughly between `560px` and `680px` depending on the font. Tailwind's `max-w-xl` (`576px`), `max-w-2xl` (`672px`) and `max-w-prose` (`65ch`) all fit. Recheck the cap if the body font size changes.
+Any unit works. `65ch` measures characters directly, one `ch` being the width of the `0` in the current font, and a pixel or rem cap is just as good. At a `16px` body size the 60–75 character range lands roughly between `560px` and `680px` depending on the font. Recheck the cap if the body font size changes.
 
 ## Wrapping
 
 | Declaration | Use | Avoid |
 | --- | --- | --- |
-| `text-wrap: balance` | Headings, titles, short descriptions | Paragraphs; Chromium ignores it past six lines |
+| `text-wrap: balance` | Headings, titles, short descriptions | Paragraphs; browsers stop balancing past a few lines |
 | `text-wrap: pretty` | Any paragraph, long-form included | Nothing; unsupported browsers wrap normally |
 | `overflow-wrap: break-word` | Containers that can hold long words, URLs or IDs | — |
 | `white-space: nowrap` | Labels, badges, values like `10 km` | Anything that can outgrow its container |

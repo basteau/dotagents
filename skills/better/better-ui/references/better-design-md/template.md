@@ -5,7 +5,7 @@ A skeleton that follows the [DESIGN.md format](https://github.com/google-labs-co
 every `<…>` with a value taken from the code, and give it a source comment.
 Delete sections, tokens and components the project does not have, and list
 deliberately absent sections in `omitted`. Remove the HTML comments before
-finishing.
+finishing. Schema limits and extension-token rules are in [format.md](format.md).
 
 ````markdown
 ---

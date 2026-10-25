@@ -23,7 +23,7 @@ The canonical `.sr-only` pattern hides content visually while keeping it in the 
 
 Use `1px` boxes, not `0`, because some screen readers skip zero-sized elements. `white-space: nowrap` stops words being read as one run-together string. Never `display: none` or `visibility: hidden`, which remove the content from assistive tech entirely.
 
-Tailwind ships this as `sr-only`. The skip-link recipe is in [focus-and-keyboard.md](focus-and-keyboard.md).
+Utility frameworks usually ship this class under the same name. The skip-link recipe is in [focus-and-keyboard.md](focus-and-keyboard.md).
 
 Use it for context sighted users get visually: `<span class="sr-only">Opens in new tab</span>`, table captions or an icon-only control's label where `aria-label` isn't an option.
 
@@ -51,11 +51,9 @@ Rules for reliable announcements:
 - Keep messages short and self-contained. `aria-atomic="true"` re-reads the whole region on change.
 - Never move focus to a toast. Announce it and leave focus where the user is working.
 
-```tsx
-// Region rendered from the start, message injected later
-<div role="status" className="sr-only">
-  {statusMessage}
-</div>
+```html
+<!-- Rendered empty with the page; a script sets its text later -->
+<div role="status" class="sr-only"></div>
 ```
 
 For loading states: set `aria-busy="true"` on the updating region, announce "Loading…" politely, then announce the outcome ("Loaded, 12 results").
@@ -84,13 +82,13 @@ A missing `alt` is worse than an empty one, because screen readers fall back to 
 - Meaningful inline SVG: `role="img"` plus `aria-label="…"`, or a `<title>` as the first child referenced by `aria-labelledby`.
 - Simple cases: `<img src="icon.svg" alt="…">` is the most reliable delivery.
 
-```tsx
-// Decorative icon inside a labeled button
+```html
+<!-- Decorative icon inside a labeled button -->
 <button aria-label="Close">
   <svg aria-hidden="true">…</svg>
 </button>
 
-// Standalone meaningful icon
+<!-- Standalone meaningful icon -->
 <svg role="img" aria-label="Verified account">…</svg>
 ```
 

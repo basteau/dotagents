@@ -1,10 +1,10 @@
-# CSS cheat sheet
+# Declaration lookup
 
-One-line lookup for every typography CSS declaration covered by this reference, with the Tailwind 4 equivalent. Where no utility exists, the arbitrary-value form is shown. Pick the column that matches the project: the declaration in plain CSS, CSS Modules, styled-components or StyleX codebases, the utility in Tailwind codebases.
+One-line lookup for every typography declaration this reference names. The rule lives in the top file; this is for finding the property. The last column is optional: the Tailwind v4 utility for projects that use it, in arbitrary-value form where no utility exists. Ignore it in any other codebase.
 
 ## Font
 
-| Declaration | What it does | Tailwind |
+| Declaration | What it does | Optional: Tailwind v4 |
 | --- | --- | --- |
 | `font-family: sans-serif` | The sans family | `font-sans` |
 | `font-family: serif` | The serif family | `font-serif` |
@@ -27,7 +27,7 @@ One-line lookup for every typography CSS declaration covered by this reference, 
 
 ## Numbers
 
-| Declaration | What it does | Tailwind |
+| Declaration | What it does | Optional: Tailwind v4 |
 | --- | --- | --- |
 | `font-variant-numeric: tabular-nums` | Equal-width digits | `tabular-nums` |
 | `font-variant-numeric: proportional-nums` | Natural-width digits | `proportional-nums` |
@@ -37,11 +37,11 @@ One-line lookup for every typography CSS declaration covered by this reference, 
 | `font-variant-numeric: diagonal-fractions` | True fractions from `1/2` | `diagonal-fractions` |
 | `font-variant-numeric: ordinal` | Raised ordinal suffixes | `ordinal` |
 
-Plain CSS takes every numeric value in one declaration; Tailwind's numeric utilities compose.
+Plain CSS takes every numeric value in one declaration (`tabular-nums slashed-zero`); the Tailwind utilities compose as separate classes.
 
 ## Spacing and layout
 
-| Declaration | What it does | Tailwind |
+| Declaration | What it does | Optional: Tailwind v4 |
 | --- | --- | --- |
 | `letter-spacing` | Space between letters, in `em` | `tracking-*` |
 | `line-height` | Space between lines, unitless | `leading-*` |
@@ -52,7 +52,7 @@ Plain CSS takes every numeric value in one declaration; Tailwind's numeric utili
 
 ## Wrapping and overflow
 
-| Declaration | What it does | Tailwind |
+| Declaration | What it does | Optional: Tailwind v4 |
 | --- | --- | --- |
 | `text-wrap: balance` | Even out heading lines | `text-balance` |
 | `text-wrap: pretty` | Keep a lone word off the last line | `text-pretty` |
@@ -66,7 +66,7 @@ Plain CSS takes every numeric value in one declaration; Tailwind's numeric utili
 
 ## Decoration and interaction
 
-| Declaration | What it does | Tailwind |
+| Declaration | What it does | Optional: Tailwind v4 |
 | --- | --- | --- |
 | `text-decoration-line: underline` | Draw an underline | `underline` |
 | `text-decoration-color` | Underline color | `decoration-*` |

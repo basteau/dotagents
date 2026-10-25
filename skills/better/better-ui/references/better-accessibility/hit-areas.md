@@ -21,8 +21,6 @@ The visible element can stay small; the hit area is what must be big. Anything t
 
 Where the visible element is smaller, say a 20×20 checkbox, extend the hit area with a pseudo-element. Put it on a wrapping element or the `<button>`, never on the `<input>`, because form controls don't render `::before`/`::after` reliably.
 
-### CSS example
-
 ```css
 /* 20px checkbox with a 44px hit area, on the wrapper around the input */
 .checkbox-control {
@@ -40,17 +38,6 @@ Where the visible element is smaller, say a 20×20 checkbox, extend the hit area
   width: 44px;
   height: 44px;
 }
-```
-
-### Tailwind example
-
-```tsx
-<button
-  aria-label="Mark done"
-  className="relative size-5 after:absolute after:top-1/2 after:left-1/2 after:size-11 after:-translate-1/2"
->
-  <CheckIcon aria-hidden="true" />
-</button>
 ```
 
 ### Layout alternative
@@ -74,7 +61,7 @@ Two interactive elements never have overlapping hit areas. Where an extended hit
 
 A decorative layer painted over interactive content absorbs every pointer event its box covers: a gradient scrim, a glow, a blurred sheen, a full-bleed `::after`. The control underneath looks live and does nothing, and no hit-area sizing fixes it.
 
-Give each one `pointer-events: none` (Tailwind `pointer-events-none`) so events reach the control below. A layer that is an element rather than a pseudo-element also gets `aria-hidden="true"`:
+Give each one `pointer-events: none` so events reach the control below. A layer that is an element rather than a pseudo-element also gets `aria-hidden="true"`:
 
 ```css
 .card-glow {
