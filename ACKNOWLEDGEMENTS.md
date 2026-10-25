@@ -5,11 +5,11 @@ License terms apply to each contribution, not automatically to the whole collect
 
 | Author / copyright notice | Contribution | License |
 | --- | --- | --- |
-| Copyright (c) 2026 [Jakub Krehel](https://github.com/jakubkrehel/skills) | `better-ui` router and accessibility, colors, interface, layout, polish, typography, and writing references | MIT |
+| Copyright (c) 2026 [Jakub Krehel](https://github.com/jakubkrehel/skills) | `better-ui` router and accessibility, colors, interface, layout, polish, typography, and writing references; `jakub-krehel` group (also from [make-interfaces-feel-better](https://github.com/jakubkrehel/make-interfaces-feel-better) and [oklch-skill](https://github.com/jakubkrehel/oklch-skill)) | MIT |
 | Copyright (c) 2026 [Meng To](https://github.com/MengTo/Skills) | Landing-page strategy adapted into `better-ui` | MIT |
 | Copyright (c) 2026 [Elaya](https://github.com/elayadesign/ai-design-skills) | Landing-page design guidance adapted into `better-ui` | MIT |
-| Copyright (c) 2026 [Raphael Salaja](https://github.com/raphaelsalaja/userinterface-wiki) | Interaction and visual-design guidance adapted into `better-ui` | MIT |
-| Copyright (c) 2026 [Emil Kowalski](https://www.skills.sh/emilkowalski/skills) | `better-ui` animation and PWA references | MIT |
+| Copyright (c) 2026 [Raphael Salaja](https://github.com/raphaelsalaja/userinterface-wiki) | Interaction and visual-design guidance adapted into `better-ui`; `raphael-salaja` group (also from [skill](https://github.com/raphaelsalaja/skill)) | MIT |
+| Copyright (c) 2026 [Emil Kowalski](https://www.skills.sh/emilkowalski/skills) | `better-ui` animation and PWA references; `emil-kowalski` group | MIT |
 | Copyright (c) 2026 [Lauren Tan / poteto](https://github.com/poteto/plugins/tree/main/pstack) | pstack: `technical-writing`, `unslop`, and TypeScript guidance | MIT |
 | Copyright (c) 2026 [Matteo Collina](https://github.com/mcollina/skills) | Advanced TypeScript references integrated into `better-ts` | MIT |
 | Copyright (c) 2026 [Matt Pocock](https://github.com/mattpocock/skills) | Workflow skills and agent-writing guidance | MIT |
@@ -40,6 +40,8 @@ These research sources retain their own terms; credit does not relicense their w
 - `better-effect` synthesizes official Effect patterns and community research, not upstream skill folders or scripts. Source details remain in its references.
 
 - `better-ui` selectively rewrites design skills into topic references rather than preserving upstream folders, catalogs, or demos. Landing-page guidance combines Meng To and Elaya; Tailwind guidance is an original synthesis. Fixed recipes and global mandates are omitted in favor of project conventions.
+
+- The `jakub-krehel`, `raphael-salaja`, and `emil-kowalski` groups are complete, unmodified upstream skill folders: jakubkrehel/skills `592aedc44d7d5b3e29740984252902f3e5402a1c`, make-interfaces-feel-better `35545ea1512ad59fa463e6b1f95ca9c052981fe6`, oklch-skill `0e81f040e16d48fcc61d3e1b7ea548542371321f`; raphaelsalaja/skill `dc9eef22f13635df77d9b9e67c82aa85d52a97b7`, userinterface-wiki `skills/` (as `userinterface-wiki`) `256a954080c8bcf1b1ceb1e2a4079d1f24cf593a`; emilkowalski/skills `2d228630ba1446365f614a108cb8252f1feda202`. Upstream names are kept, so Jakub's `better-ui` and Emil's `prototype` share names with local skills; install one of each pair.
 
 - `better-ts` adapts poteto's `typescript-best-practices` (`SKILL.md` and `references/patterns.md`) from revision `74dd2291e8e37b12fd6dc49b2acbd655c6bdaf12`. It retains the rule-table/example structure under a model-invokable local name, inlines essential companion-principle guidance, corrects assertion/inference wording, and adds Standard Schema parsing, a Valibot/better-result example, and project-applicable strictness. It replaces the earlier multi-source router and advanced references.
 
