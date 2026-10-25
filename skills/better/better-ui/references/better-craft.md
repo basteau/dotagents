@@ -39,12 +39,30 @@ content, primary action, density and distinguishing treatment.
 ## Extend the product's language
 
 For an established product, extend its visual language, tokens, components and
-styling system; never add a second system to land one improvement. For a new
-surface, choose a coherent direction from the brief and assets. When the user wants
-their own style, or neither project nor brief sets a direction, load
-[basteau-taste](basteau-taste.md) as the direction. State consequential assumptions
-and proceed; ask only when audience, purpose or brand is ambiguous enough to change
-the design.
+styling system; never add a second system to land one improvement. The project's
+DESIGN.md, when present, is the direction; a new site without one decides its style
+through [better-design-md](better-design-md.md) first. When a brief is vague, decide,
+state your reading in one line and proceed; ask only when a missing fact blocks the
+work or would change the design.
+
+## Know whether it is read or worked in
+
+The more often something is seen, the quieter and faster it should be. Decide first
+which kind of surface this is; a product page that shows its app is a page whose
+interface fragments follow app-screen rules.
+
+| | Page: read and scrolled | App screen: worked in daily |
+| --- | --- | --- |
+| Leads with | The idea: the subject, a headline, a picture | The block that answers the screen's one question |
+| Title | Display size, says what this is | A noun title near body scale, no hero header |
+| Color | Carried by the work or whole fields; an accent on the action | On the data and at most one control, never the chrome |
+| Expression | One or two signature moves; staged motion | Restraint; delight only at rare moments such as first run or completion |
+| Starts from | [landing page](better-landing-page.md) | This file and [interaction](better-interaction.md) |
+
+On an app screen, write the screen's one question and today's one finding ("the
+23:28 deploy doubled the error rate"): the largest block answers the question, the
+finding sits under the title beside the action it drives, and the most frequent job
+is one click from the first screen.
 
 ## Explore real variants while the direction is open
 
@@ -57,29 +75,36 @@ pick; then promote one and remove the rest. The practice is in
 ## Compose with real content
 
 Establish hierarchy through proportion, alignment, grouping and type contrast before
-any surface effect. Give each section a reason to exist and order reading toward the
-task. Use representative names, values, descriptions, item counts and images; lorem
-ipsum and three tidy rows make every structure look good.
+any surface effect, and order reading toward the task. Use representative names,
+values, item counts and images; lorem ipsum and three tidy rows make every structure
+look good. Never fake the subject: no stock stand-in for the product and no
+dashboard of gray bars, but a real cropped fragment with data that adds up, or the
+subject drawn. Choose each image for subject, crop and focal point, and keep those
+as the viewport changes.
 
-## Let a few details carry identity
+## Take identity from the subject, not the category
 
-Choose imagery for subject, crop and focal point, and keep those choices as the
-viewport changes. Express character through a few intentional details whose
-prominence fits the product, not interchangeable decoration, and keep familiar
-controls recognizable. Repeat the chosen spacing, radius, icon and elevation
-relationships so the surface reads as one system.
+List what only this product or client has: its name and what it means, its place,
+its numbers and constraints, its objects, materials, rituals and the words of its
+trade. Draw the few details that carry identity from that list, and test each by
+swapping in the nearest competitor: if it still fits, it belongs to the category.
+Let the work carry the color; a near-neutral interface lets real media and data be
+the vivid part. Keep familiar controls recognizable, and repeat the chosen spacing,
+radius, icon and elevation relationships so the surface reads as one system.
+
+## Restrain ornament, be generous with substance
+
+Removing template devices (an eyebrow over every heading, icon cards, gradients,
+hairlines) is half the job; a surface that loses them and gains nothing reads thin
+and unfinished. Fill the space with scale, the full content, real pictures of the
+subject's world or a whole field of color, never another ornament. An empty area is
+a rest only when something closes it; otherwise it is a hole.
 
 ## Keep every part in one personality
 
 Motion, type, color, copy and even names should share one character: a playful
 product can be softer and bouncier, a professional tool crisp and fast. When a detail
 fights the rest, change it to fit rather than adding another to balance it.
-
-## Let frequency set the budget for expression
-
-The more often something is seen or used, the quieter and faster it should be. Daily
-tools and repeated actions get restraint; rare moments such as onboarding, first run
-or completion can carry delight. Motion specifics are in [animation](better-animation.md).
 
 ## Design every state, not the default screen
 
@@ -97,12 +122,13 @@ setup minimal.
 
 ## Render, compare, refine
 
-Inspect the result in a browser or platform preview with real content at
-representative wide and narrow sizes; for an existing screen, compare before and
-after in the same state and viewport. Against a supplied reference, compare
-hierarchy, density, proportion and character, not only values. Fix the largest
-mismatch with the direction at its cause, from composition to type and color, then
-surface and motion. Return with fresh eyes when you can, and walk every state slowly.
+Screenshot the result with real content at about 1440, 768 and 390px and judge the
+pictures, not the code: a problem visible in a screenshot is real whatever the code
+says. For an existing screen, compare before and after in the same state and
+viewport; against a supplied reference, compare hierarchy, density, proportion and
+character, not only values. Fix the top three problems at their cause, in the order
+idea, hierarchy, composition, type, imagery, color, detail, motion, then look again;
+three rounds at most. The passes are in [critique](better-ui-review/critique.md).
 
 ## Finish against the direction
 

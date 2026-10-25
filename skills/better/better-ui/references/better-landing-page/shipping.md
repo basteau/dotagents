@@ -5,21 +5,38 @@ than mocked up.
 
 ## Content realism
 
-- Write real draft copy in the brand's voice. No lorem ipsum.
-- No placeholder brands, people or places ("Acme", "John Doe", "Lorem Café"). In a
-  draft, use the client's real names or mark the gap: `[client logo]`, `[quote from
-  a customer]`.
+- Write real draft copy in the brand's voice. No lorem ipsum, and no placeholder
+  brands, people or places ("Acme", "John Doe", "Lorem Café").
+- Where the brief gives the shape of the content but not every detail (six rooms
+  "from €140", a short menu, twelve speakers), write the full plausible set: each
+  room with its name and rate, each dish with its price. A page can only be judged
+  at its real density; list every sample detail for the client to confirm.
 - Never present invented testimonials, logos, press, ratings or statistics as real.
   A specific-looking number ("47.2% faster") is as fictional as a round one; use a
-  supplied figure or leave the claim out.
+  supplied figure, show the thing itself, or mark the gap: `[quote from a customer]`.
 - For layout testing, use representative lengths: the longest name, a two-line
   title, a missing photo, an empty list. See [layout](../better-layout.md).
-- Avoid generic marketing filler: "elevate", "seamless", "unleash", "next-gen",
-  "game-changer", "streamline", "in today's world". Replace each with what the
-  product does.
+- Replace generic filler ("elevate", "seamless", "unleash", "streamline", "not
+  just X, it's Y", "in today's world") with what the product does. Ask of each
+  sentence whether a competitor could print it unchanged.
 - Sentence case for headings, active voice, no exclamation marks in confirmations,
   no "Oops" in errors; see [writing](../better-writing.md).
-- Use distinct, consented photos of real people; stock smiles read as fake.
+
+## Honest imagery
+
+Take pictures in this order, and report which you used:
+
+| Source | Use it for | Keep it honest by |
+| --- | --- | --- |
+| The client's own photographs, footage, work and interface | Always first; an ordinary photo of the real thing beats a beautiful one of something else | Consented photos of real people; real screenshots shown large at least once |
+| Generated images, when an image tool is available | Scenes the brief describes but no photo exists of | Never passing one off as the client's real product, room, dish or team |
+| Open archives and museums | Its street in old postcards, a map of the neighbourhood, its material up close, its trade in engravings | A licence that allows commercial use, a credit line in the footer, never shown as the client's own |
+| Drawn from the subject | Its objects, tiles, windows or interface when no honest picture exists | One graphic language in the palette's colors, with detail that rewards a second look; a drawing you cannot name in the subject's world is decoration |
+| Type and color alone | When nothing above fits | Type as the image and color at full scale; no icons in squares, blobs or empty boxes |
+
+Never a fake product shot, a stock stand-in for the subject, a device frame around
+a shrunken screenshot or a gray box. Give every picture on the page one small set
+of crop ratios and one treatment.
 
 ## Complete states
 
@@ -44,29 +61,19 @@ state that says what happens next. See [interaction](../better-interaction.md) a
 | Local business | Address, hours, phone and map link as text; consistent with the business listing |
 | Event | Date, time zone, venue and calendar link as text; ticket status kept current |
 
-## Pitfalls
-
-- Several competing actions in the opening.
-- A vague value proposition: "streamline", "optimize", "reimagine".
-- A long feature list with no outcomes.
-- Proof buried at the bottom, or proof that cannot be verified.
-- The product, work or place shown too small to read, or replaced by a stock image.
-- Every section the same width and density, so nothing paces the read.
-- Decoration everywhere, so the signature detail disappears.
-- Content invisible until a reveal script runs.
-- A mobile layout that breaks reading or pushes the action several screens down.
-- No clear next step at the end.
-
 ## Before you finish
 
 - [ ] The site type, narrative and one primary action are deliberate and stated.
+- [ ] The idea sentence passes the competitor test and reaches every section.
 - [ ] The first screen says what, whose and what next, at desktop and phone widths.
 - [ ] Every claim, number, logo and quote is supplied or verified; gaps are marked.
+- [ ] Every section the brief asks for is delivered in full; sample details and
+      found pictures with their credits are listed.
 - [ ] Proof sits beside the claims it supports.
 - [ ] The primary action has one label, one destination and one distinct treatment,
       and appears again at the end.
 - [ ] Sections vary in composition but share one visual system.
-- [ ] One or two signature details, everything else quiet.
+- [ ] One or two signature details, quiet chrome, no thin or empty screens.
 - [ ] Copy is readable and controls usable before and without any animation, and
       under reduced motion.
 - [ ] Links, navigation and the conversion path work through success and failure;
@@ -74,4 +81,6 @@ state that says what happens next. See [interaction](../better-interaction.md) a
 - [ ] Metadata, favicon, sharing image, legal links and 404 are in place.
 - [ ] Focus, contrast, zoom, loading and media sizing are checked on the rendered
       page.
+- [ ] The page is critiqued from screenshots at about 1440, 768 and 390px, using
+      [critique](../better-ui-review/critique.md).
 - [ ] Any conversion claim is reported as a hypothesis until measured.

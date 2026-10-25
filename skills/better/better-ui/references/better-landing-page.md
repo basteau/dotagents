@@ -7,13 +7,14 @@ A homepage serving several audiences may need several paths; preserve that purpo
 instead of forcing a single conversion. For a focused section or copy edit, apply
 only the relevant rules below.
 
-Visual direction comes from [craft](better-craft.md), and from
-[basteau-taste](basteau-taste.md) when the user wants their own style or nothing
-else sets one; this file decides what the page says, in what order, and how it
-persuades. Type, grid, palette and surfaces live in [typography](better-typography.md),
-[layout](better-layout.md), [colors](better-colors.md) and [polish](better-polish.md);
-motion in [animation](better-animation.md); copy in [writing](better-writing.md);
-forms and feedback in [interaction](better-interaction.md) and
+Visual direction comes from the project's DESIGN.md, or from
+[better-design-md](better-design-md.md) for a new site without one, applied through
+[craft](better-craft.md); this file decides what the page says, in what order, and
+how it persuades. Type, grid, palette and surfaces live in
+[typography](better-typography.md), [layout](better-layout.md),
+[colors](better-colors.md) and [polish](better-polish.md); motion in
+[animation](better-animation.md); copy in [writing](better-writing.md); forms and
+feedback in [interaction](better-interaction.md) and
 [accessibility](better-accessibility.md).
 
 ## Resolve the offer before composing
@@ -33,54 +34,59 @@ That choice sets the hero, the proof and the sections; a portfolio converts thro
 its work and a contact line, a bakery through hours and an address. The site types
 and their usual shape are in [narratives.md](better-landing-page/narratives.md).
 
-## Order sections by the visitor's questions
+## Take the idea from the subject
 
-Sketch the page as the questions a visitor asks in order: what is this, is it for
-me, can I trust it, what does it take, how do I start. Each section must explain
-value, demonstrate it, resolve an objection or enable the action; drop the ones
-that do none. Pick the narrative by visitor intent and say why, using
-[narratives.md](better-landing-page/narratives.md#narrative-by-visitor-intent).
+List eight to twelve things that belong to this client and no competitor: its name
+and what it means, its street and what that looks like, the numbers in the brief,
+the constraint it lives with, its materials, rituals and the printed things of its
+world. Then write one sentence: "On this page, [something from that list] becomes
+[the device]." Put the nearest competitor in it; if it still works, the idea
+belongs to the category. Where to look is in
+[narratives.md](better-landing-page/narratives.md#where-the-idea-comes-from).
 
-## Establish identity in the first screen
+## Write the argument before the design
 
-Within one screen a visitor should know what this is, whose it is, and what it
-feels like. Say it in one plain sentence in the owner's voice, show the real
-subject (product, work, food, room, people) rather than a generic stand-in, and
-add one signature detail that belongs to this brand alone. Patterns for each kind of
-site are in [hero.md](better-landing-page/hero.md).
+List the page as claims with their proof, one line per section, in the order a
+visitor asks: what is this, is it for me, can I trust it, what does it take, how do
+I start. Delete any section that carries no claim; the argument, not the stock run
+of hero, logos, three features, testimonial and pricing, sets the order. State the
+outline, hero copy and narrative choice before code, then build the hero, using
+[variants](better-craft/variants.md) while its direction is open, and work downward; see [narratives.md](better-landing-page/narratives.md#outline-before-building).
 
-## Make the hero clear before distinctive
+## Make the first screen say what, whose and what next
 
-Pair a specific outcome or identity headline with one or two sentences on how or
-for whom. Label the primary action with its next step ("Book a table", "Join the
-waitlist") and disclose any commitment beside it. Place one genuine proof signal
-near the claim it supports. Break headline lines at meaningful phrases and keep the
-opening readable and the action reachable on small screens; see
-[hero.md](better-landing-page/hero.md#headline-and-action).
+Within one screen a visitor should know what this is, whose it is and what to do
+next: one plain sentence in the owner's voice, the real subject rather than a
+generic stand-in, the idea made visible, and one action labelled with its next step
+("Book a table") with any commitment beside it. Compose the screen to the viewport
+and keep the opening readable and the action reachable on a phone. Patterns are in
+[hero.md](better-landing-page/hero.md).
+
+## Give the page one live thing
+
+When the content offers one, give the page one thing the visitor can do, or that
+differs per visit, made from the idea: whether the oven is lit right now, the chair
+in the wood you pick, the real monthly figure for the loan you set. It uses real
+content, works with a thumb, has a plain fallback without script, never blocks
+reading, and is one thing, not a playground. Place it where it proves a claim,
+often the hero or the booking.
 
 ## Give the page rhythm and an ending
 
-Carry the hero's type, color, spacing and image treatment through every section,
-and vary composition with purpose: dense then open, image-led then text-led, wide
-then narrow. Use one large statement or manifesto as a pause when it adds emphasis.
-People remember the peak and the end, so close on a deliberate final section that
-echoes the opening; see [sections.md](better-landing-page/sections.md#pacing-and-rhythm).
+Carry the hero's type, color, spacing and image treatment, and the idea, through
+every section, pricing, FAQ and footer included; a distinctive first screen followed
+by stock blocks is the commonest failure. Vary composition with purpose, and close
+on a deliberate final section that echoes the opening, since people remember the
+peak and the end; see [sections.md](better-landing-page/sections.md#pacing-and-rhythm).
 
-## Let the work be the proof
+## Prove every claim with the real thing
 
-Show the real thing at a size where it can be read: the product in use, case
-studies with role and outcome, the dish, the venue, last year's event. Caption it
-with context, place endorsements and numbers beside the claim they support, and
-compare alternatives only on criteria you can support. Proof patterns are in
+Show the work, product, place or numbers at a size where they can be read: real
+figures set large, case studies with role and outcome, screenshots, films, a working
+demo, the dish. Write benefits as outcome plus mechanism ("export a weekly report in
+one step", not "streamline your workflow"), answer the objections that decide the
+visit, and offer risk reversal only when it is real. Proof patterns are in
 [sections.md](better-landing-page/sections.md#proof-and-persuasion).
-
-## Make persuasion concrete
-
-Write benefits as outcomes backed by a mechanism or evidence; "export a weekly
-report in one step" beats "streamline your workflow". Answer the objections that
-decide the visit: suitability, effort, price, commitment, location, what happens
-next. Offer risk reversal (trial, cancellation, refund) only when it is real, and
-surface material terms near the action.
 
 ## Keep one primary action recognizable
 
@@ -90,42 +96,38 @@ Never place competing primary actions in the opening. Secondary paths such as
 "See the menu" or "Watch the film" take lower emphasis; see
 [sections.md](better-landing-page/sections.md#calls-to-action).
 
-## Spend restraint deliberately
+## Spend ornament sparingly and substance generously
 
-Choose one or two signature moves (a crop, a display face, a typographic gesture,
-a tactile interaction) and keep everything else quiet so they register. Familiar
-navigation, small chrome and plain controls let the content lead. Motion on a
-marketing page may be longer and more expressive when it explains or stages
-content, but it plays once, never gates reading, and honors reduced motion.
+Choose one or two signature moves drawn from the idea and keep chrome, navigation
+and controls quiet so they register. Never let that restraint thin the content:
+every section delivers its full information (the whole menu with prices, each room,
+every speaker), and space freed from ornament goes to larger type, whole color
+fields or real pictures. Marketing motion may stage content, but the page is
+finished without it.
 
-## Draft with real content
+## Draft with real content and honest pictures
 
-Write real draft copy in the brand's voice; lorem ipsum, "Acme", stock smiles and
-generic superlatives make every layout look finished and every page look generated.
-Claims, prices, endorsements, logos and terms need supplied or verified facts; a
-specific-looking invented number is still fiction. Mark missing assets visibly in a
-draft instead; see [shipping.md](better-landing-page/shipping.md#content-realism).
-
-## Outline first, then build section by section
-
-Before code, state the page outline, hero copy and primary action, the proof each
-section will use, and the narrative choice. Then establish the hero and visual
-language and build downward, refining one section at a time without rebuilding
-settled ones. Use [variants](better-craft/variants.md) when the hero direction is
-still open.
+Write real copy in the brand's voice, and plausible sample details where the brief
+leaves gaps (dish names, room rates) so the page is judged at its real density; list
+them for the client to confirm. Never invent proof: no quotes, logos, ratings or
+statistics. Use the client's own pictures first, then honest ones of its world,
+never a stock stand-in or fake product shot; see
+[shipping.md](better-landing-page/shipping.md#content-realism).
 
 ## Ship and verify the complete path
 
 Connect every action to its real destination, form or integration, and name any
 that are missing; a prototype must not imply a submission was sent. Add title,
 description, sharing image and favicon, keep the site's indexing intent, and leave
-no dead links or dead ends. Inspect the whole page at desktop and phone widths and
-exercise the conversion path through success and failure, using the checklist in
+no dead links or dead ends. Inspect the whole page at about 1440, 768 and 390px,
+critique it with [critique](better-ui-review/critique.md), and exercise the
+conversion path through success and failure, using the checklist in
 [shipping.md](better-landing-page/shipping.md#before-you-finish).
 
 ## Report
 
 Finish when the offer and next step are clear, the page carries one coherent
 direction, every claim is supportable, and the path works or its gaps are stated.
-A conversion improvement is a hypothesis until measured. For a requested review,
-use the [shared review format](better-ui-review.md#report).
+Name the idea sentence, the live thing, and every sample detail and found picture
+the client must confirm. A conversion improvement is a hypothesis until measured.
+For a requested review, use the [shared review format](better-ui-review.md#report).

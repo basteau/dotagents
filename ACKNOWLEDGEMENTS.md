@@ -7,6 +7,7 @@ License terms apply to each contribution, not automatically to the whole collect
 | --- | --- | --- |
 | Copyright (c) 2026 [Jakub Krehel](https://github.com/jakubkrehel/skills) | `better-ui` router and accessibility, colors (including OKLCH), interface, layout, polish, typography, writing, and review references; `jakub-krehel` group (also from [make-interfaces-feel-better](https://github.com/jakubkrehel/make-interfaces-feel-better) and [oklch-skill](https://github.com/jakubkrehel/oklch-skill)) | MIT |
 | Copyright (c) 2026 [Vojta Holik](https://github.com/vojtaholik/good-css) | CSS guidance rewritten into `better-css` (`92d436ba1937d1b1407c47e35abb3e199eaace2e`) | MIT |
+| Copyright (c) 2026 [Leonxlnx](https://github.com/Leonxlnx/taste-skill) | Subject-led art direction, critique, and AI-tell guidance distilled into `better-ui` craft, landing-page, and review references (`12af471f627f866411b4bd785b19646d3672784c`) | MIT |
 | Copyright (c) 2026 [Meng To](https://github.com/MengTo/Skills) | Landing-page strategy adapted into `better-ui` | MIT |
 | Copyright (c) 2026 [Elaya](https://github.com/elayadesign/ai-design-skills) | Landing-page design guidance adapted into `better-ui` | MIT |
 | Copyright (c) 2026 [Raphael Salaja](https://github.com/raphaelsalaja/userinterface-wiki) | `better-ui` sound, laws-of-UX, prefetching, pseudo-element, morphing-icon, presence, and animation-principle guidance; `raphael-salaja` group (also from [skill](https://github.com/raphaelsalaja/skill)) | MIT |
@@ -30,7 +31,7 @@ License terms apply to each contribution, not automatically to the whole collect
 - [better-result / Dillon Mulroy](https://github.com/dmmulroy/better-result), [Valibot](https://valibot.dev), [Standard Schema](https://standardschema.dev), and [Alexis King](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/): TypeScript boundary parsing and expected-error guidance.
 - `basteau/selfix`: local workflow and deployment experience.
 - [Vercel's design.md](https://vercel.com/design.md): example structure for `better-design-md`.
-- [savor.it](https://savor.it), [public.joannabui.com](https://public.joannabui.com/), [ped.ro](https://ped.ro/), and [raphaelsalaja.com](https://www.raphaelsalaja.com/), with `basteau/basteau` and `basteau/sebdev`: visual taste studied for `basteau-taste` and landing-page techniques.
+- [savor.it](https://savor.it), [public.joannabui.com](https://public.joannabui.com/), [ped.ro](https://ped.ro/), [raphaelsalaja.com](https://www.raphaelsalaja.com/), and [leonlin.de](https://leonlin.de/): landing-page techniques.
 
 These research sources retain their own terms; credit does not relicense their work.
 
@@ -43,7 +44,7 @@ These research sources retain their own terms; credit does not relicense their w
 
 - `better-effect` synthesizes official Effect patterns and community research, not upstream skill folders or scripts. Source details remain in its references.
 
-- `better-ui` selectively rewrites design skills into topic references rather than preserving upstream folders, catalogs, or demos. Landing-page guidance combines Meng To and Elaya (`skills/landing-page-design` at `38bbe5765600b9178b5395a823c9f6c8d2b8e730`); Tailwind guidance is an original synthesis. Fixed recipes and global mandates are omitted in favor of project conventions. The references were refreshed from the group revisions below; motion moved from `better-polish` into `better-animation`, and `better-sound`, `basteau-taste`, `better-css`, and `better-design-md` were added. `basteau-taste` is original, distilled from the sites under Further thanks. Conflicting upstream rules were reconciled per reference, and claims that did not check out (for example OKLCH contrast heuristics) were corrected or dropped.
+- `better-ui` selectively rewrites design skills into topic references rather than preserving upstream folders, catalogs, or demos. Landing-page guidance combines Meng To and Elaya (`skills/landing-page-design` at `38bbe5765600b9178b5395a823c9f6c8d2b8e730`); Tailwind guidance is an original synthesis. Fixed recipes and global mandates are omitted in favor of project conventions. The references were refreshed from the group revisions below; motion moved from `better-polish` into `better-animation`, and `better-sound`, `better-css`, and `better-design-md` were added. Conflicting upstream rules were reconciled per reference, and claims that did not check out (for example OKLCH contrast heuristics) were corrected or dropped.
 
 - The `jakub-krehel`, `raphael-salaja`, and `emil-kowalski` groups are complete, unmodified upstream skill folders: jakubkrehel/skills `592aedc44d7d5b3e29740984252902f3e5402a1c`, make-interfaces-feel-better `35545ea1512ad59fa463e6b1f95ca9c052981fe6`, oklch-skill `0e81f040e16d48fcc61d3e1b7ea548542371321f`; raphaelsalaja/skill `dc9eef22f13635df77d9b9e67c82aa85d52a97b7`, userinterface-wiki `skills/` (as `userinterface-wiki`) `256a954080c8bcf1b1ceb1e2a4079d1f24cf593a`; emilkowalski/skills `2d228630ba1446365f614a108cb8252f1feda202`. Upstream names are kept, so Jakub's `better-ui` and Emil's `prototype` share names with local skills; install one of each pair.
 

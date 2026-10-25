@@ -19,6 +19,23 @@ are starting points; let the real content decide the number and order of section
 A site can combine types: a product brand with a manifesto, a studio with a shop.
 Keep one primary action per page and give the others secondary weight.
 
+## Where the idea comes from
+
+Fill the first blank of "On this page, [something of the subject] becomes [the
+device]" from the client's own list, never from the category. A loaf of bread is
+every bakery; the seven doors of the street this one is named after are only this
+one. "Clean and modern" is not an idea.
+
+| Look at | Ask | For example |
+| --- | --- | --- |
+| Its output | What does it produce that can sit on the page as material? | A camera that prints poems delivers its copy as paper slips |
+| Its object | What is its silhouette or cross-section? | The product's shape as the one motif, mask and frame |
+| Its name | Can the letters hold a photograph, stack or split to two corners? | The name set full width with a picture inside it |
+| Its place | Is there one view that makes someone want to be there? | One full-bleed view with the name along the bottom edge |
+| Its ritual | Is there a sequence the page can perform as it scrolls? | The oven lit at five, the ferry at seven |
+| Its artifact | What printed thing already exists in its world? | The page as the ticket, the menu, the label or the invitation |
+| Its opposite | Which other category owns the feeling this one lacks? | A money app dressed as a streetwear drop |
+
 ## Narrative by visitor intent
 
 | Visitor situation | Structure |
@@ -69,9 +86,9 @@ Name the outcome of the click. "Learn more", "Submit" and "Click here" say nothi
 Before writing code for a new page, return in order:
 
 1. Site type, narrative choice and why.
-2. Section outline, each with its job.
-3. Hero copy: headline, supporting line, primary action, proof signal.
-4. The proof each section will use, and what is missing.
+2. The idea sentence, and the live thing if there is one.
+3. Section outline: one claim and its proof per section, with what is missing.
+4. Hero copy: headline, supporting line, primary action, proof signal.
 5. Indexing intent: evergreen and indexed, or a campaign kept out of search.
 
 Then build the hero, establish the visual language, and work downward one section

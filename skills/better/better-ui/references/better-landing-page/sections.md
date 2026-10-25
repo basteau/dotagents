@@ -6,8 +6,18 @@ How the page moves after the hero: pacing, proof, actions and the ending.
 
 - Keep one system and vary the composition. The same type, palette, spacing scale
   and image treatment run through every section; layout, density and scale change.
+  Name each section's layout in one word (split, list, full-bleed, statement); the
+  same word twice in a row, or three times on a page, is the template showing.
+- Let one face and two or three sizes far apart do the visible work: one very
+  large, one small, little in between.
 - Alternate pressure. Follow a dense section (features, a work grid) with an open
-  one (a single image, a statement), and a wide view with a narrow column.
+  one (a single image, a statement), and a wide view with a narrow column. Change
+  the ground between chapters, light paper to dark, instead of drawing rules or
+  boxes around them.
+- Place every void. An empty area is a rest only when something closes it: the
+  picture, a line large enough to span it, an element on its far side. Text in one
+  half means the other half holds its picture, list or figure; one deliberate rest
+  per page, and a screen of plain ground is an underbuilt section.
 - Tell belief-led stories in scroll-sized beats: one idea per screen, a short line
   set large, the image doing the rest. A list of exclusions ("without A, B, C") or
   a repeated word can carry a manifesto when it is specific to the brand.
@@ -27,8 +37,9 @@ How the page moves after the hero: pacing, proof, actions and the ending.
 One large-type section that states the core belief or benefit, separate from the
 hero, is a strong pause in a longer page. It is optional.
 
-- Write a real sentence of two or more lines, specific to this brand; a generic
-  section title set large is not a statement.
+- Write a real sentence specific to this brand, about 25 words at most, marked up
+  as a paragraph or blockquote; a generic section title set large is not a
+  statement, and one set larger than statement size reads as a long headline.
 - Set it as display type with a capped measure and phrase-aware breaks.
 - If it animates (for example, words brightening from a muted tone as they cross
   the viewport), the full sentence must be readable without the effect, at rest,
@@ -40,11 +51,11 @@ hero, is a strong pause in a longer page. It is optional.
 
 | Proof | Make it credible |
 | --- | --- |
-| The product, work or place itself | Large enough to read; real screens, real dishes, real rooms |
+| The product, work or place itself | At display size: real screens, films, transcripts, a working demo, real dishes and rooms; never icon cards standing in |
 | Case study | Client, your role, the problem, what changed; a link to the full story |
 | Testimonial | Real name, role or context, photo only with permission; next to the claim it supports |
 | Logos and press | Only real relationships; label what they mean ("Clients", "As seen in") |
-| Numbers | Sourced, dated and specific; a range or approximation when that is the truth |
+| Numbers | Sourced, dated and specific, set large when they carry the case; a range or approximation when that is the truth |
 | Credentials line | Past teams, years in business, certifications, in quiet small type |
 | Process | Show how it is made; craft and transparency persuade belief-led audiences |
 
@@ -79,8 +90,9 @@ hero, is a strong pause in a longer page. It is optional.
 - Close on purpose. The last section is part of the story: the final action, a
   newsletter or contact moment, or a bookend that returns to the hero's image,
   color or motif.
-- A large wordmark, the founder's sign-off or a short human line ("Made in Leuven")
-  can end the page with character when it belongs to the brand.
+- A large wordmark, one closing line set at display size, the founder's sign-off
+  or a short human line ("Made in Leuven") can bookend the page with character when
+  it belongs to the brand. A link-column sitemap is not a designed close.
 - Keep the practical footer complete: navigation, contact, legal and privacy links,
   social profiles, and for local businesses address and hours.
 
@@ -90,10 +102,14 @@ hero, is a strong pause in a longer page. It is optional.
   attention; "it looks cool" is not a purpose on a page people revisit.
 - Marketing motion may run longer than interface motion, but content the visitor is
   reading or acting on must not move for style.
-- Reveal on scroll once, with modest distance; reveal images with a clip or fade
-  rather than sliding text far; never leave content invisible until a script runs.
+- Tie motion to reading: lines unmask once as they enter, a picture drifts with
+  the scroll. Reveal with modest distance, never the same fade on every block, and
+  never leave content invisible until a script runs.
+- No preloader, entry gate, custom cursor or wheel capture, and nothing moving
+  across text while it is read.
 - Decorative pointer effects suit a marketing hero; keep them off forms, prices and
   data.
-- Honor reduced motion everywhere and pause or still any looping film on request.
+- Honor reduced motion everywhere, and give any endless reel or loop a visible
+  [pause control](../better-accessibility/motion-and-zoom.md#autoplay-and-timed-ui).
   Timing, easing and implementation live in [animation](../better-animation.md);
   sound, if any, in [sound](../better-sound.md).

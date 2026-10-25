@@ -29,6 +29,7 @@ needs only the questions its change raises.
 | Ask about | Example question | Records into |
 | --- | --- | --- |
 | Audience and first impression | Who is this for, and what should they feel in the first five seconds? | Overview |
+| The subject's own material | What belongs to this subject and no competitor: its name, place, objects, rituals, printed things? | Overview, signature detail |
 | A concrete reference | Which object, place, publication or site should it evoke, and what exactly about it? | Overview |
 | Anti-references | What should it never look or sound like? | Do's and Don'ts |
 | What is sacred | Which elements must survive every redesign (mark, color, signature detail)? | Shapes, Components, Do's and Don'ts |
@@ -41,10 +42,18 @@ needs only the questions its change raises.
 Record answers as this project's decisions, in the user's terms. Answers do
 not overwrite values: when the stated intent differs from the shipped code,
 record the code value and list the difference as an open question or a planned
-change. If the user wants "my style", propose [basteau-taste](basteau-taste.md)
-as the starting direction and record only what they adopt. If the user skips
-the questions, write from the code and list the unanswered ones as open
-questions at the end of the file.
+change. If the user skips the questions, write from the code and list the
+unanswered ones as open questions at the end of the file.
+
+## Decide the style at initialisation
+
+A new site gets its own style here, not from a default. When there is little or
+no code, the answers are the direction: turn them into two or three concrete
+directions, each with a reference, palette proportions, a type pairing and one
+signature detail drawn from the subject. Let the user pick, then encode the
+chosen one as tokens and rules the build follows. Values written before the code
+exists are decisions, not extractions; mark them as such, and re-extract once
+the build ships them.
 
 ## Record decisions, not advice
 
@@ -62,8 +71,8 @@ guidance, use the `better-ui` skill. Then do not explain contrast, spacing
 theory or accessibility basics again. Do record how this project meets those
 requirements, such as its focus ring or reduced-motion behavior.
 
-Do not copy [basteau-taste](basteau-taste.md) or any other default direction
-into a project's DESIGN.md. Record only what the project actually adopted.
+Do not copy a default direction or another site's style into a project's
+DESIGN.md. Record only what this project adopted.
 
 ## Extract every value from the source
 

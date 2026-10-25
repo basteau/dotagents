@@ -1,7 +1,7 @@
 ---
 name: better-ui
 description: "Create beautifully crafted interfaces with focused guidance for composition, interaction, motion, sound, and refinement."
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
 # Better UI
@@ -17,8 +17,7 @@ references, then follow supporting links only when needed:
 | Prompt concerns | Read |
 | --- | --- |
 | Landing page, homepage, marketing, portfolio, studio, small-business or event site, campaign, launch, offer | [better-landing-page](references/better-landing-page.md) first |
-| Create a screen or flow, redesign, “make it beautiful,” explore directions or variants, overall craft | [better-craft](references/better-craft.md) first |
-| “My style,” the basteau feel, or no visual direction set | [basteau-taste](references/basteau-taste.md), alongside better-craft |
+| Create a screen, flow, app screen or dashboard, redesign, “make it beautiful,” explore directions or variants, overall craft | [better-craft](references/better-craft.md) first |
 | Decisions, forms, feedback, loading, optimistic updates, undo, perceived speed, prefetching, laws of UX | [better-interaction](references/better-interaction.md) |
 | Keyboard, focus, semantics, ARIA, screen readers, forms, hit areas, reduced motion, zoom, WCAG | [better-accessibility](references/better-accessibility.md) |
 | Grouping, spacing scale, alignment, reading order, responsive layout, overflow, RTL | [better-layout](references/better-layout.md) |
@@ -29,8 +28,8 @@ references, then follow supporting links only when needed:
 | Transitions, easing, springs, enter/exit, component motion, gestures, motion performance, effect names | [better-animation](references/better-animation.md) |
 | UI sound, audio feedback, Web Audio, sound toggles | [better-sound](references/better-sound.md) |
 | Mobile web or PWA feel, tap feedback, input zoom, keyboard, viewport units, safe areas, scroll ownership, browser chrome | [better-pwa](references/better-pwa.md) |
-| Write or update a project's DESIGN.md | [better-design-md](references/better-design-md.md) |
-| Review, audit, critique, change or PR review, stress tests with worst-case data | [better-ui-review](references/better-ui-review.md), plus the relevant domains |
+| Start a new site's style, or write or update a project's DESIGN.md | [better-design-md](references/better-design-md.md) |
+| Review, audit, critique or design score, “looks generic or AI-made,” change or PR review, stress tests with worst-case data | [better-ui-review](references/better-ui-review.md), plus the relevant domains |
 
 When writing or reviewing stylesheets, also read [better-css](references/better-css.md);
 in a Tailwind CSS v4 project, also read [tailwind](references/tailwind.md).
@@ -39,7 +38,8 @@ Combine domains when the task crosses their boundaries. A label rewrite needs
 writing; an overflowing label also needs typography or layout. Broad creation
 starts with better-craft; landing pages start with better-landing-page. Each loads
 domain guidance as its decisions arise. A project's DESIGN.md, when present, wins
-over these defaults. Cross-domain reviews start with better-ui-review; focused
+over these defaults; a new site without one decides its style through
+better-design-md first. Cross-domain reviews start with better-ui-review; focused
 reviews use their domain. “Make this better” authorizes scoped improvements. Infer
 the surface from the current task; ask only when missing context would materially
 change the work.

@@ -31,6 +31,10 @@ In instructional copy, write "you", not "the user". In errors, "we" reads as def
 
 Choose words a tired reader gets on the first pass, and delete every word that does no work. No idioms, colloquialisms or humor that won't translate. Skip unnecessary gender: "Subscribers can post recipes", not "his or her recipes". Match the input device: "tap" on touch, "click" with a pointer, "select" when both are possible.
 
+## Use the words of the trade
+
+Name things the way the people doing the work do: "Waiting on the customer", "Off sick", "Due on the 28th", not a template's generic "Items", "Records" or "Status". Ask of each label and empty state whether any product could print it unchanged; if so, sharpen it with this product's own nouns.
+
 ## Build strings whole
 
 Never assemble a sentence from fragments around a variable (`"You have " + n + " new messages"`); word order changes per language. Write one message with placeholders and use the locale's plural rules, not `n === 1 ? "" : "s"`, because many languages have more than two forms. Format numbers, dates and lists through `Intl`. Recipes: [patterns.md](better-writing/patterns.md#plurals-and-placeholders).
@@ -107,6 +111,7 @@ A placeholder shows a realistic value in the accepted format, `name@example.com`
 | `aria-label="Trash"`, `"Close icon"`, `"X"` | Name the action: "Delete project", "Close dialog" |
 | `toLocaleDateString()` with no locale; a date built from `getMonth()` | `Intl.DateTimeFormat` with the user's locale |
 | `Save Changes` beside `Discard changes` | One case per element type |
+| `Items`, `Records`, `Data`, `Status` as a heading or column label | The product's own noun for the thing |
 
 ## Reporting
 

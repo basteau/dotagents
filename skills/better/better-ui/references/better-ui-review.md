@@ -2,7 +2,7 @@
 
 Review a screen, flow, component or change and return one ranked report. This reference owns scope, evidence, severity, consolidation and the report format. It applies only when a review, audit, critique or stress test is requested; build and improvement requests follow their domain guidance. Reviews are read-only unless fixes are also requested.
 
-Domain references own their rules, checks and fixes: [accessibility](better-accessibility.md), [layout](better-layout.md), [writing](better-writing.md), [typography](better-typography.md), [colors](better-colors.md), [polish](better-polish.md), [animation](better-animation.md) and [interaction](better-interaction.md), plus [landing pages](better-landing-page.md), [mobile web and PWA](better-pwa.md) and [sound](better-sound.md) where the surface has them. A focused review loads only its domain and uses the severity and report below. Change scoping is in [change-review.md](better-ui-review/change-review.md); state coverage and worst-case data are in [stress-testing.md](better-ui-review/stress-testing.md).
+Domain references own their rules, checks and fixes: [accessibility](better-accessibility.md), [layout](better-layout.md), [writing](better-writing.md), [typography](better-typography.md), [colors](better-colors.md), [polish](better-polish.md), [animation](better-animation.md) and [interaction](better-interaction.md), plus [landing pages](better-landing-page.md), [mobile web and PWA](better-pwa.md) and [sound](better-sound.md) where the surface has them. A focused review loads only its domain and uses the severity and report below. Change scoping is in [change-review.md](better-ui-review/change-review.md); state coverage and worst-case data are in [stress-testing.md](better-ui-review/stress-testing.md); design-quality passes, juror scores and generated-look tells are in [critique.md](better-ui-review/critique.md).
 
 ## Report evidence, not taste
 
@@ -31,6 +31,10 @@ Demo data is chosen to make a design look good. Feed the realistic worst case th
 ## Verify what can be verified
 
 Inspect the rendered interface when appearance, input, motion or device behavior decides the result, and record the exact command or interaction. Source alone cannot establish visual quality, motion feel or device behavior; a screenshot alone cannot establish a code cause. Trace shared components and tokens before assigning a cause. A check you could not run is Not verified, never a finding and never Clear.
+
+## Critique the render as a stranger would
+
+When a critique, a design verdict or a "does this look generated?" check is requested, judge screenshots at about 1440, 768 and 390px, never the code. Make the passes, score with the juror weights and caps, and name tells in [critique.md](better-ui-review/critique.md). Report them as Opportunities, with the screenshot that shows each; a tell or a low score is never a finding without a broken rule behind it.
 
 ## Rank by user impact
 
@@ -78,7 +82,7 @@ Add these sections where they apply:
 
 - **Pre-existing:** for a change review, at most three, outside the verdict.
 - **Decisions for you:** findings with more than one right answer, such as wrap or truncate, paginate or virtualize; one line each with a recommendation.
-- **Opportunities:** for a requested critique, improvements grounded in the brief and rendered evidence, kept apart from defects.
+- **Opportunities:** for a requested critique, the scores and the top three problems in the [critique format](better-ui-review/critique.md#write-the-critique-down), grounded in the brief and the screenshots, kept apart from defects.
 - **What held up:** for a stress test, the worst cases already handled.
 - **Verification:** each check, how it was run and its result, with Not verified checks listed separately.
 
@@ -101,3 +105,4 @@ When fixes are requested, the report is the change scope. Fix at the shared caus
 | An After written in a stack the project does not use | Rewrite it in the project's idiom |
 | An After that adds a wrapper or attribute | Check whether deleting or the native element fixes it first |
 | Edits made during a review-only request | Report and stop |
+| A critique read from the code, or a tell filed as a defect | Screenshots at three widths; tells go under Opportunities |
