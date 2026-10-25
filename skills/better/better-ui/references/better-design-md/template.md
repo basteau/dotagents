@@ -56,7 +56,8 @@ disagree, the code wins: fix this file.
 
 ## Overview
 
-<!-- Personality and audience in two or three sentences. Name one specific
+<!-- Personality and audience in two or three sentences, in the user's own
+terms from the direction questions. Name one specific
 reference the design evokes (an object, place or print genre), not adjectives.
 Say what the design refuses to be. -->
 
@@ -134,4 +135,11 @@ copy unchanged into another project's DESIGN.md. -->
 
 - **Do** <rule rooted in this project>.
 - **Don't** <the generic default an agent would reach for here>.
+
+## Open questions
+
+<!-- Optional project section. Direction questions the user skipped, and gaps
+between stated intent and shipped code. Delete it when empty. -->
+
+- <Question or conflict, with the current code value>
 ````
