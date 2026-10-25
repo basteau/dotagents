@@ -32,7 +32,8 @@ Read the corresponding documentation when changing these definitions:
 
 - [Theme tokens](https://tailwindcss.com/docs/theme): use `@theme` for tokens that
   expose utilities or variants, ordinary CSS variables for other values, and
-  `@theme inline` when a theme token references another variable.
+  `@theme inline` when a theme token references another variable, except for semantic
+  tokens a theme repoints at runtime ([token naming](better-colors/token-naming.md)).
 - [Custom utilities and variants](https://tailwindcss.com/docs/adding-custom-styles):
   use `@utility` for custom utilities that need variant support.
 - [Scoped styles and directives](https://tailwindcss.com/docs/functions-and-directives):

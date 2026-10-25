@@ -1,117 +1,125 @@
 # Better animation
 
-Make state changes clear and interactions responsive. Start by deciding whether
-motion earns its attention cost, then choose the smallest implementation that
-serves the interaction. Adapted from Emil Kowalski's animation skills.
+Make state changes legible and interactions feel immediate. The bar is motion that
+feels right, not motion that merely runs, and restraint is part of it: decide whether
+motion earns its attention cost before choosing a curve, then build the smallest
+implementation that serves the interaction. Zero lines of motion code is sometimes
+the correct result.
+
+This reference owns motion purpose, timing, continuity, gestures, and rendering cost.
+[better-polish](better-polish.md) covers static visual finish, [better-interaction](better-interaction.md)
+covers loading, feedback flow, and perceived latency, [better-sound](better-sound.md)
+covers audio feedback, and [better-accessibility](better-accessibility.md) covers
+reduced-motion policy and non-motion state cues in depth; check motion accessibility
+here regardless. For a cross-domain review, use [better-ui-review](better-ui-review.md).
 
 ## Follow the requested work
 
-- **Build or fix:** implement the requested motion and verify it. A request to
-  improve existing animations authorizes scoped fixes, not just a report.
-- **Review or audit:** inspect without editing unless fixes are also requested.
-  For a diff, distinguish introduced problems from existing ones.
-- **Find opportunities:** propose a few worthwhile additions and explain meaningful
-  rejections. Do not manufacture motion to fill a quota.
-- **Name an effect:** answer the terminology question directly using
-  [vocabulary.md](better-animation/vocabulary.md); do not start an implementation.
+- **Build or fix:** implement and verify. A request to improve existing animations
+  authorizes scoped fixes, not just a report.
+- **Review, audit, or find opportunities:** stay read-only unless fixes are requested;
+  use [review-and-planning.md](better-animation/review-and-planning.md).
+- **Name an effect:** answer from [vocabulary.md](better-animation/vocabulary.md);
+  do not start an implementation.
 
-Read the target project's instructions, component code, motion tokens, animation
-facilities, supported platforms, and relevant preview/check commands. Keep its stack,
-native conventions, component primitives, and motion language. Reuse working tokens
-before adding new ones; a different curve is not automatically a defect. Express
-the intended behavior first, then implement it with the target technology's APIs.
+Read the project's instructions, component code, motion tokens, animation
+facilities, supported platforms, and preview or check commands. Keep its stack,
+native conventions, primitives, and motion language; extend existing tokens instead
+of forking them. Express the intended behavior first, then implement it with the
+target platform's APIs. Make the call and give the reason in a line; do not offer
+motion options as a menu.
 
-This reference owns motion purpose, timing, continuity, gestures, and rendering
-cost. [better-polish](better-polish.md) covers visual polish. [better-accessibility](better-accessibility.md) covers reduced-motion
-preferences, equivalent input access, and non-motion state cues. Consult those
-references only when the task needs their details; check motion accessibility here
-regardless. For a cross-domain review, use [better-ui-review](better-ui-review.md)'s scope, severity,
-and report format. Report each root cause once.
+## Decide in order
 
-## Decide whether to animate
+Run these steps in sequence; the first two can end the work. The reasoning and the
+craft bar behind each step live in [principles.md](better-animation/principles.md).
 
-Name the purpose: feedback, spatial continuity, state indication, preventing a
-jarring change, explanation, or occasional delight. Judge frequency from the actual
-flow; state an assumption when usage is unknown.
+1. Should it animate at all, given how often it is seen?
+2. What purpose does it serve?
+3. Which mechanism is the cheapest that works?
+4. Easing and duration, or a spring?
+5. Which properties, from which origin?
+6. How does it behave when interrupted, and how does it exit?
+7. What do reduced motion, touch, and keyboard get?
 
-| Use | Motion budget |
-| --- | --- |
-| Repeated shortcuts, command palette toggles, rapid navigation | Prefer instant changes; do not delay the next action |
-| Frequent hover, selection, or press feedback | Subtle and brief, or static feedback |
-| Occasional menus, dialogs, drawers, toasts | A short transition can explain the change |
-| Rare onboarding, demonstrations, celebrations | More expressive motion when it serves the experience |
+## Gate on frequency and purpose
 
-Keyboard input alone does not make an interaction different: retain equivalent
-feedback, focus, and access across input methods. Avoid moving data people are
-reading or making routine work wait for decoration. When proposing opportunities,
-reject motion without a purpose. When implementing a specific request, respect the
-user's intended experience and explain any consequential tradeoff.
+Shortcuts, command palette toggles, keyboard navigation, typing, and context menus
+get no entrance animation. Frequent hover and selection feedback stays
+near-imperceptible. Occasional menus, dialogs, drawers, and toasts get standard
+motion; rare onboarding and success moments hold the delight budget. Activating an
+ordinary control by keyboard gets the same feedback as a click.
 
-## Choose the implementation
+Name the purpose: feedback, spatial consistency, state indication, preventing a
+jarring change, explanation, or delight at the rare tier. If none applies, do not
+animate. Data people are reading or acting on does not move for style.
+
+## Choose the cheapest mechanism
 
 | Need | Starting point |
 | --- | --- |
-| Hover, press, reversible state changes | The platform's state-driven transition on explicit properties |
-| Entry, exit, or layout changes | Existing component or presentation lifecycle support |
-| A staged sequence | A timeline or keyframes when restarting is appropriate |
-| Programmatic playback | Existing animation controls with cancellation and cleanup |
-| Gestures and momentum | The platform's gesture system and interruptible springs |
-| Navigation and system surfaces | Native or established component transitions |
+| Hover, press, color, reversible state | State-driven transition on named properties |
+| Entry without script state | Platform entry styles, such as `@starting-style` on the web |
+| Predetermined motion while the page is busy | Declarative animation off the main thread (CSS, WAAPI) |
+| Exit, layout, shared elements | Existing component or presentation lifecycle support |
+| Gestures, momentum, interruptible values | The platform's gesture system and springs |
+| Menus, dialogs, drawers, toasts | An accessible existing component, not a rebuilt one |
 
-Do not add a dependency for a simple fade. Reuse accessible menus, dialogs, and
-drawers rather than rebuilding their behavior to get an animation.
+Do not add a dependency for a fade.
 
-Prefer translation, scale, rotation, and opacity when they avoid layout work in
-the target renderer; name each animated property. Use layout animation only when
-the layout must actually change, such as an accordion, and
-measure its cost. Use the renderer's efficient animation path where available;
-an API or thread name alone does not make every property cheap. Read
-[timing-and-performance.md](better-animation/timing-and-performance.md) for curves,
-durations, springs, and performance decisions.
+## Pick timing by who is acting
+
+User-driven motion (drag, flick, pointer-following) uses springs that carry
+velocity. System-driven changes use an easing curve with a duration: ease-out for
+arrivals and responses, ease-in-out for travel on screen, linear only for time.
+Never ease-in on an entrance. Keep routine UI under 300ms, make similar elements
+share timing, and time a deliberate phase slower than the system's response. Use
+the curves, duration table, and spring starting values in
+[timing-and-performance.md](better-animation/timing-and-performance.md).
+
+## Animate cheap properties from the right origin
+
+Prefer transform and opacity; name every animated property and never transition
+`all`. Use layout animation only for a genuine layout change, and measure it. Never
+enter from `scale(0)`: start from 0.9–0.97 with opacity, or a plain fade when
+movement adds nothing. Grow anchored surfaces from their trigger and keep dialogs
+centered. Rendering cost, frame budgets, and diagnosis live in
+[timing-and-performance.md](better-animation/timing-and-performance.md).
 
 ## Keep motion continuous
 
-Retarget from the current visual state when toggled or reversed. Do not restart a
-rapid interaction from its original keyframe. Preserve velocity when a gesture
-hands off to a spring, and clean up interrupted animations and listeners.
+Retarget from the current visual state on reversal; rapidly repeated changes use
+transitions or springs, not keyframes that restart. Preserve gesture velocity into
+the settle, and clean up interrupted animations and listeners. Exit the way it
+entered, usually shorter and subtler, and keep an exiting surface presented without
+leaving invisible controls interactive. Stage one focal point at a time and stagger
+only small, infrequent groups.
 
-Anchor popover scaling to its trigger; keep unanchored dialogs centered. For a
-panel entrance, start near full scale with opacity rather than zero size. A plain
-fade is valid when movement adds nothing. Keep entry and exit spatially related,
-with shorter or subtler exits where appropriate. Preserve presentation long enough to
-render an exit without leaving invisible controls interactive.
+| Topic | Read |
+| --- | --- |
+| Press, popover, tooltip, dialog, drawer, toast, accordion, stagger, crossfade | [patterns.md](better-animation/patterns.md) |
+| Mount, unmount, presence, exit modes, nested exits | [enter-exit.md](better-animation/enter-exit.md) |
+| Icon swaps and shape morphs | [icons-and-morphing.md](better-animation/icons-and-morphing.md) |
+| Drag, swipe, momentum, rubber-banding | [gestures.md](better-animation/gestures.md) |
+| Ready-made web implementations | [recipes.md](better-animation/recipes.md) |
 
-Read [patterns.md](better-animation/patterns.md) for popovers, tooltips, dialogs, drawers,
-toasts, accordions, stagger, crossfades, and drag behavior.
+## Ship reduced motion and input gating with it
 
-## Include reduced motion and input behavior
+Honor system and application reduced-motion preferences on every animation path.
+Reduced means fewer and gentler, not zero: drop travel, scale, parallax, and bounce;
+keep opacity or color changes that aid comprehension. Final states, focus, and
+feedback must stay correct when motion is off, and completion logic must not wait on
+a callback a disabled animation never emits. Gate hover motion to hover-capable
+fine pointers, keep press feedback for touch, and never make motion the only state cue.
 
-Honor system and application reduced-motion preferences across every animation path.
-Remove nonessential translation, scale, parallax, and bounce. Use instant state changes or a brief fade
-when it helps; a fade is optional. Keep content visible, final states correct, and
-feedback understandable when animation is disabled. Completion logic must not
-depend solely on a callback that a disabled animation will never emit.
+## Verify the feel
 
-Use hover-only movement only on inputs that support hover. Preserve touch press
-feedback, keyboard focus, and other supported input methods. Motion never supplies
-the only state cue or delays focus management and essential interaction.
+Exercise entry, exit, rapid repetition, reversal, and content changes. Check reduced
+motion, keyboard, and touch or gestures where relevant. Watch at normal speed, then
+at 2–5× duration or in the animation inspector, and step coordinated properties frame
+by frame. Test gestures on a real device and profile under representative load
+before claiming smoothness. Run the project's checks.
 
-## Verify and report
-
-Exercise normal entry and exit, rapid repetition, reversal, and content changes.
-Check reduced motion, keyboard operation, and touch or gestures where relevant.
-Inspect at normal speed, then slow playback to expose timing and origin mistakes.
-Profile under representative load before claiming smoothness or dropped frames.
-
-Run relevant project checks. State what was inspected and what remains unverified;
-source inspection alone cannot establish how motion feels. For implementation,
-report what changed, the chosen timing, and verification briefly. For reviews,
-audits, opportunities, and requested plans, use
-[review-and-planning.md](better-animation/review-and-planning.md).
-
-## Optional implementation examples
-
-For a web project using the original polish recipes, consult
-[web motion recipes](better-polish/motion-recipes.md) only when one matches the
-requested component. Their exact values are examples, not overrides of the motion
-principles or the target project's conventions.
+Report briefly: the frequency and purpose decision, the mechanism, properties,
+curve, and duration or spring chosen, and what still needs a feel check. Source
+inspection alone cannot establish how motion feels.

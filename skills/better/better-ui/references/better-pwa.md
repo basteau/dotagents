@@ -1,170 +1,157 @@
 # Better PWA
 
-Make mobile web interfaces respond naturally to touch, browser chrome, and the
-software keyboard. Adapted from Emil Kowalski's `mobile-native` skill. Applies to
-web apps in browser tabs and installed standalone mode, not React Native.
+Make a mobile web interface respond like an installed app to touch, browser chrome,
+and the software keyboard. Covers web apps in a browser tab and in installed
+standalone mode, not React Native. Most symptoms are one CSS declaration or meta
+tag at the platform layer; build or fix what was requested, keep reviews read-only,
+and inspect the project's browser support, metadata API, scroll containers, and
+existing primitives before changing anything.
 
-## Follow the requested work
+Motion, springs, and drag physics (velocity, momentum, rubber-banding, thresholds)
+belong to [better-animation](better-animation.md) and its
+[gestures](better-animation/gestures.md) detail. Hit-area sizes, focus, zoom, and
+semantics belong to [better-accessibility](better-accessibility.md); input text
+sizing to [better-typography](better-typography.md); responsive structure to
+[better-layout](better-layout.md); feedback sounds to [better-sound](better-sound.md).
+Service workers, offline caching, install prompts, and push are separate work;
+fixing feel does not make an app installable or offline-capable.
 
-Build or fix the requested behavior; keep reviews read-only unless fixes are also
-requested. Inspect the project's browser support, styling, metadata APIs, scroll
-containers, and existing components before choosing a change. Prefer CSS and
-metadata over device detection or new JavaScript machinery. Apply each fix where
-its symptom occurs, rather than installing a global reset.
-
-This reference covers the mobile platform layer. Installation, service workers,
-offline caching, and push are separate work when requested; visual fixes alone do
-not make an app installable or offline-capable.
-
-[better-animation](better-animation.md) owns motion timing and gesture handoff;
-[better-accessibility](better-accessibility.md) owns semantics, focus, hit areas,
-zoom, and equivalent input access. [better-layout](better-layout.md) owns responsive
-structure; [better-typography](better-typography.md) owns text and input sizing.
-Read their details only when needed. Preserve these requirements in every fix and
-report shared causes once.
-
-## Match the symptom
+## Start from the symptom
 
 | Symptom | Start with |
 | --- | --- |
-| Hover remains after a tap | Gate hover styling by input capability |
-| Gray or blue tap flash fights custom feedback | Replace the tap highlight only with visible press feedback |
-| Full-screen layout hides its bottom action | Choose `dvh` or `svh` for the intended viewport behavior |
-| Focus zooms or the keyboard covers a field | Check computed input size and keyboard viewport behavior |
-| Taps feel slow | Immediate press feedback; check `touch-action` and main-thread work |
-| Scrolling a sheet moves or refreshes the page | Define scroll ownership and contain overscroll |
-| Notch or home indicator covers controls | Pair edge-to-edge viewport settings with safe-area padding |
-| Holding a control selects its label | Restrict selection suppression to controls |
-| A swipe fights page scrolling | Separate native scrolling from custom gesture ownership |
-| Browser or installed-app chrome clashes with the page | Align supported theme and launch metadata |
+| Hover stays applied after a tap | Gate hover styles by input capability |
+| Tap feels laggy | Press feedback on contact; `touch-action: manipulation`; check main-thread work |
+| Gray or blue flash on tap | Remove the tap highlight where a press state replaces it |
+| Long-press selects a button label or opens a callout | Scope selection and callout suppression to controls |
+| Bottom action hidden or layout jumps with the URL bar | `dvh` for app shells, `svh` for first screens |
+| Page zooms into a focused field | Computed input font size of at least `16px` |
+| Keyboard covers the field or the submit action | Check keyboard viewport behavior before adding JavaScript |
+| Notch or home indicator covers controls | `viewport-fit=cover` plus safe-area padding |
+| Scrolling a sheet moves or refreshes the page | Contain overscroll on the inner scroller |
+| A swipe fights page scrolling | Give the gesture surface one `touch-action` owner |
+| Status bar or browser chrome clashes with the page | Per-scheme `theme-color` matching the top surface |
+| Installed app strands the user with no way back | Provide in-app navigation in standalone mode |
+| Right in desktop emulation, wrong on the phone | Test on real hardware |
 
-## Touch feedback and activation
+Code for every row is in [touch-and-input.md](better-pwa/touch-and-input.md) and
+[viewport-and-scroll.md](better-pwa/viewport-and-scroll.md).
 
-Gate decorative hover styles with `@media (hover: hover)`. Add `(pointer: fine)`
-when the effect also needs precise targeting. Inspect generated CSS before adding
-framework configuration; an existing hover utility may already include the guard.
-These queries describe the primary input, not every attached device. Keep touch,
-mouse, stylus, and keyboard paths usable together; neither width nor a user-agent
-string reliably identifies a touch device.
+## Reach for CSS and metadata before JavaScript
 
-Use `:active` for immediate press feedback and retain `:focus-visible` for keyboard
-focus. If JavaScript must track a press, start feedback on `pointerdown` and clear
-it on release or cancellation. Keep ordinary activation on native `click` or form
-submission so scrolling away can cancel a tap and keyboard activation still works.
-Use the project's motion tokens; do not delay an action for the feedback animation.
+Media queries, `env()`, viewport units, and `touch-action` describe what the device
+can do; a `useIsTouchDevice()` hook or user-agent check guesses. Apply each fix where
+its reason applies rather than as a global habit: `user-select: none` is correct on a
+button and a defect on body text. A starter baseline for new mobile-facing apps is in
+[baseline-and-testing.md](better-pwa/baseline-and-testing.md).
 
-`touch-action: manipulation` on tappable controls permits panning and pinch zoom
-while removing double-tap zoom handling. It can remove the associated click delay;
-it cannot fix a blocked main thread or a slow handler. Measure before adding handlers.
+## Gate hover by capability, never by device
 
-Set `-webkit-tap-highlight-color: transparent` only on controls with a verified
-replacement press state. A global reset is appropriate only when all affected
-controls provide that feedback. Do not remove a focus indicator with the highlight.
+Touch browsers fake `:hover` on tap and leave it applied until the next tap
+elsewhere. Wrap decorative hover rules in `@media (hover: hover)`, adding
+`(pointer: fine)` when the effect assumes precise targeting. Touch, mouse, stylus,
+and keyboard can coexist on one device, so keep every path usable; width and
+user-agent strings do not identify touch. Check generated CSS first: the framework's
+hover variant may already include the guard.
 
-Use `user-select: none` and, where needed, `-webkit-user-select: none` on control
-labels or drag handles. Scope `-webkit-touch-callout: none` to controls whose
-long-press menu conflicts with their operation. Keep prose, errors, addresses, and
-identifiers selectable, and preserve useful link and image context menus.
+## Give press feedback on contact
 
-## Viewport, safe areas, and the keyboard
+Native controls respond the instant a finger lands; feedback that waits for `click`
+reads as lag even at 0ms. Style `:active` (keep `:focus-visible`), or start feedback
+on `pointerdown` and clear it on release and `pointercancel`, while activation stays
+on native `click` so sliding away cancels and keyboards still work. Keep presses short
+(around 100-160ms ease-out, from the project's tokens) and never delay the action.
+`touch-action: manipulation` removes double-tap-zoom delay but cannot fix a slow
+handler; profile first. Haptics can only echo visible feedback: iOS Safari lacks
+vibration. Recipes are in [touch-and-input.md](better-pwa/touch-and-input.md).
 
-Keep a single viewport declaration through the project's metadata system:
+## Strip the tap flash and text selection only from controls
 
-```html
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-```
+`-webkit-tap-highlight-color: transparent` removes the loudest "this is a website"
+tell and the browser's only tap feedback; set it globally only once every tappable
+element has an `:active` state, and never remove focus indicators with it. Suppress
+`user-select` (with the `-webkit-` prefix) on control labels, tabs, chips, and drag
+handles, and `-webkit-touch-callout` only where the long-press menu fights the
+control. Never on `body` or prose: people copy addresses, errors, and order numbers.
 
-Use `viewport-fit=cover` when painting edge to edge, paired with content insets.
-Never add `user-scalable=no` or a restrictive `maximum-scale` to fix layout or focus.
+## Size the viewport for its job
 
-- Use `100dvh` when a shell or drawer should follow expanding and collapsing
-  browser chrome. Prefer `min-height` for growing content; fixed-height shells
-  need a deliberate scroll container so content and actions remain reachable.
-- Use `min-height: 100svh` for a stable first screen that should fit with browser
-  chrome expanded. Dynamic units can cause unwanted resizing during a hero's scroll.
-- Keep a preceding `100vh` fallback only when the support matrix needs it. Neither
-  `dvh` nor safe-area insets alone guarantee clearance above the software keyboard.
+`100vh` is the viewport with browser chrome collapsed, so on load it overflows and
+pins bottom actions under the URL bar. Use `100dvh` for app shells and drawers that
+should track the visible area; use `min-height: 100svh` for heroes and first screens
+that should stay stable while scrolling. Prefer `min-height` for growing content and
+give fixed-height shells a deliberate scroll container.
 
-Let backgrounds reach the edges while padding controls and content away from
-cutouts and the home indicator. Preserve the normal spacing token, for example:
+## Paint edge to edge, pad content to the safe area
 
-```css
-.bottom-bar {
-  padding-bottom: calc(var(--space-4, 1rem) + env(safe-area-inset-bottom, 0px));
-}
-```
+Add `viewport-fit=cover` to the single viewport declaration, then pad fixed headers,
+tab bars, toasts, and sheets with `env(safe-area-inset-*)` added to the normal
+spacing token, with a `0px` fallback. Without the meta tag every inset is `0`.
+Backgrounds reach the edges; controls and text clear cutouts and the home indicator.
+Check all four edges in landscape and count each inset once, not again in nested chrome.
 
-Check top, bottom, left, and right insets, especially in landscape. Account for
-insets once per edge; do not double-pad nested chrome. Fixed overlays need their
-own clearance, and underlying content needs enough space to scroll past them.
+## Never disable zoom
 
-For iOS focus zoom, check that the computed input, textarea, and select font size
-is at least `16px`; `1rem` only meets that floor when the root size does. Preserve
-user zoom. Set suitable `type`, `inputmode`, `autocomplete`, and `enterkeyhint`;
-disable autocapitalization or autocorrection only for fields such as codes and
-usernames where correction is harmful. Keep paste and native form behavior.
+`user-scalable=no` and a restrictive `maximum-scale` are accessibility failures and
+the wrong fix for focus zoom. iOS zooms into fields whose computed font size is under
+`16px` and does not zoom back out; fix the size instead, with the two approaches in
+[better-typography](better-typography.md). While in the field, set `type`,
+`inputmode`, `autocomplete`, and `enterkeyhint` so the right keyboard appears.
 
-For a keyboard-sensitive shell, consider `interactive-widget=resizes-content`
-where supported and appropriate. Do not assume identical resizing across browsers.
-First use normal scrolling and the project's existing keyboard handling; introduce
-Visual Viewport logic only for a reproduced obstruction that needs it. Verify field
-focus, typing, dismissal, and access to the submit action with the keyboard open.
-If landscape text inflation is the specific problem, consider
-`-webkit-text-size-adjust: 100%` and verify text resizing remains usable.
+## Keep fields reachable with the keyboard open
 
-## Scroll and gesture ownership
+Neither `dvh` nor safe-area insets guarantee clearance above the software keyboard,
+and browsers resize differently. Start with ordinary scrolling and the project's
+existing handling; `interactive-widget=resizes-content` helps where supported. Add
+Visual Viewport logic only for a reproduced obstruction, then verify focus, typing,
+dismissal, and reaching the submit action with the keyboard open.
 
-Keep native overflow scrolling and CSS scroll snapping for ordinary carousels;
-choose snap strictness that leaves all slide content reachable. A native horizontal
-scroller needs the browser to retain horizontal panning, so do not give it the
-`pan-y` rule intended for a JavaScript-driven horizontal drag.
+## Give every gesture surface one owner
 
-For custom gestures, `touch-action` names what the browser may handle. A horizontal
-drag surface can use `pan-y pinch-zoom`; a vertical drag handle can use
-`pan-x pinch-zoom`. Keep sheet content scrollable and put restrictions on the
-smallest gesture surface. Check ancestor rules too: a permissive child cannot
-undo an ancestor's restriction. Avoid `none` on ordinary controls and content;
-it disables browser panning and zoom. Handle `pointercancel` without firing an
-action or leaving feedback stuck, and retain an accessible alternative to dragging.
+`touch-action` names what the browser may still do: a JavaScript horizontal drag gets
+`pan-y pinch-zoom`, a vertical sheet handle gets `pan-x pinch-zoom`. Put restrictions
+on the smallest gesture surface, never `none` on content people scroll past, and
+remember a child cannot undo an ancestor's restriction. Prefer native overflow with
+CSS scroll snap for ordinary carousels. Use Pointer Events with pointer capture,
+handle `pointercancel` without firing the action, and keep a non-drag alternative.
+Tracking, thresholds, and release physics are in [gestures](better-animation/gestures.md).
 
-Use `overscroll-behavior-y: contain` on an inner vertical scroller when reaching
-its edge should not scroll the page behind it. Suppress root pull-to-refresh only
-when it conflicts with the app's interaction; choose `contain` to retain local
-overscroll effects or `none` when those also conflict. Limit suppression to the
-needed axis so browser navigation is preserved where possible. Keep ordinary
-document scrolling and intentional refresh behavior.
+## Contain overscroll where it conflicts
 
-Overscroll containment is not a complete modal implementation. Reuse the project's
-dialog or sheet primitive for background scroll locking, focus, and restoration.
-Do not cancel every `touchmove` to solve scroll chaining.
+Use `overscroll-behavior-y: contain` on inner scrollers (sheet content, chat lists,
+sidebars) so reaching the edge does not move or refresh the page behind; `contain`
+keeps the container's own bounce. Suppress root pull-to-refresh only in app-like
+shells where it conflicts, and keep it on scrolling documents. Never cancel
+`touchmove` to stop scroll chaining, and reuse the project's dialog or sheet
+primitive for background scroll locking and focus restoration.
 
-## Browser chrome and installed appearance
+## Match browser chrome to the top surface
 
-Use supported `theme-color` metadata to suggest a browser chrome color matching
-the adjacent page surface. For system-driven themes, supply light and dark media
-variants. For an in-app theme override, keep the active metadata synchronized with
-the actual theme. Declare `color-scheme` only for schemes the interface supports.
+Give `theme-color` one value per supported color scheme, matching the header or top
+surface rather than the brand color, and keep it in sync with an in-app theme toggle.
+Treat it as a hint: some browsers ignore it and tint from the page itself, so the top
+surface and `body` background must match too. Declare `color-scheme` only for schemes
+the interface supports.
 
-When installed mode is in scope, align the manifest's `theme_color` and launch
-`background_color` with the app. Treat platform-specific status-bar settings such
-as `apple-mobile-web-app-status-bar-style` separately: they are not arbitrary color
-values, and `theme-color` is not a cross-browser guarantee. Verify the launch screen,
-status bar contrast, safe areas, and page background in the supported display modes.
+## Give installed mode its own way back
 
-## Verify and report
+Standalone display removes the URL bar and back button. When installation is in
+scope, align the manifest's `theme_color` and `background_color` with the launch
+surface, check `apple-mobile-web-app-status-bar-style` separately, and use
+`@media (display-mode: standalone)` to add in-app back navigation, share, and
+refresh paths the browser chrome used to provide. Never trap the user on a screen.
 
-Use desktop tools to inspect CSS, metadata, overflow, and input paths. Emulation
-helps with layout but cannot establish real touch feel or all browser behavior.
-Exercise the affected flow on supported phones: expanded and collapsed browser
-chrome, portrait and landscape, keyboard open and closed, scroll boundaries,
-cancelled taps, pinch zoom, and theme changes. Include installed standalone mode
-when targeted, and representative older hardware when performance is at issue.
+## Test on a real phone before calling it done
 
-Use the project's device-preview setup and Safari Web Inspector or Chrome remote
-debugging when available. Run relevant project checks. If hardware is unavailable,
-finish the code-verifiable work and identify exactly which device checks remain
-unverified; do not claim a device result from source inspection or emulation.
+Sticky hover, tap highlight, URL-bar resizing, focus zoom, tap delay, rubber-banding,
+safe areas, and the keyboard do not reproduce in desktop emulation. Use the project's
+device-preview setup or remote inspection, test an older phone, landscape, keyboard
+open, and installed mode when targeted. Without hardware, finish the code-verifiable
+work and name the checks that remain unverified. Workflow and checklist are in
+[baseline-and-testing.md](better-pwa/baseline-and-testing.md).
 
-For implementation, briefly report the symptom, changed behavior, and verification.
-For reviews, use [better-ui-review](better-ui-review.md)'s evidence, severity, and
-report format without loading unrelated domains.
+## Report
+
+For implementation, report in a few lines: the symptom matched, the one-line cause,
+the file and declaration changed, and what still needs a phone. For reviews, use
+[better-ui-review](better-ui-review.md)'s evidence, severity, and report format.

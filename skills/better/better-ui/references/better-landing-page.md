@@ -1,122 +1,131 @@
-# Landing pages
+# Landing pages and marketing sites
 
-Use this for a page promoting a specific offer: a product launch, trial, demo,
-service, purchase, download, or waitlist. A homepage serving several audiences may
-need several paths; preserve that purpose instead of forcing a single conversion.
-For a full build or redesign, use [craft](better-craft.md) for visual direction and
-rendered refinement. For a focused section or copy edit, apply only the relevant
-parts below.
+Use this for a page or small site whose job is to introduce something and move a
+visitor to a next step: a product launch, trial or waitlist, a studio or freelance
+practice, a small business, a portfolio or personal site, an event, or a campaign.
+A homepage serving several audiences may need several paths; preserve that purpose
+instead of forcing a single conversion. For a focused section or copy edit, apply
+only the relevant rules below.
+
+Visual direction comes from [craft](better-craft.md), and from
+[basteau-taste](basteau-taste.md) when the user wants their own style or nothing
+else sets one; this file decides what the page says, in what order, and how it
+persuades. Type, grid, palette and surfaces live in [typography](better-typography.md),
+[layout](better-layout.md), [colors](better-colors.md) and [polish](better-polish.md);
+motion in [animation](better-animation.md); copy in [writing](better-writing.md);
+forms and feedback in [interaction](better-interaction.md) and
+[accessibility](better-accessibility.md).
 
 ## Resolve the offer before composing
 
-Read the brief, existing page, and available product material. Establish:
+Establish the audience and what they know on arrival, the offer, the one primary
+action and what happens after it, the traffic source and its promise, the main
+objections, and the evidence, imagery and terms actually available. Ask for missing
+facts in one batch, only when they would change the page; otherwise state the
+assumption in a line and continue. The brief is usable when the visitor, promise,
+next step and evidence gaps are clear.
 
-- The audience, their desired outcome, and what they already know on arrival.
-- The offer, primary action, and what happens after that action.
-- The traffic source and promise that brought the visitor here.
-- The main objections, available evidence, product imagery, and actual terms.
+## Name the site's job and its next step
 
-Ask only for missing information that would materially change the page. State
-reasonable design assumptions and continue. Claims, prices, customer endorsements,
-and cancellation or refund terms require supplied or verified facts. When evidence
-is absent, omit the claim or mark the missing asset in a draft; realistic-looking
-fiction is not social proof.
+Decide what kind of site this is and what a successful visit ends in: a signup, a
+booking, a visit to the shop, an email, a ticket, or simply remembering the name.
+That choice sets the hero, the proof and the sections; a portfolio converts through
+its work and a contact line, a bakery through hours and an address. The site types
+and their usual shape are in [narratives.md](better-landing-page/narratives.md).
 
-The brief is usable when the visitor, promise, primary action, and evidence gaps
-are clear. Keep any summary short and proceed to implementation when requested.
+## Order sections by the visitor's questions
 
-## Choose a narrative that fits visitor intent
+Sketch the page as the questions a visitor asks in order: what is this, is it for
+me, can I trust it, what does it take, how do I start. Each section must explain
+value, demonstrate it, resolve an objection or enable the action; drop the ones
+that do none. Pick the narrative by visitor intent and say why, using
+[narratives.md](better-landing-page/narratives.md#narrative-by-visitor-intent).
 
-| Visitor situation | Useful structure |
-| --- | --- |
-| Product understood through a screenshot or demo | Clear hero, product evidence, benefits, objections, action |
-| Unfamiliar offer or substantial skepticism | Explanatory story with proof beside each major claim |
-| Known audience, simple offer, high intent | Short page with the essential benefit, terms, and action |
-| Comparing alternatives | Explicit comparison criteria, supported differences, tradeoffs, and next step |
+## Establish identity in the first screen
 
-Sketch the section order around the questions visitors need answered. Each section
-should explain value, demonstrate it, resolve an objection, or enable the action.
-Use benefit groups, process steps, case studies, pricing, or FAQs only where they
-advance that argument. Let the content determine their number and order.
+Within one screen a visitor should know what this is, whose it is, and what it
+feels like. Say it in one plain sentence in the owner's voice, show the real
+subject (product, work, food, room, people) rather than a generic stand-in, and
+add one signature detail that belongs to this brand alone. Patterns for each kind of
+site are in [hero.md](better-landing-page/hero.md).
 
-Match the hero's promise and visual tone to the campaign or link that led here.
-For a longer page, repeat the primary action after useful decision points and at
-the end, keeping its destination and meaning consistent. Give exploratory actions
-such as a demo preview lower emphasis when they support the same decision.
+## Make the hero clear before distinctive
 
-## Make the hero both clear and distinctive
+Pair a specific outcome or identity headline with one or two sentences on how or
+for whom. Label the primary action with its next step ("Book a table", "Join the
+waitlist") and disclose any commitment beside it. Place one genuine proof signal
+near the claim it supports. Break headline lines at meaningful phrases and keep the
+opening readable and the action reachable on small screens; see
+[hero.md](better-landing-page/hero.md#headline-and-action).
 
-Make the opening communicate what the offer is, who it helps, and why it matters.
-Pair a specific outcome headline with a short explanation of how the product
-provides it. Label the primary action with the next step, such as “Book a demo” or
-“Join the waitlist,” and disclose material commitment beside it.
+## Give the page rhythm and an ending
 
-Build the composition around the promise and its strongest visual evidence. Use
-a legible product detail, an illustrative scenario, or editorial imagery that
-explains the offer. Choose the crop and scale intentionally; a tiny dashboard
-inside an oversized device frame rarely demonstrates much. Where genuine proof
-exists, place a concise signal near the claim it supports.
+Carry the hero's type, color, spacing and image treatment through every section,
+and vary composition with purpose: dense then open, image-led then text-led, wide
+then narrow. Use one large statement or manifesto as a pause when it adds emphasis.
+People remember the peak and the end, so close on a deliberate final section that
+echoes the opening; see [sections.md](better-landing-page/sections.md#pacing-and-rhythm).
 
-Use [typography](better-typography.md) for headline measure and wrapping. Preserve
-meaningful phrases across sizes without relying on desktop-only line breaks.
-Keep the opening readable and the action discoverable on small screens; the
-entire hero need not be squeezed into every device's first viewport.
+## Let the work be the proof
 
-## Give the page visual rhythm
-
-Carry the hero's type, color, spacing, and image treatment through the whole page.
-Vary section composition with purpose: an expansive product view can give way to
-a concise explanation, a focused customer story, then a quiet decision section.
-Use shared alignment and consistent spacing to make those changes feel related.
-
-Choose a memorable treatment that belongs to the product, such as a strong image
-crop, expressive display type, or a well-composed demonstration. A large benefit
-statement can provide a pause in a longer narrative when it adds emphasis. Its
-presence and animation are optional. Keep copy readable and controls usable before
-and without reveal effects; consult [animation](better-animation.md) when motion
-helps demonstrate the product or guide attention.
-
-Use [layout](better-layout.md), [colors](better-colors.md), and
-[polish](better-polish.md) when those decisions need detail. Work in the project's
-visual system; font lists, fixed hero widths, and a particular navigation shape
-are design options, not prerequisites for a crafted landing page.
+Show the real thing at a size where it can be read: the product in use, case
+studies with role and outcome, the dish, the venue, last year's event. Caption it
+with context, place endorsements and numbers beside the claim they support, and
+compare alternatives only on criteria you can support. Proof patterns are in
+[sections.md](better-landing-page/sections.md#proof-and-persuasion).
 
 ## Make persuasion concrete
 
-Write benefits as outcomes supported by mechanisms or evidence. “Export a weekly
-report in one step” is useful when the product does it; a quantified time saving
-needs evidence. Put relevant proof alongside the benefit, with enough attribution
-and context to understand it. Compare alternatives on supportable criteria.
+Write benefits as outcomes backed by a mechanism or evidence; "export a weekly
+report in one step" beats "streamline your workflow". Answer the objections that
+decide the visit: suitability, effort, price, commitment, location, what happens
+next. Offer risk reversal (trial, cancellation, refund) only when it is real, and
+surface material terms near the action.
 
-Answer the objections that affect the decision: suitability, setup effort, price,
-compatibility, commitment, or what happens next. Surface important terms near the
-action. Explain genuine trials, cancellation terms, or guarantees when available.
-Use [writing](better-writing.md) for clear labels, terminology, and error copy.
+## Keep one primary action recognizable
 
-## Build and verify the complete path
+Give the primary action one label, one destination and one visual treatment that
+stands apart from everything else, and repeat it at decision points and at the end.
+Never place competing primary actions in the opening. Secondary paths such as
+"See the menu" or "Watch the film" take lower emphasis; see
+[sections.md](better-landing-page/sections.md#calls-to-action).
 
-Establish the hero and visual language, then implement and refine sections without
-rebuilding settled portions unnecessarily. Connect the CTA to its real destination
-or form. Use [interaction](better-interaction.md) and
-[accessibility](better-accessibility.md) for form validation, pending feedback,
-errors, success, and keyboard operation. Identify missing integrations explicitly;
-a visual prototype should not imply that a submission was stored or sent.
+## Spend restraint deliberately
 
-For a complete page, include appropriate title, description, favicon, and sharing
-metadata, using available brand assets. Preserve the site's indexing policy; decide
-indexing from the publication intent rather than automatically hiding campaign
-pages. Use existing legal and privacy destinations where applicable. Add structured
-data only when it matches visible content and current eligibility requirements.
+Choose one or two signature moves (a crop, a display face, a typographic gesture,
+a tactile interaction) and keep everything else quiet so they register. Familiar
+navigation, small chrome and plain controls let the content lead. Motion on a
+marketing page may be longer and more expressive when it explains or stages
+content, but it plays once, never gates reading, and honors reduced motion.
 
-Inspect the full page at representative desktop and mobile widths. Check the hero,
-section transitions, text and image crops, and final CTA together. Exercise links,
-navigation, and the conversion path through success and failure. Verify relevant
-focus, contrast, reduced motion, and loading behavior. Size media appropriately,
-reserve its space, and keep secondary media from delaying the opening content.
+## Draft with real content
 
-Finish when the offer and next step are clear, the full page carries a coherent
-visual direction, claims are supportable, and the requested path works or its
-remaining integration gaps are stated. Report changes and verification briefly.
-A conversion improvement is a hypothesis until measured; visual inspection alone
-cannot establish it. For a requested review, use the
-[shared review format](better-ui-review.md#report).
+Write real draft copy in the brand's voice; lorem ipsum, "Acme", stock smiles and
+generic superlatives make every layout look finished and every page look generated.
+Claims, prices, endorsements, logos and terms need supplied or verified facts; a
+specific-looking invented number is still fiction. Mark missing assets visibly in a
+draft instead; see [shipping.md](better-landing-page/shipping.md#content-realism).
+
+## Outline first, then build section by section
+
+Before code, state the page outline, hero copy and primary action, the proof each
+section will use, and the narrative choice. Then establish the hero and visual
+language and build downward, refining one section at a time without rebuilding
+settled ones. Use [variants](better-craft/variants.md) when the hero direction is
+still open.
+
+## Ship and verify the complete path
+
+Connect every action to its real destination, form or integration, and name any
+that are missing; a prototype must not imply a submission was sent. Add title,
+description, sharing image and favicon, keep the site's indexing intent, and leave
+no dead links or dead ends. Inspect the whole page at desktop and phone widths and
+exercise the conversion path through success and failure, using the checklist in
+[shipping.md](better-landing-page/shipping.md#before-you-finish).
+
+## Report
+
+Finish when the offer and next step are clear, the page carries one coherent
+direction, every claim is supportable, and the path works or its gaps are stated.
+A conversion improvement is a hypothesis until measured. For a requested review,
+use the [shared review format](better-ui-review.md#report).

@@ -1,12 +1,12 @@
 # Focus and keyboard
 
-Focus rings, skip links, tabindex, focus trapping and the APG keyboard patterns.
+Focus rings, focus not obscured, skip links, tabindex, focus trapping, the APG keyboard patterns and route changes.
 
 ## Focus rings
 
-Style `:focus-visible`, not bare `:focus`. The browser shows it for keyboard and assistive-tech focus and suppresses it for mouse clicks, where focus is already obvious. Never write `outline: none` or `focus:outline-none` without a visible replacement, which removes keyboard navigation for sighted keyboard users.
+The browser shows `:focus-visible` for keyboard and assistive-tech focus. It suppresses it for mouse clicks on buttons and links but still shows it in text inputs. An `outline: none` or `focus:outline-none` with no visible replacement leaves sighted keyboard users with no way to see where they are.
 
-Prefer the browser's unmodified focus indicator, which adapts to platform and forced-color settings without the author predicting every background. Adding only `outline-offset` preserves it. A custom `outline: 2px solid` with no color renders `currentColor`, which is not automatically accessible, because the outline may cross colors unlike the text's own background. The preference order:
+The browser's unmodified indicator adapts to platform and forced-color settings without the author predicting every background. Adding only `outline-offset` preserves it. A custom `outline: 2px solid` with no color renders `currentColor`, which may fail against the colors the outline crosses. The preference order:
 
 ```css
 /* Best: keep the browser ring, just give it breathing room */
@@ -28,11 +28,28 @@ Prefer the browser's unmodified focus indicator, which adapts to platform and fo
 </button>
 ```
 
-A custom focus indicator must meet the applicable project or WCAG target for visible area and change of contrast. Inspect the whole perimeter against every adjacent color it crosses: component fills, page surfaces, images, gradients, hover and selected states. A token, brand color, or `currentColor` passes only when that rendered check does.
+Check the whole perimeter of a custom indicator against every adjacent color it crosses. That means component fills, page surfaces, images, gradients and hover and selected states. A token, brand color or `currentColor` passes only when that rendered check does.
+
+### Forced colors
 
 In `forced-colors: active` (Windows High Contrast), keep the default color adjustment or name a system color such as `Highlight`. `forced-color-adjust: none` freezes the authored color, so use it only where you have checked the control stays perceivable.
 
-Group focus styles with `:focus-within` when a wrapper should light up while an inner input has focus (e.g. a search box with an icon inside the border).
+Forced colors also drop `box-shadow`, so a ring built only from a shadow, including Tailwind's `ring-*` utilities, disappears. Keep the shadow if the design wants it and add a transparent outline, which the system repaints in a visible color:
+
+```css
+:focus-visible {
+  box-shadow: 0 0 0 2px var(--focus-ring);
+  outline: 2px solid transparent;
+}
+```
+
+Tailwind v4: pair `focus-visible:ring-2` with `focus-visible:outline-hidden`, which keeps a transparent outline under forced colors. `outline-none` removes it everywhere.
+
+Group focus styles with `:focus-within` when a wrapper should light up while an inner input has focus, such as a search box with an icon inside the border.
+
+## Focus not obscured
+
+Sticky chrome hides whatever scrolls under it, including the element that just received focus (2.4.11). Pad the scroll container by the sticky element's height with `scroll-padding-block-start`, and by a sticky footer or cookie banner's height with `scroll-padding-block-end`. The layout recipe is in [better-layout](../better-layout.md).
 
 ## Skip link
 
@@ -45,7 +62,7 @@ Target `<main id="main">` and visually hide the link until focused:
 }
 .skip-link:focus {
   inset-inline-start: 16px;
-  top: 16px;
+  inset-block-start: 16px;
 }
 ```
 
@@ -57,7 +74,7 @@ Target `<main id="main">` and visually hide the link until focused:
 </body>
 ```
 
-Give in-page anchor targets `scroll-margin-top`, such as `80px` under a sticky header, so the target isn't hidden when jumped to.
+Tailwind: `sr-only focus:not-sr-only` on the link. Give in-page anchor targets `scroll-margin-block-start`, such as `80px` under a sticky header, so the target isn't hidden when jumped to.
 
 ## tabindex rules
 
@@ -84,9 +101,19 @@ Composite widgets, meaning tabs, menus, toolbars and radio groups, occupy one Ta
 </div>
 ```
 
+A combobox keeps DOM focus in its input instead. Point `aria-activedescendant` on the input at the `id` of the highlighted option and update it on arrow keys.
+
 ## Focus trapping and restoration
 
-Modals must trap focus. Put `inert` on everything behind the dialog, which removes background content from the tab order and from assistive tech in one move:
+Native `<dialog>` with `showModal()` makes everything behind it inert and closes on Escape:
+
+```tsx
+dialogRef.current.showModal(); // on open
+dialogRef.current.close(); // on close
+triggerRef.current?.focus(); // return focus to the element that opened it
+```
+
+A custom overlay that can't use `<dialog>` needs `role="dialog"`, `aria-modal="true"` and an accessible name via `aria-labelledby`. Put `inert` on everything behind it, which removes background content from the tab order and from assistive tech in one move:
 
 ```tsx
 // On open
@@ -97,18 +124,18 @@ const dialog = dialogRef.current;
 
 // On close
 document.getElementById("app-content").inert = false;
-triggerRef.current?.focus(); // always return focus to the element that opened it
+triggerRef.current?.focus();
 ```
 
-Prefer native `<dialog>` with `showModal()`, which gives you the trap, the `inert` background and Escape handling for free. A custom overlay that can't use it needs `role="dialog"`, `aria-modal="true"` and an accessible name via `aria-labelledby`. Either way:
+Either way:
 
 - On open, focus the first focusable element. For destructive confirmations, focus the least destructive action instead.
 - On close, return focus to the trigger, or to the nearest logical container if the trigger is gone.
-- Add `overscroll-behavior: contain` on the dialog so scrolling inside never scrolls the page behind it.
+- Keep scrolling inside the dialog from moving the page behind it; containment is in [better-pwa](../better-pwa.md).
 
 ## Keyboard patterns (ARIA APG)
 
-Native elements come with these behaviors; custom widgets must implement them. A role is a promise. Give something `role="tab"` and users expect the full tab keyboard model.
+Native elements come with these behaviors; custom widgets must implement them. A role is a promise: give something `role="tab"` and users expect the full tab keyboard model.
 
 | Widget | Keys |
 | --- | --- |
@@ -122,10 +149,10 @@ Native elements come with these behaviors; custom widgets must implement them. A
 Universal rules:
 
 - Escape dismisses whatever opened last: tooltip, then menu, then dialog.
-- Arrow keys, not Tab, move within a composite widget; Tab moves between widgets.
 - Tabs choose activation mode: automatic (panel switches on arrow focus) when panels render instantly, manual (Enter/Space to activate) when switching is expensive.
-- Enter submits the focused input's form. In `<textarea>`, Enter inserts a newline and ⌘/Ctrl+Enter submits.
+- Enter in a single-line text input submits its form natively. In `<textarea>`, Enter inserts a newline, and ⌘/Ctrl+Enter submits only if you implement it.
+- Custom single-key shortcuts must be remappable, disableable or active only while their component has focus (2.1.4), so speech-input users don't trigger them by talking.
 
 ## SPA route changes
 
-Client-side navigation doesn't reset focus or announce anything. On route change, update `document.title` to match the new context, then move focus to the new view's `<h1>` (given `tabindex="-1"`) or to `<main>`. Restore scroll position on back and forward navigation, and scroll to top on forward navigation.
+Client-side navigation doesn't reset focus or announce anything. On route change, update `document.title` to match the new context, then move focus to the new view's `<h1>` (given `tabindex="-1"`) or to `<main>`. Restore scroll position on history traversal with back and forward, and scroll to top on a new navigation.

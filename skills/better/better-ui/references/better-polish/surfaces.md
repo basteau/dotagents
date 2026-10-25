@@ -1,210 +1,178 @@
 # Surfaces
 
-Border radius, optical alignment, shadows and image outlines.
+Recipes for concentric radius, optical alignment, shadow rings, elevation, alpha
+borders, image outlines and tactile buttons. Translate values into the project's
+tokens; the numbers are starting points. Transition timing belongs to
+[better-animation](../better-animation.md).
 
-## Concentric border radius
-
-When nesting rounded elements, the outer radius must equal the inner radius plus the padding between them:
+## Concentric radius
 
 ```
-outerRadius = innerRadius + padding
+outerRadius = innerRadius + padding + borderWidth
 ```
 
-The rule matters most when nested surfaces sit close together. Past `24px` of padding, treat the layers as separate surfaces and choose each radius independently rather than forcing concentric math.
-
-### Example
+Derive the outer radius from tokens so the pair stays concentric when either changes:
 
 ```css
-/* Good: concentric radii */
 .card {
-  border-radius: 20px; /* 12 + 8 */
-  padding: 8px;
+  --inset: 8px;
+  --inner-radius: 12px;
+  padding: var(--inset);
+  border-radius: calc(var(--inner-radius) + var(--inset)); /* 20px */
 }
 .card-inner {
-  border-radius: 12px;
-}
-
-/* Bad: same radius on both */
-.card {
-  border-radius: 12px;
-  padding: 8px;
-}
-.card-inner {
-  border-radius: 12px;
+  border-radius: var(--inner-radius);
 }
 ```
-
-### Tailwind example
 
 ```tsx
-// Good: outer radius accounts for padding
-<div className="rounded-2xl p-2">       {/* 16px radius, 8px padding */}
-  <div className="rounded-lg">          {/* 8px radius = 16 - 8 ✓ */}
-    ...
-  </div>
+// Tailwind: 16px outer radius, 8px padding, 8px inner radius
+<div className="rounded-2xl p-2">
+  <div className="rounded-lg">...</div>
 </div>
-
-// Bad: same radius on both
-<div className="rounded-xl p-2">
-  <div className="rounded-xl">          {/* same radius, looks off */}
-    ...
-  </div>
-</div>
+// Bad: rounded-xl on both, so the inner corners look pinched
 ```
 
-Mismatched radii on closely nested surfaces are a common source of visual tension. Calculate concentrically where the layers share a visible, even inset. Keep an established component token where they are independent or the padding is deliberately asymmetric.
+Past about `24px` of padding the curves no longer read as related; choose each radius
+independently. Where the padding is deliberately asymmetric, keep the component's tokens.
 
 ## Optical alignment
 
-When geometric centering looks off, align optically instead.
+### Buttons with text and an icon
 
-### Buttons with text + icon
-
-Where an icon makes symmetric padding look unbalanced, use slightly less on the icon side. A starting point:
-`icon-side padding = text-side padding - 2px`.
+Start the icon side at `2px` less padding than the text side, then judge by eye.
 
 ```css
-/* Good: less padding on icon side */
 .button-with-icon {
   padding-inline-start: 16px;
-  padding-inline-end: 14px; /* trailing icon side = text side - 2px */
-}
-
-/* Bad: equal padding looks like icon is pushed too far right */
-.button-with-icon {
-  padding-inline: 16px;
+  padding-inline-end: 14px; /* trailing icon side */
 }
 ```
 
 ```tsx
-// Tailwind
 <button className="ps-4 pe-3.5 flex items-center gap-2">
   <span>Continue</span>
   <ArrowRightIcon />
 </button>
 ```
 
-### Play button triangles
+### Play triangles
 
-Play icons are triangular and their geometric center is not their visual center. Shift slightly right:
+A triangle's geometric center sits behind its visual center, so shift it toward its point:
 
 ```css
-/* Good: optically centered */
 .play-button svg {
-  transform: translateX(2px); /* physical correction to the glyph itself */
-}
-
-/* Bad: geometrically centered but looks off */
-.play-button svg {
-  /* no adjustment */
+  transform: translateX(2px); /* physical on purpose: playback icons never mirror */
 }
 ```
 
-### Asymmetric icons (stars, arrows, carets)
+### Asymmetric glyphs
 
-Some icons carry uneven visual weight. The best fix is adjusting the SVG directly, so the component needs no extra margin or padding.
+Stars, arrows and carets carry uneven weight. Fix the `viewBox` or path in the SVG so
+no component needs an offset. Where the asset cannot change, nudge a wrapper
+(`translate-x-px`), never the layout around it.
 
-```tsx
-// Best: fix in the SVG itself
-// Adjust the viewBox or path to visually center the icon
+## Shadow rings
 
-// Fallback: adjust with margin
-<span className="translate-x-px">
-  <StarIcon />
-</span>
-```
-
-## Shadows instead of borders
-
-Where **buttons, cards and containers** use a border for depth or elevation, replace it with a subtle `box-shadow`. Shadows use transparency, so they adapt to any background where solid borders do not. That matters most over images or multiple background colors, which a fixed border color was never designed for.
-
-**Never apply this to dividers**, meaning `border-b`, `border-t` and side borders, or any border whose purpose is layout separation rather than depth. Those stay borders.
-
-### Shadow as border (light mode)
-
-Three layers. The first acts as a 1px border ring, the second adds subtle lift, the third ambient depth:
+A ring replaces a depth-only border. Light mode uses three layers: a `1px` ring, a
+tight lift and ambient depth.
 
 ```css
 :root {
   --shadow-border:
-    0px 0px 0px 1px oklch(0 0 0 / 0.06),
-    0px 1px 2px -1px oklch(0 0 0 / 0.06),
-    0px 2px 4px 0px oklch(0 0 0 / 0.04);
+    0 0 0 1px oklch(0 0 0 / 0.06),
+    0 1px 2px -1px oklch(0 0 0 / 0.06),
+    0 2px 4px 0 oklch(0 0 0 / 0.04);
   --shadow-border-hover:
-    0px 0px 0px 1px oklch(0 0 0 / 0.08),
-    0px 1px 2px -1px oklch(0 0 0 / 0.08),
-    0px 2px 4px 0px oklch(0 0 0 / 0.06);
+    0 0 0 1px oklch(0 0 0 / 0.08),
+    0 1px 2px -1px oklch(0 0 0 / 0.08),
+    0 2px 4px 0 oklch(0 0 0 / 0.06);
 }
-```
-
-### Shadow as border (dark mode)
-
-In dark mode, simplify to one white ring, since layered depth shadows are invisible on dark backgrounds:
-
-```css
-/* Dark mode: adapt to whatever setup the project uses
-   (prefers-color-scheme, class, data attribute, etc.) */
+/* Under the project's dark selector: depth layers vanish, keep one light ring */
 --shadow-border: 0 0 0 1px oklch(1 0 0 / 0.08);
 --shadow-border-hover: 0 0 0 1px oklch(1 0 0 / 0.13);
+
+.card {
+  border: 1px solid transparent; /* forced colors paints this when shadows drop */
+  box-shadow: var(--shadow-border);
+}
+.card:hover {
+  box-shadow: var(--shadow-border-hover); /* a short box-shadow transition is fine here */
+}
 ```
 
-### Usage with hover transition
+The transparent border also keeps the box the size of the border it replaces. Gate
+hover styling and choose its timing per [better-animation](../better-animation.md).
 
-Apply the variable and add `transition-[box-shadow]` for a smooth hover:
+| Use a shadow ring | Keep a border |
+| --- | --- |
+| Cards and containers that need depth | Dividers between list items |
+| Bordered button styles | Table cell boundaries |
+| Dropdowns, popovers, modals | Form input outlines (measured 3:1 contrast) |
+| Elements over images or mixed backgrounds | Hairline separators in dense UI |
+
+## Elevation scale
+
+Size tracks height: a higher surface gets more offset, more blur and slightly more
+alpha. Each level layers tight, medium and wide shadows, and every `y` offset is
+positive so one light source sits above.
 
 ```css
-.card {
-  box-shadow: var(--shadow-border);
-  transition-property: box-shadow;
-  transition-duration: 150ms;
-  transition-timing-function: ease-out;
-}
-
-.card:hover {
-  box-shadow: var(--shadow-border-hover);
+:root {
+  --shadow-1: 0 1px 2px oklch(0 0 0 / 0.05);                     /* cards */
+  --shadow-2: 0 1px 2px oklch(0 0 0 / 0.06),
+              0 4px 8px oklch(0 0 0 / 0.04);                     /* dropdowns */
+  --shadow-3: 0 1px 2px oklch(0 0 0 / 0.06),
+              0 4px 8px oklch(0 0 0 / 0.04),
+              0 12px 24px oklch(0 0 0 / 0.03);                   /* modals */
 }
 ```
 
-### When to use shadows vs. borders
+- Mixed offsets such as `4px 0` on one surface and `0 -4px` on another imply two light
+  sources and read as broken.
+- One heavy layer (`0 4px 16px / 0.2`) looks flat and dirty. Spread the same depth over
+  layers of falling opacity.
+- On a tinted background, tint the shadow toward that hue (`oklch(0.25 0.03 <hue> / 0.08)`)
+  rather than raising black alpha, which turns the edge muddy.
+- Dark surfaces barely show shadows. Raise elevated surfaces one lighter neutral step and
+  add the light ring above; keep a dark shadow only for separation from the page.
+- To animate elevation, fade a pseudo-element carrying the target shadow
+  ([pseudo-elements.md](pseudo-elements.md#elevation-on-hover)).
 
-| Use shadows | Use borders |
-| --- | --- |
-| Cards, containers with depth | Dividers between list items |
-| Buttons with bordered styles | Table cell boundaries |
-| Elevated elements (dropdowns, modals) | Form input outlines (for accessibility) |
-| Elements on varied backgrounds | Hairline separators in dense UI |
-| Hover/focus states for lift effect | |
+## Alpha borders
+
+A fixed gray only works on the background it was picked on. A translucent neutral
+blends into whatever sits underneath, so one token serves cards, tinted sections and
+images.
+
+```css
+:root {
+  --border-subtle: oklch(0 0 0 / 0.08);
+}
+/* Under the project's dark selector */
+--border-subtle: oklch(1 0 0 / 0.1);
+
+.card { border: 1px solid var(--border-subtle); }
+```
+
+Alpha colors cannot be contrast-checked statically. Where the boundary must meet `3:1`
+(inputs, toggles), measure the composited color on each real background, or use an
+opaque token there; see [better-colors](../better-colors.md).
 
 ## Image outlines
 
-Add a `1px` outline at low opacity to images for consistent depth, especially where other elements use borders or shadows.
-
-### Choose the separator in context
-
-Use an outline when the image needs separation from its background. Start with the
-project's separator token or the low-opacity black/white examples below. Tune the
-opacity against the actual image and surface; a frame is optional for deliberately
-borderless imagery. These examples illustrate a treatment, not a required palette.
-
-### Light mode
-
 ```css
-img {
-  outline: 1px solid oklch(0 0 0 / 0.1);
-  outline-offset: -1px; /* draw the ring just inside the image edge */
+:root {
+  --image-outline: oklch(0 0 0 / 0.1);
 }
-```
+/* Under the project's dark selector */
+--image-outline: oklch(1 0 0 / 0.1);
 
-### Dark mode
-
-```css
-img {
-  outline: 1px solid oklch(1 0 0 / 0.1);
+.content-image {
+  outline: 1px solid var(--image-outline);
   outline-offset: -1px;
 }
 ```
-
-### Tailwind with dark mode
 
 ```tsx
 <img
@@ -214,6 +182,35 @@ img {
 />
 ```
 
-Translate the example into the project’s token system and inspect both themes.
+Never `outline-slate-*`, `outline-zinc-*`, a palette near-black such as `#111827` or the
+accent: the tint shows as a colored fringe on the photo's edge. Skip transparent artwork
+and deliberately borderless full-bleed photography. `outline` never changes the image's
+size, and at `-1px` offset it sits inside the edge and follows the corner radius.
 
-**Why outline instead of border?** `outline` never affects layout, adding no width or height at any offset, and `outline-offset: -1px` draws the ring just inside the image edge so it hugs the corner radius.
+## Tactile button anatomy
+
+For styles with depth, build a raised button from layers. Each is nearly invisible
+alone; if the gradient is noticeable, it is too strong.
+
+```css
+.button-primary {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in oklch, var(--button-bg), white 4%),
+    var(--button-bg)
+  );
+  color: var(--button-fg);
+  box-shadow:
+    0 0 0 0.5px oklch(0 0 0 / 0.3),          /* cut into the surface */
+    inset 0 0 0 1px oklch(1 0 0 / 0.04),     /* ambient inner highlight */
+    inset 0 1px 0 oklch(1 0 0 / 0.07),       /* top light */
+    0 1px 2px oklch(0 0 0 / 0.1),            /* depth, tight to wide */
+    0 2px 4px oklch(0 0 0 / 0.06),
+    0 4px 8px oklch(0 0 0 / 0.03);
+  text-shadow: 0 1px 1px oklch(0 0 0 / 0.15); /* lifts the label off the fill */
+}
+```
+
+The anatomy targets dark, filled buttons. On a light fill, drop the text shadow and
+lower the inner highlights; secondary buttons usually need only the shadow ring. Check
+that the label still meets text contrast against the lightest part of the gradient.
