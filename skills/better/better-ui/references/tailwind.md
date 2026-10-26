@@ -35,6 +35,8 @@ same rules. Check generated CSS before adding config.
 | Concentric radius | Outer `rounded-*` = inner radius + padding, as `rounded-2xl p-2` around `rounded-lg` |
 | Image outline | `outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10` |
 | Directional icon in RTL | `rtl:-scale-x-100`, and no second flip on the same element |
+| Typography declarations | `truncate`, `line-clamp-*`, `text-balance`, `text-pretty`, `antialiased` on the root, `decoration-from-font`; numeric utilities such as `tabular-nums slashed-zero` compose as separate classes |
+| A declaration with no utility | An arbitrary property with `_` for spaces: `[font-synthesis-weight:none]`, `[text-box:trim-both_cap_alphabetic]`, `text-[clamp(2rem,1.25rem+3vw,3.5rem)]` |
 
 ## Missing styles
 
@@ -53,7 +55,7 @@ Read the corresponding documentation when changing these definitions:
 - [Theme tokens](https://tailwindcss.com/docs/theme): use `@theme` for tokens that
   expose utilities or variants, ordinary CSS variables for other values, and
   `@theme inline` when a theme token references another variable, except for semantic
-  tokens a theme repoints at runtime ([token naming](better-colors/token-naming.md)).
+  tokens a theme repoints at runtime ([color tokens](#color-tokens-in-theme)).
 - [Custom utilities and variants](https://tailwindcss.com/docs/adding-custom-styles):
   use `@utility` for custom utilities that need variant support.
 - [Scoped styles and directives](https://tailwindcss.com/docs/functions-and-directives):
@@ -65,6 +67,40 @@ Read the corresponding documentation when changing these definitions:
 
 When configuration or custom utilities change, verify their output with the
 project's Tailwind build. The parent skill owns rendered-state verification.
+
+### Color tokens in `@theme`
+
+The two tiers are [token naming](better-colors/token-naming.md)'s. In v4, names
+declared in `@theme` become the utility API, and the `--color-*` namespace produces
+`bg-*`, `text-*` and `border-*`. Declare primitives and semantics in the same block;
+the default palette is already `oklch()` primitives under `--color-{hue}-{step}`,
+so a custom scale in `oklch()` sits beside it in one notation:
+
+```css
+@theme {
+  /* Primitives */
+  --color-brand-50: oklch(0.97 0.014 255);
+  --color-brand-600: oklch(0.546 0.215 263);
+
+  /* Semantics: what templates should use */
+  --color-accent-solid: var(--color-brand-600);
+  --color-text-secondary: var(--color-neutral-700);
+}
+```
+
+- That yields `bg-accent-solid` and `text-text-secondary` beside `bg-brand-600`. The
+  `text-` doubling comes from the utility prefix; accept it or follow the project's
+  existing convention.
+- Both tiers are reachable, so the tiering is a convention: templates use semantic
+  utilities, and a raw `bg-brand-600` in a component is the thing to flag.
+- Repoint semantics for another theme in a block outside `@theme`, such as `.dark`,
+  using the switching mechanism
+  [palette-generation.md](better-colors/palette-generation.md#choosing-the-switching-mechanism)
+  picks. Keep those semantic tokens in a plain `@theme`, not `@theme inline`:
+  inlining bakes the primitive into each utility, so the override never reaches it.
+- Opacity modifiers such as `bg-accent-solid/50` compile to `color-mix()` with
+  `transparent`; text sits on solid tokens, as [better-colors](better-colors.md)
+  requires for measurable contrast.
 
 ## Setup and migration
 

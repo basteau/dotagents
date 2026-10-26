@@ -101,14 +101,12 @@ file disagree, the shipped code wins; list the conflict as an open question.
 
 ## Follow the spec's structure
 
-Use the canonical `##` sections in this order, leaving out any that do not
-apply: Overview, Colors, Typography, Layout, Elevation & Depth, Shapes,
-Components, Do's and Don'ts. Put project sections where a reader would look for
-them: Voice after Overview; Motion, Sound or Iconography after Shapes. Every
-DESIGN.md needs `name`, and a `primary` color when colors exist. Tokens the
-schema has no key for, such as shadow, motion and sound, go in a fenced `yaml`
-block in their own section; the section table and schema limits are in
-[format.md](better-design-md/format.md).
+Use the canonical `##` sections in the spec's order, leaving out any that do
+not apply, and put project sections where a reader would look for them: Voice
+after Overview; Motion, Sound or Iconography after Shapes. Every DESIGN.md needs
+`name`, and a `primary` color when colors exist. Open
+[format.md](better-design-md/format.md) for the section table, extension tokens
+for shadow, motion and sound, and value limits.
 
 ## Describe intent with a specific reference
 
@@ -118,17 +116,12 @@ what each color, size or effect is for, where it appears, and where it never
 appears. Scarcity rules carry the most character: "vermilion lives in diagrams
 only".
 
-Refer to tokens in prose as `{colors.primary}` so the prose and values stay
-linked.
-
 ## Cover components the project ships
 
 Document only components that exist. For each one, give its tokens, its
-variants as related keys (`button-primary`, `button-primary-hover`), and its
-states: hover, focus-visible, active, disabled, loading or selected where they
-apply. Describe what the schema has no property for (borders, shadows,
-transitions) in prose; the property list is in
-[format.md](better-design-md/format.md#components).
+variants and its states: hover, focus-visible, active, disabled, loading or
+selected where they apply. How to model variants, states and the properties the
+schema lacks is in [format.md](better-design-md/format.md#components).
 
 Add anything distinctive, such as a wordmark effect, a dot grid or a sound cue,
 along with its trigger, its limits and the file that implements it. These details

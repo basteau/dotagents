@@ -36,13 +36,12 @@ and their usual shape are in [narratives.md](better-landing-page/narratives.md).
 
 ## Take the idea from the subject
 
-List eight to twelve things that belong to this client and no competitor: its name
-and what it means, its street and what that looks like, the numbers in the brief,
-the constraint it lives with, its materials, rituals and the printed things of its
-world. Then write one sentence: "On this page, [something from that list] becomes
-[the device]." Put the nearest competitor in it; if it still works, the idea
-belongs to the category. Where to look is in
-[narratives.md](better-landing-page/narratives.md#where-the-idea-comes-from).
+Apply [craft's identity
+rule](better-craft.md#take-identity-from-the-subject-not-the-category)
+to the whole page: list eight to twelve things that belong to this client and no
+competitor, then write one sentence: "On this page, [something from that list]
+becomes [the device]." Run craft's competitor test on that sentence. Where to look
+is in [narratives.md](better-landing-page/narratives.md#where-the-idea-comes-from).
 
 ## Write the argument before the design
 
@@ -52,7 +51,8 @@ I start. Delete any section that carries no claim; the argument, not the stock r
 of hero, logos, three features, testimonial and pricing, sets the order. State the
 outline, hero copy and narrative choice before code, then build the hero, using
 [variants](better-craft/variants.md) while its direction is open, and work
-downward; see [narratives.md](better-landing-page/narratives.md#outline-before-building).
+downward; see
+[narratives.md](better-landing-page/narratives.md#outline-before-building).
 
 ## Make the first screen say what, whose and what next
 
@@ -110,8 +110,7 @@ Marketing motion may stage content, but the page is finished without it.
 Write real copy in the brand's voice, and plausible sample details where the brief
 leaves gaps (dish names, room rates) so the page is judged at its real density; list
 them for the client to confirm. Never invent proof: no quotes, logos, ratings or
-statistics. Use the client's own pictures first, then honest ones of its world,
-never a stock stand-in or fake product shot; see
+statistics. Use the client's own pictures first, then honest ones of its world; see
 [shipping.md](better-landing-page/shipping.md#content-realism).
 
 ## Ship and verify the complete path
@@ -119,12 +118,12 @@ never a stock stand-in or fake product shot; see
 Connect every action to its real destination, form or integration, and name any
 that are missing; a prototype must not imply a submission was sent. Add title,
 description, sharing image and favicon, keep the site's indexing intent, and leave
-no dead links or dead ends. Inspect the whole page at about 1440, 768 and 390px,
-critique it with [critique](better-ui-review/critique.md), and exercise the
+no dead links or dead ends. Render and critique the whole page as in
+[craft](better-craft.md#render-compare-refine), and exercise the
 conversion path through success and failure, using the checklist in
 [shipping.md](better-landing-page/shipping.md#before-you-finish).
 
-## Report
+## Finish and report
 
 Finish when the offer and next step are clear, the page carries one coherent
 direction, every claim is supportable, and the path works or its gaps are stated.

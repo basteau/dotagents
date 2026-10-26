@@ -10,7 +10,7 @@ How the page moves after the hero: pacing, proof, actions and the ending.
   same word twice in a row, or three times on a page, is the template showing.
 - Let one face and two or three sizes far apart do the visible work: one very
   large, one small, little in between; the system limits are in
-  [typography](../better-typography.md#fewer-fonts-sizes-and-weights).
+  [typography](../better-typography.md#fonts-and-loading).
 - Alternate pressure. Follow a dense section (features, a work grid) with an open
   one (a single image, a statement), and a wide view with a narrow column. Change
   the ground between chapters, light paper to dark, instead of drawing rules or

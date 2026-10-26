@@ -106,14 +106,6 @@ an explicit envelope and exponential decay. Recipes, parameter ranges and a
 "too harsh / too long" translation table are in
 [synthesis.md](better-sound/synthesis.md).
 
-## Verify by listening and by numbers
-
-Play every sound at the default volume on laptop speakers and earbuds, repeat it
-rapidly, and trigger it under reduced motion and with the toggle off. For each
-sound, render it offline and check audible duration, peak level and summed gain
-against the weight table; for a flow, count sound events and maximum overlapping
-voices. Report anything you could not hear as `Not verified`.
-
 ## Before you finish
 
 | Mistake | Fix |
@@ -127,5 +119,13 @@ voices. Report anything you could not hear as `Not verified`.
 | Linear fade to zero, clicks at the end | Exponential decay to 0.001, set the start value first |
 | Gain above 1, or layers summing loud | Master around 0.3, layers summed under 0.6 |
 | Sound plays under reduced motion | Default it off, and offer a toggle if sound is frequent |
+
+## Reporting
+
+**Verification.** Listen and measure. Play every sound at the default volume on laptop
+speakers and earbuds, repeat it rapidly, and trigger it under reduced motion and with
+the toggle off. For each sound, render it offline and check audible duration, peak
+level and summed gain against the weight table; for a flow, count sound events and
+maximum overlapping voices. Report anything you could not hear as `Not verified`.
 
 For reviews, use [the shared review format](better-ui-review.md#report).

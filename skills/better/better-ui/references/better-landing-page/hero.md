@@ -14,7 +14,7 @@ whose it is and what to do next before scrolling.
 | A credential line | Answers "why trust them" quietly | "Previously at …", "Since 2009", "Featured in …", set small beneath the statement |
 | A small, familiar nav | Lets the content lead | A wordmark, three to six links, one action |
 
-Keep the signature to one or two moves drawn from the idea. A second competing gesture cancels both.
+A gesture that competes with the page's signature move cancels both.
 
 ## Composition patterns
 
@@ -61,7 +61,8 @@ then action and image, each a semantic chunk rather than every letter. It must
 finish quickly, never block reading or clicking, never replay on return navigation,
 and collapse to an instant or opacity-only state under reduced motion. Put no
 preloader, entry gate or covering intro before the content: the headline, the
-supporting line and the picture are painted on the first frame. Timing and easing come from
+supporting line and the picture are painted on the first frame. Timing and easing
+come from
 [animation](../better-animation.md).
 
 ## Small screens

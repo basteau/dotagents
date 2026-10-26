@@ -7,11 +7,13 @@ implementation that serves the interaction. Zero lines of motion code is sometim
 the correct result.
 
 This reference owns motion purpose, timing, continuity, gestures, and rendering cost.
-[better-polish](better-polish.md) covers static visual finish, [better-interaction](better-interaction.md)
-covers loading, feedback flow, and perceived latency, [better-sound](better-sound.md)
-covers audio feedback, and [better-accessibility](better-accessibility.md) covers
-reduced-motion policy and non-motion state cues in depth; check motion accessibility
-here regardless. For a cross-domain review, use [better-ui-review](better-ui-review.md).
+[better-polish](better-polish.md) covers static visual finish,
+[better-interaction](better-interaction.md) covers loading, feedback flow, perceived
+latency, and tooltip and toast timing, [better-sound](better-sound.md) covers audio
+feedback, [better-pwa](better-pwa.md) covers hover gating and tap activation, and
+[better-accessibility](better-accessibility.md) covers reduced-motion policy and
+non-motion state cues; each pattern here applies them. For a cross-domain review,
+use [better-ui-review](better-ui-review.md).
 
 ## Follow the requested work
 
@@ -83,7 +85,8 @@ Prefer transform and opacity; name every animated property and never transition
 `all`. Use layout animation only for a genuine layout change, and measure it. Never
 enter from `scale(0)`: start from 0.9–0.97 with opacity, or a plain fade when
 movement adds nothing. Press feedback uses the project's press scale, or 0.97 where
-it has none. Grow anchored surfaces from their trigger and keep dialogs centered. Rendering cost, frame budgets, and diagnosis live in
+it has none. Grow anchored surfaces from their trigger and keep dialogs centered.
+Rendering cost, frame budgets, and diagnosis live in
 [timing-and-performance.md](better-animation/timing-and-performance.md).
 
 ## Keep motion continuous
@@ -105,21 +108,33 @@ only small, infrequent groups.
 
 ## Ship reduced motion and input gating with it
 
-Honor system and application reduced-motion preferences on every animation path.
-Reduced means fewer and gentler, not zero: drop travel, scale, parallax, and bounce;
-keep opacity or color changes that aid comprehension. Final states, focus, and
+Honor system and application reduced-motion preferences on every animation path,
+script-driven ones included; what to drop and what to keep is
+[better-accessibility](better-accessibility/motion-and-zoom.md#what-to-disable-vs-reduce)'s,
+and
+each pattern's reduced version is in its detail file. Final states, focus, and
 feedback must stay correct when motion is off, and completion logic must not wait on
-a callback a disabled animation never emits. Gate hover motion to hover-capable
-fine pointers, keep press feedback for touch, and never make motion the only state cue.
+a callback a disabled animation never emits. Gate hover motion as
+[better-pwa](better-pwa.md#gate-hover-by-capability-never-by-device) describes, keep
+press feedback for touch, and never make motion the only state cue.
 
-## Verify the feel
+## Before you finish
 
-Exercise entry, exit, rapid repetition, reversal, and content changes. Check reduced
-motion, keyboard, and touch or gestures where relevant. Watch at normal speed, then
-at 2–5× duration or in the animation inspector, and step coordinated properties frame
-by frame. Test gestures on a real device and profile under representative load
-before claiming smoothness. Run the project's checks.
+Check the [never-ship table](better-animation/principles.md#never-ship).
 
-Report briefly: the frequency and purpose decision, the mechanism, properties,
-curve, and duration or spring chosen, and what still needs a feel check. Source
-inspection alone cannot establish how motion feels.
+## Reporting
+
+**Severity.** Use the motion severity table in
+[review-and-planning.md](better-animation/review-and-planning.md#vet-every-finding).
+
+**Verification.** Exercise entry, exit, rapid repetition, reversal, and content
+changes. Check reduced motion, keyboard, and touch or gestures where relevant. Watch
+at normal speed, then at 2–5× duration or in the animation inspector, and step
+coordinated properties frame by frame. Test gestures on a real device and profile
+under representative load before claiming smoothness. Run the project's checks.
+Source inspection alone cannot establish how motion feels; report what still needs a
+feel check as `Not verified`.
+
+For a build, report briefly: the frequency and purpose decision, the mechanism,
+properties, curve, and duration or spring chosen. For reviews, use [the shared review
+format](better-ui-review.md#report).

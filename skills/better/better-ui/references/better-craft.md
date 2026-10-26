@@ -122,15 +122,16 @@ when users with different needs would each be wrong with the other's default.
 
 ## Render, compare, refine
 
-Screenshot the result with real content at about 1440, 768 and 390px and judge the
-pictures, not the code: a problem visible in a screenshot is real whatever the code
-says. For an existing screen, compare before and after in the same state and
+Screenshot the result with real content at the widths
+[critique](better-ui-review/critique.md#judge-the-pictures-not-the-code) names and
+judge the pictures, not the code. For an existing screen, compare before and after in
+the same state and
 viewport; against a supplied reference, compare hierarchy, density, proportion and
 character, not only values. Fix the top three problems at their cause, in the order
 idea, hierarchy, composition, type, imagery, color, detail, motion, then look again;
 three rounds at most. The passes are in [critique](better-ui-review/critique.md).
 
-## Finish against the direction
+## Finish and report
 
 Finish when the surface expresses the direction, the primary flow and affected states
 work with supported inputs, and visible defects in the inspected scope are fixed or

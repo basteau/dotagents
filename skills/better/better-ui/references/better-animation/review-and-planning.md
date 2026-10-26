@@ -16,8 +16,8 @@ result.
 | What could animate here, make it feel more alive | Opportunities | No | Opportunities, rejected candidates, verdict |
 | Plan the motion work | Plan | Only the plan document | Self-contained plans in the project's convention |
 
-For a cross-domain review, use [better-ui-review](../better-ui-review.md)'s scope,
-severity, and report format, and fold these findings into it. Report each root cause once.
+Every review uses [better-ui-review](../better-ui-review.md)'s scope and report
+format; a cross-domain review folds these findings into its one table.
 
 ## Recon before judging
 
@@ -102,29 +102,26 @@ Give concrete target values or existing token names, never "use a nicer easing".
 
 ## Report a review or audit
 
-One table, one row per issue, with `file:line` in the location. Never a list of
-separate "Before:" and "After:" lines.
+Use [the shared review format](../better-ui-review.md#report), with motion values
+concrete enough to paste:
 
-| Location | Before | After | Why |
-| --- | --- | --- | --- |
-| `menu.css:14` | `transition: all 300ms ease-in` | `transition: transform 200ms var(--ease-out), opacity 200ms var(--ease-out)` | Named properties; ease-in delays the moment the user watches |
-| `popover.css:8` | `transform: scale(0)` | `transform: scale(0.95); opacity: 0`, origin at the trigger | Nothing appears from nothing; anchored surfaces grow from their trigger |
+| Severity | Domain | Location | Before | After | Why |
+| --- | --- | --- | --- | --- | --- |
+| HIGH | Animation | `menu.css:14` | `transition: all 300ms ease-in` | `transition: transform 200ms var(--ease-out), opacity 200ms var(--ease-out)` | Named properties; ease-in delays the moment the user watches |
+| HIGH | Animation | `popover.css:8` | `transform: scale(0)` | `transform: scale(0.95); opacity: 0`, origin at the trigger | Nothing appears from nothing; anchored surfaces grow from their trigger |
 
-For an audit, order rows by leverage (impact divided by effort) and add severity
-and category columns. Then list two to four missed opportunities separately, since
-they are additive rather than corrective.
+For an audit, order rows by leverage (impact divided by effort) and add a category
+column. Then list two to four missed opportunities separately, since they are
+additive rather than corrective.
 
-Group remaining commentary by impact, highest first, omitting empty tiers:
-feel-breaking regressions; missed simplifications; performance; interruptibility and
-timing; origin, physicality, and cohesion; accessibility and input.
-
-Close a review with a decision:
+The shared verdict applies, with these motion triggers:
 
 - **Block** on any feel-breaking regression, motion on a keyboard or high-frequency
   action, `scale(0)` or ease-in on UI, movement that ignores reduced motion, or an
   expensive animation with an easy cheap fix.
 - **Approve** when none of those remain, nothing obviously should be deleted, timing
-  is within budget, interruption is handled where needed, and reduced motion is respected.
+  is within budget, interruption is handled where needed, and reduced motion is
+  respected.
 
 State what was inspected and what remains unverified. When feel cannot be judged from
 code, say so and name the check: slowed playback, frame stepping, a real device.

@@ -18,7 +18,8 @@ cancelled press (dragged away, interrupted) returns without activating. Scaling 
 visual must not shrink the hit area. Not every control needs
 it; give the component an opt-out where motion distracts, and never scale a
 disabled control. Under reduced motion, keep scale unchanged and use color, surface,
-or label feedback. Hover styling is optional and only for hover-capable input.
+or label feedback. Hover styling is optional and gated as
+[better-pwa](../better-pwa.md#gate-hover-by-capability-never-by-device) describes.
 
 ## Popover, menu, tooltip, dialog
 
@@ -34,12 +35,14 @@ the exception and stay centered. Animate a dialog's backdrop (a native `::backdr
 or an overlay element) with its surface, same curve and duration, so the two read as
 one; dim it to direct focus, and exit both together and faster than they entered.
 Native `<dialog>` and popovers leave `display: none`, so they need starting styles
-and discrete transitions: [recipes.md](recipes.md#entering-from-display-none-native-dialog-and-popover). A plain fade is valid when movement adds
+and discrete transitions:
+[recipes.md](recipes.md#entering-from-display-none-native-dialog-and-popover). A
+plain fade is valid when movement adds
 nothing. Under reduced motion, drop the scale and keep an optional short fade.
 
-For pointer tooltips, a first-hover delay prevents accidental activation. Once one
-is open, neighbours open with no delay and no animation, which makes a toolbar feel
-fast. Tooltips must also open on focus and never be the only route to information.
+Tooltip delays and when they open are
+[interaction](../better-interaction/feedback-and-latency.md#transient-feedback)'s; once
+one is open, neighbours open with no animation, which makes a toolbar feel fast.
 
 ## Drawers and sheets
 
@@ -56,9 +59,10 @@ Enter and exit from the same edge. Toast motion may be slightly slower and softe
 than generic UI when it matches the component's personality; cohesion with the
 design matters more than the generic budget. In a stack, the opacity change has to
 work with the height change; there is no formula, so tune it and look again the next
-day. Handle the invisible edge cases: pause timers while the page is hidden or the
-stack is hovered, keep hover alive across gaps between stacked items, and keep
-dismissed items out of focus order. Announce content through a live region, not
+day. Handle the invisible edge cases: keep hover alive across gaps between stacked
+items, keep dismissed items out of focus order, and leave timer rules to
+[interaction](../better-interaction/feedback-and-latency.md#transient-feedback).
+Announce content through a live region, not
 through the animation.
 
 ## Accordions and container size

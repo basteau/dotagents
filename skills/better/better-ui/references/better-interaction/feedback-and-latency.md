@@ -2,7 +2,8 @@
 
 Response budgets, loading states, optimistic updates, undo, races, and transient
 feedback. Values are starting points; use the project's data layer and components.
-Motion values for press and pending states live in [better-animation](../better-animation.md).
+Motion values for press and pending states live in
+[better-animation](../better-animation.md).
 
 ## Response budgets
 
@@ -115,7 +116,7 @@ async function create(formData: FormData) {
 Remove or change the item in view at once and show undo beside the result. Prefer a
 server-side soft delete with a restore call; a client-side delayed commit is lost if
 the tab closes before it fires. Keep the undo control reachable by keyboard and long
-enough to read; pausing its timer on hover and focus follows the toast rules below.
+enough to read; its timer follows the toast rules below.
 
 For a destructive action that is frequent and deliberate, a hold-to-confirm control
 works: the press fills slowly and linearly (around 1-2s), release snaps back fast.
@@ -159,14 +160,15 @@ a failed submission and put the retry beside the error.
 
 ## Transient feedback
 
-- Toasts: one region, newest in a consistent place. Pause the dismiss timer on hover,
-  on focus within, and while the page is hidden (`document.hidden` on the web). Lengthen the timer for longer
-  text. Toasts with an action or an error persist until dismissed. Collapse repeats
-  of the same message instead of stacking them.
+- Toasts: one region, newest in a consistent place. The minimum duration, pausing
+  and which toasts never time out are the access floor in
+  [motion-and-zoom.md](../better-accessibility/motion-and-zoom.md#autoplay-and-timed-ui);
+  above it, lengthen the timer for longer text and collapse repeats of the same
+  message instead of stacking them.
 - Tooltips: a short open delay (around 300-500ms) prevents accidental triggers. Once
   one is open, neighbors open instantly with no transition until the pointer leaves
-  the group. Tooltips never hold the only copy of essential information, and touch
-  has no hover, so the same content needs another path.
+  the group. Tooltips also open on keyboard focus and never hold the only copy of
+  essential information; touch has no hover, so the same content needs another path.
 - Inline status: prefer a quiet "Saved" beside the edited field to a toast for
   routine saves; reserve toasts for results away from the trigger.
 
