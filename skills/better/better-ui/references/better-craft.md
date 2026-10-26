@@ -20,13 +20,6 @@ users or the direction; "it looks cool" and "it was the default" are not reasons
 When borrowing from a reference, name the decision behind the detail and apply
 that, never the look alone.
 
-## Do the work nobody notices
-
-Fix the details people only see when they are wrong: concentric radii, shared
-edges, digits that keep their width, context preserved across changes, long and
-missing values handled. Check each in the render; none is worth a sentence in the
-report, and together they decide whether the surface feels right.
-
 ## Set the direction before composing
 
 Inspect the existing screen, nearby components, real content and supplied references.
@@ -114,6 +107,13 @@ invisibly: long and missing values, timers that pause in a hidden tab, hover tha
 survives the gaps between items. A beautiful default screen is one state of the
 experience.
 
+## Do the work nobody notices
+
+Fix the details people only see when they are wrong: concentric radii, shared
+edges, digits that keep their width, context preserved across changes, long and
+missing values handled. Check each in the render; none is worth a sentence in the
+report, and together they decide whether the surface feels right.
+
 ## Ship excellent defaults over options
 
 Most people never customize, so the default must be the good version. Prefer one
@@ -125,9 +125,8 @@ when users with different needs would each be wrong with the other's default.
 Screenshot the result with real content at the widths
 [critique](better-ui-review/critique.md#judge-the-pictures-not-the-code) names and
 judge the pictures, not the code. For an existing screen, compare before and after in
-the same state and
-viewport; against a supplied reference, compare hierarchy, density, proportion and
-character, not only values. Fix the top three problems at their cause, in the order
+the same state and viewport; against a supplied reference, compare hierarchy,
+density, proportion and character, not only values. Fix the top three problems at their cause, in the order
 idea, hierarchy, composition, type, imagery, color, detail, motion, then look again;
 three rounds at most. The passes are in [critique](better-ui-review/critique.md).
 

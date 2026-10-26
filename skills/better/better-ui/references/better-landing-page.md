@@ -36,8 +36,7 @@ and their usual shape are in [narratives.md](better-landing-page/narratives.md).
 
 ## Take the idea from the subject
 
-Apply [craft's identity
-rule](better-craft.md#take-identity-from-the-subject-not-the-category)
+Apply [craft's identity rule](better-craft.md#take-identity-from-the-subject-not-the-category)
 to the whole page: list eight to twelve things that belong to this client and no
 competitor, then write one sentence: "On this page, [something from that list]
 becomes [the device]." Run craft's competitor test on that sentence. Where to look
@@ -51,8 +50,7 @@ I start. Delete any section that carries no claim; the argument, not the stock r
 of hero, logos, three features, testimonial and pricing, sets the order. State the
 outline, hero copy and narrative choice before code, then build the hero, using
 [variants](better-craft/variants.md) while its direction is open, and work
-downward; see
-[narratives.md](better-landing-page/narratives.md#outline-before-building).
+downward; see [narratives.md](better-landing-page/narratives.md#outline-before-building).
 
 ## Make the first screen say what, whose and what next
 
@@ -119,8 +117,8 @@ Connect every action to its real destination, form or integration, and name any
 that are missing; a prototype must not imply a submission was sent. Add title,
 description, sharing image and favicon, keep the site's indexing intent, and leave
 no dead links or dead ends. Render and critique the whole page as in
-[craft](better-craft.md#render-compare-refine), and exercise the
-conversion path through success and failure, using the checklist in
+[craft](better-craft.md#render-compare-refine), and exercise the conversion path
+through success and failure, using the checklist in
 [shipping.md](better-landing-page/shipping.md#before-you-finish).
 
 ## Finish and report

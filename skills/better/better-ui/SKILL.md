@@ -1,6 +1,6 @@
 ---
 name: better-ui
-description: "Create beautifully crafted interfaces with focused guidance for composition, interaction, motion, sound, and refinement."
+description: "Create, refine and review beautifully crafted web interfaces: pages, landing pages, app screens, components, motion, sound, accessibility and a project's DESIGN.md. Use when building, redesigning, polishing or critiquing UI, or when a page looks generic."
 disable-model-invocation: false
 ---
 

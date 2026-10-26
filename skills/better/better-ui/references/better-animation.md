@@ -109,9 +109,8 @@ only small, infrequent groups.
 ## Ship reduced motion and input gating with it
 
 Honor system and application reduced-motion preferences on every animation path,
-script-driven ones included; what to drop and what to keep is
-[better-accessibility](better-accessibility/motion-and-zoom.md#what-to-disable-vs-reduce)'s,
-and
+script-driven ones included. What to drop and what to keep is decided in
+[better-accessibility](better-accessibility/motion-and-zoom.md#what-to-disable-vs-reduce);
 each pattern's reduced version is in its detail file. Final states, focus, and
 feedback must stay correct when motion is off, and completion logic must not wait on
 a callback a disabled animation never emits. Gate hover motion as
