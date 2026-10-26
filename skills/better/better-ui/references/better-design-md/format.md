@@ -1,7 +1,8 @@
 # DESIGN.md format notes
 
 Schema limits, extension tokens and tooling for the
-[DESIGN.md format](https://github.com/google-labs-code/design.md/blob/main/docs/spec.md).
+[DESIGN.md
+format](https://github.com/google-labs-code/design.md/blob/main/docs/spec.md).
 The format is versioned `alpha` and still changing; the keys, warnings and
 commands below describe it as last checked, so confirm them against the current
 spec before relying on one.

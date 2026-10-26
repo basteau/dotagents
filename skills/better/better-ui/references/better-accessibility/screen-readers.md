@@ -4,7 +4,8 @@ Visually hidden content, live regions, toasts, alt text and SVG.
 
 ## Visually hidden content
 
-The canonical `.sr-only` pattern hides content visually while keeping it in the accessibility tree:
+The canonical `.sr-only` pattern hides content visually while keeping it in the
+accessibility tree:
 
 ```css
 .sr-only {
@@ -21,20 +22,30 @@ The canonical `.sr-only` pattern hides content visually while keeping it in the 
 }
 ```
 
-Use `1px` boxes, not `0`, because some screen readers skip zero-sized elements. `white-space: nowrap` stops words being read as one run-together string. Never `display: none` or `visibility: hidden`, which remove the content from assistive tech entirely.
+Use `1px` boxes, not `0`, because some screen readers skip zero-sized elements.
+`white-space: nowrap` stops words being read as one run-together string. Never
+`display: none` or `visibility: hidden`, which remove the content from assistive tech
+entirely.
 
-Utility frameworks usually ship this class under the same name. The skip-link recipe is in [focus-and-keyboard.md](focus-and-keyboard.md).
+Utility frameworks usually ship this class under the same name. The skip-link recipe
+is in [focus-and-keyboard.md](focus-and-keyboard.md).
 
-Use it for context sighted users get visually: `<span class="sr-only">Opens in new tab</span>`, table captions or an icon-only control's label where `aria-label` isn't an option.
+Use it for context sighted users get visually: `<span class="sr-only">Opens in new
+tab</span>`, table captions or an icon-only control's label where `aria-label` isn't
+an option.
 
 ## Choosing how to announce a change
 
 Work down this list and stop at the first match:
 
-1. **Focus moves there anyway**, as with an opened modal or the first invalid field. Nothing extra needed; the focus move is the announcement.
-2. **Tied to a specific control**, such as a field error or character count: `aria-describedby` on the control, announced with the field.
-3. **Non-urgent, not tied to a control**, such as a toast, "Saved", a result count or a loading state: a polite live region, `role="status"`.
-4. **Urgent and not tied to a control**, such as a form-level failure or session expiry: `role="alert"`.
+1. **Focus moves there anyway**, as with an opened modal or the first invalid field.
+   Nothing extra needed; the focus move is the announcement.
+2. **Tied to a specific control**, such as a field error or character count:
+   `aria-describedby` on the control, announced with the field.
+3. **Non-urgent, not tied to a control**, such as a toast, "Saved", a result count or
+   a loading state: a polite live region, `role="status"`.
+4. **Urgent and not tied to a control**, such as a form-level failure or session
+   expiry: `role="alert"`.
 
 ## Live regions
 
@@ -45,10 +56,14 @@ Work down this list and stop at the first match:
 
 Rules for reliable announcements:
 
-- For repeated polite updates, keep a stable empty region in the DOM before changing its text. Inserting a new polite region with its content is announced inconsistently.
-- Dynamically inserted `role="alert"` content is usually announced, but behavior varies. Test the target browser and screen-reader combinations.
+- For repeated polite updates, keep a stable empty region in the DOM before changing
+  its text. Inserting a new polite region with its content is announced
+  inconsistently.
+- Dynamically inserted `role="alert"` content is usually announced, but behavior
+  varies. Test the target browser and screen-reader combinations.
 - Default to polite. `assertive` interrupts whatever the user was reading.
-- Keep messages short and self-contained. `aria-atomic="true"` re-reads the whole region on change.
+- Keep messages short and self-contained. `aria-atomic="true"` re-reads the whole
+  region on change.
 - Never move focus to a toast. Announce it and leave focus where the user is working.
 
 ```html
@@ -56,11 +71,16 @@ Rules for reliable announcements:
 <div role="status" class="sr-only"></div>
 ```
 
-For loading states: set `aria-busy="true"` on the updating region, announce "Loading…" politely, then announce the outcome ("Loaded, 12 results").
+For loading states: set `aria-busy="true"` on the updating region, announce
+"Loading…" politely, then announce the outcome ("Loaded, 12 results").
 
 ## aria-hidden
 
-`aria-hidden="true"` removes an element and its whole subtree from assistive tech. Use it for decorative icons and content duplicated for visual effect. Never put it on or above a focusable element, which creates stops you can Tab to that do not exist for a screen reader. Hiding something interactive means removing it from the tab order too.
+`aria-hidden="true"` removes an element and its whole subtree from assistive tech.
+Use it for decorative icons and content duplicated for visual effect. Never put it on
+or above a focusable element, which creates stops you can Tab to that do not exist
+for a screen reader. Hiding something interactive means removing it from the tab
+order too.
 
 ## Alt text
 
@@ -74,12 +94,14 @@ Choose by purpose, not by what the image looks like:
 | Image of text | The exact text (better: use real text) | `alt="50% off everything"` |
 | Complex (chart, diagram) | Short summary in `alt`, full data as a table or text nearby | `alt="Revenue by quarter, described below"` |
 
-A missing `alt` is worse than an empty one, because screen readers fall back to reading the file name.
+A missing `alt` is worse than an empty one, because screen readers fall back to
+reading the file name.
 
 ## SVG
 
 - Decorative SVG: `aria-hidden="true"`. No title needed.
-- Meaningful inline SVG: `role="img"` plus `aria-label="…"`, or a `<title>` as the first child referenced by `aria-labelledby`.
+- Meaningful inline SVG: `role="img"` plus `aria-label="…"`, or a `<title>` as the
+  first child referenced by `aria-labelledby`.
 - Simple cases: `<img src="icon.svg" alt="…">` is the most reliable delivery.
 
 ```html
@@ -94,4 +116,7 @@ A missing `alt` is worse than an empty one, because screen readers fall back to 
 
 ## Video and audio
 
-Prerecorded video needs captions (1.2.2), plus audio description where the visuals carry information the soundtrack doesn't (1.2.5). Prerecorded audio needs a transcript (1.2.1). Never autoplay with sound (1.4.2), and always render controls. Interface sound cues are covered in [better-sound](../better-sound.md).
+Prerecorded video needs captions (1.2.2), plus audio description where the visuals
+carry information the soundtrack doesn't (1.2.5). Prerecorded audio needs a
+transcript (1.2.1). Never autoplay with sound (1.4.2), and always render controls.
+Interface sound cues are covered in [better-sound](../better-sound.md).

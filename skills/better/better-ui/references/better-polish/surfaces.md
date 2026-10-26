@@ -28,7 +28,8 @@ Derive the outer radius from tokens so the pair stays concentric when either cha
 The same radius on both layers is the common miss: the inner corners look pinched.
 
 Past about `24px` of padding the curves no longer read as related; choose each radius
-independently. Where the padding is deliberately asymmetric, keep the component's tokens.
+independently. Where the padding is deliberately asymmetric, keep the component's
+tokens.
 
 ## Optical alignment
 
@@ -45,7 +46,8 @@ Start the icon side at `2px` less padding than the text side, then judge by eye.
 
 ### Play triangles
 
-A triangle's geometric center sits behind its visual center, so shift it toward its point:
+A triangle's geometric center sits behind its visual center, so shift it toward its
+point:
 
 ```css
 .play-button svg {
@@ -119,9 +121,11 @@ positive so one light source sits above.
   sources and read as broken.
 - One heavy layer (`0 4px 16px / 0.2`) looks flat and dirty. Spread the same depth over
   layers of falling opacity.
-- On a tinted background, tint the shadow toward that hue (`oklch(0.25 0.03 <hue> / 0.08)`)
+- On a tinted background, tint the shadow toward that hue (`oklch(0.25 0.03 <hue>
+  / 0.08)`)
   rather than raising black alpha, which turns the edge muddy.
-- Dark surfaces barely show shadows. Raise elevated surfaces one lighter neutral step and
+- Dark surfaces barely show shadows. Raise elevated surfaces one lighter neutral step
+  and
   add the light ring above; keep a dark shadow only for separation from the page.
 - To animate elevation, fade a pseudo-element carrying the target shadow
   ([pseudo-elements.md](pseudo-elements.md#elevation-on-hover)).
@@ -162,7 +166,8 @@ opaque token there; see [better-colors](../better-colors.md).
 ```
 
 Never a tinted gray from the palette (slate, zinc), a near-black such as `#111827` or
-the accent: the tint shows as a colored fringe on the photo's edge. Skip transparent artwork
+the accent: the tint shows as a colored fringe on the photo's edge. Skip transparent
+artwork
 and deliberately borderless full-bleed photography. `outline` never changes the image's
 size, and at `-1px` offset it sits inside the edge and follows the corner radius.
 

@@ -1,10 +1,15 @@
 # Color usage
 
-Deploying color once the system exists: meaning, emphasis, gradients and appearance variants. For picking values see [palette-generation.md](palette-generation.md), for naming them [token-naming.md](token-naming.md), for checking pairs [contrast.md](contrast.md).
+Deploying color once the system exists: meaning, emphasis, gradients and appearance
+variants. For picking values see [palette-generation.md](palette-generation.md), for
+naming them [token-naming.md](token-naming.md), for checking pairs
+[contrast.md](contrast.md).
 
 ## One color, one meaning
 
-Users read a near-miss in hue as a slightly different shade, not as a different color. Treat anything within `15°` of OKLCH hue as the same color: `#3b82f6` and `#4f8ef7` below are less than `1°` apart.
+Users read a near-miss in hue as a slightly different shade, not as a different
+color. Treat anything within `15°` of OKLCH hue as the same color: `#3b82f6` and
+`#4f8ef7` below are less than `1°` apart.
 
 ```css
 /* Bad: the accent means both "link" and "decorative heading" */
@@ -16,13 +21,17 @@ a { color: var(--color-accent-text); }
 .section-title { color: var(--color-text-primary); }
 ```
 
-The rule runs both ways. A color must not be *absent* where its meaning occurs. If the accent means interactive, an interactive element rendered neutral is just as misleading.
+The rule runs both ways. A color must not be *absent* where its meaning occurs. If
+the accent means interactive, an interactive element rendered neutral is just as
+misleading.
 
-Color is never the only carrier of meaning. Pair it with an icon, a label, or a shape. [better-accessibility](../better-accessibility.md) owns that requirement.
+Color is never the only carrier of meaning. Pair it with an icon, a label, or a
+shape. [better-accessibility](../better-accessibility.md) owns that requirement.
 
 ## Use tokens in their role
 
-Apply a semantic token only for the role it names. A value that happens to work in two roles stops working in both at the next theme change.
+Apply a semantic token only for the role it names. A value that happens to work in
+two roles stops working in both at the next theme change.
 
 ```css
 /* Bad: separator token repurposed as a text color because it looked right */
@@ -32,11 +41,13 @@ Apply a semantic token only for the role it names. A value that happens to work 
 .tag { background: var(--color-text-secondary); }
 ```
 
-The role inventory in [token-naming.md](token-naming.md) is the list of roles a system needs.
+The role inventory in [token-naming.md](token-naming.md) is the list of roles a
+system needs.
 
 ## One colored action per view
 
-Keep an established component hierarchy that already signals emphasis another way. Do not recolor controls merely to impose this recipe.
+Keep an established component hierarchy that already signals emphasis another way. Do
+not recolor controls merely to impose this recipe.
 
 ```css
 /* Good: one filled primary action, neutral secondaries */
@@ -46,11 +57,14 @@ Keep an established component hierarchy that already signals emphasis another wa
 /* Bad: Save, Duplicate and Export all use .button-primary, so nothing is primary */
 ```
 
-Selected states may use the accent on the glyph and label. An active tab or a checked segment is state, not emphasis.
+Selected states may use the accent on the glyph and label. An active tab or a checked
+segment is state, not emphasis.
 
 ## Gradients
 
-**The interpolation space is a look, not a correctness setting.** Three are worth knowing, and the difference between them is most visible in the middle of the gradient:
+**The interpolation space is a look, not a correctness setting.** Three are worth
+knowing, and the difference between them is most visible in the middle of the
+gradient:
 
 ```css
 /* sRGB: the default and the classic. Midpoint darkens and mutes. */
@@ -63,9 +77,16 @@ background: linear-gradient(in oklab, #3b82f6, #ec4899);
 background: linear-gradient(in oklch, #3b82f6, #ec4899);
 ```
 
-`oklab` and sRGB are **rectangular**, interpolating in a straight line through the color space. `oklch` is **polar**, interpolating the hue angle, so it arcs around the wheel through every hue between the stops. That is why it stays saturated and why it can produce hues nobody asked for. A blue-to-pink gradient routes through purple, which is either the look or a surprise.
+`oklab` and sRGB are **rectangular**, interpolating in a straight line through the
+color space. `oklch` is **polar**, interpolating the hue angle, so it arcs around the
+wheel through every hue between the stops. That is why it stays saturated and why it
+can produce hues nobody asked for. A blue-to-pink gradient routes through purple,
+which is either the look or a surprise.
 
-**The gray dead zone is a rectangular-space problem.** Two hues on opposite sides of the wheel sit either side of the neutral axis. A straight line between them passes near gray, and the middle goes lifeless. Either switch to a polar space, which routes around the axis, or add a third stop between the two and keep the space you have.
+**The gray dead zone is a rectangular-space problem.** Two hues on opposite sides of
+the wheel sit either side of the neutral axis. A straight line between them passes
+near gray, and the middle goes lifeless. Either switch to a polar space, which routes
+around the axis, or add a third stop between the two and keep the space you have.
 
 With a polar space you also control which way it goes around:
 
@@ -77,21 +98,35 @@ background: linear-gradient(in oklch shorter hue, #3b82f6, #ec4899);
 background: linear-gradient(in oklch longer hue, #3b82f6, #ec4899);
 ```
 
-**Give older browsers a plain gradient first.** An unsupported interpolation space drops the whole declaration, so where the browser matrix needs it, declare the sRGB gradient and override it with the `in oklab` one ([color-formats.md](color-formats.md#browser-support-and-fallbacks)).
+**Give older browsers a plain gradient first.** An unsupported interpolation space
+drops the whole declaration, so where the browser matrix needs it, declare the sRGB
+gradient and override it with the `in oklab` one
+([color-formats.md](color-formats.md#browser-support-and-fallbacks)).
 
-**Banding shows up on large areas.** A gradient spanning a hero with little contrast between its stops steps visibly on 8-bit displays. Widen the contrast, shrink the area, or overlay a subtle noise texture.
+**Banding shows up on large areas.** A gradient spanning a hero with little contrast
+between its stops steps visibly on 8-bit displays. Widen the contrast, shrink the
+area, or overlay a subtle noise texture.
 
-**Keep text off gradients where you can.** Contrast varies continuously across one, so a single measurement does not describe it. Where text must sit on a gradient, measure the worst region rather than the average, or put a scrim behind it.
+**Keep text off gradients where you can.** Contrast varies continuously across one,
+so a single measurement does not describe it. Where text must sit on a gradient,
+measure the worst region rather than the average, or put a scrim behind it.
 
 ## Color across cultures
 
-Color meaning is not universal. Where a color carries meaning in finance, status or alerts, verify the meaning holds in every locale you ship to.
+Color meaning is not universal. Where a color carries meaning in finance, status or
+alerts, verify the meaning holds in every locale you ship to.
 
-The classic case is stock tickers. Chinese financial UIs show gains in red and losses in green, the reverse of English ones. Where the product ships to such markets, make gain and loss per-locale tokens rather than hardcoded values. Brand and celebration colors carry the same risk more softly; white, for one, is associated with mourning in parts of East Asia.
+The classic case is stock tickers. Chinese financial UIs show gains in red and losses
+in green, the reverse of English ones. Where the product ships to such markets, make
+gain and loss per-locale tokens rather than hardcoded values. Brand and celebration
+colors carry the same risk more softly; white, for one, is associated with mourning
+in parts of East Asia.
 
 ## Light, dark and increased contrast
 
-When the product ships a dark appearance, every custom color needs a dark variant, derived per [palette-generation.md](palette-generation.md#dark-mode). Users who enable increased contrast expect visibly stronger differentiation in each appearance:
+When the product ships a dark appearance, every custom color needs a dark variant,
+derived per [palette-generation.md](palette-generation.md#dark-mode). Users who
+enable increased contrast expect visibly stronger differentiation in each appearance:
 
 ```css
 :root {
@@ -111,4 +146,8 @@ When the product ships a dark appearance, every custom color needs a dark varian
 }
 ```
 
-A single `prefers-contrast` block shared by both appearances darkens the color on a dark background too, lowering contrast there. The increased-contrast variant widens the gap to its background by at least `0.15` of OKLCH `L` over the default. Remeasure it against APCA's preferred values, Lc 90 for body text and Lc 75 for other text. Widening the gap without remeasuring is not fixing it.
+A single `prefers-contrast` block shared by both appearances darkens the color on a
+dark background too, lowering contrast there. The increased-contrast variant widens
+the gap to its background by at least `0.15` of OKLCH `L` over the default. Remeasure
+it against APCA's preferred values, Lc 90 for body text and Lc 75 for other text.
+Widening the gap without remeasuring is not fixing it.

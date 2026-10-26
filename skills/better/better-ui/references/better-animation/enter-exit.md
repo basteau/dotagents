@@ -85,7 +85,8 @@ transition from. `@starting-style` supplies the starting values, and
 `transition-behavior: allow-discrete` on `display` (and `overlay` for top-layer
 elements) keeps it rendered through the exit. The open state's duration applies on
 enter, the closed state's on exit. Browsers without support show and hide instantly,
-which is an acceptable fallback. Code: [recipes.md](recipes.md#entering-from-display-none-native-dialog-and-popover).
+which is an acceptable fallback. Code:
+[recipes.md](recipes.md#entering-from-display-none-native-dialog-and-popover).
 
 ## Optional: Motion `AnimatePresence`
 

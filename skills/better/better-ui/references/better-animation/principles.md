@@ -61,7 +61,8 @@ belongs on a marketing page, not on a chart in a banking app.
 - Exit the way it entered. Symmetric paths make swipe-to-dismiss feel obvious and
   keep the spatial story intact.
 - Real things slow before they stop: rising resistance past a boundary instead of a
-  hard wall, and released motion that keeps its velocity. See [gestures.md](gestures.md).
+  hard wall, and released motion that keeps its velocity. See
+  [gestures.md](gestures.md).
 
 ## Stage one thing at a time
 

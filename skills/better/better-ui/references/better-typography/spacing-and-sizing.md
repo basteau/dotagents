@@ -1,6 +1,7 @@
 # Spacing and sizing
 
-Units, a starting type scale, fluid display sizes, the heading mapping, tracking, line-height for wrapping text and text trimming.
+Units, a starting type scale, fluid display sizes, the heading mapping, tracking,
+line-height for wrapping text and text trimming.
 
 ## Units
 
@@ -14,7 +15,8 @@ Units, a starting type scale, fluid display sizes, the heading mapping, tracking
 
 ## Type scale
 
-Use the project's scale, or a framework's ready-made one that pairs each size with a line height, or define one.
+Use the project's scale, or a framework's ready-made one that pairs each size with a
+line height, or define one.
 
 A starting point for a product interface, named by role:
 
@@ -40,7 +42,8 @@ Emphasis within a role is one weight step up (`400` → `500`), not a size chang
 
 ## Fluid display sizes
 
-Display and hero text can grow with the viewport. Clamp it, and keep a `rem` term in the preferred value so browser zoom and the reader's font size still scale it:
+Display and hero text can grow with the viewport. Clamp it, and keep a `rem` term in
+the preferred value so browser zoom and the reader's font size still scale it:
 
 ```css
 .display {
@@ -48,7 +51,8 @@ Display and hero text can grow with the viewport. Clamp it, and keep a `rem` ter
 }
 ```
 
-Body, UI and input text stay on fixed scale steps. Check that the clamped maximum stays within the scale's next step, and that text still doubles at 200% zoom.
+Body, UI and input text stay on fixed scale steps. Check that the clamped maximum
+stays within the scale's next step, and that text still doubles at 200% zoom.
 
 ## Heading hierarchy
 
@@ -58,7 +62,8 @@ h2 { font-size: var(--text-title); }
 h3 { font-size: var(--text-heading); }
 ```
 
-In a utility-class codebase, centralize the per-level classes in base styles or a heading component rather than repeating them inline.
+In a utility-class codebase, centralize the per-level classes in base styles or a
+heading component rather than repeating them inline.
 
 ## Tracking by size
 
@@ -107,4 +112,5 @@ Values in `em`, so tracking follows the size it sits on.
 }
 ```
 
-Support is recent and not yet universal; check current support. Unsupported browsers keep the default leading, so the trim is a progressive enhancement.
+Support is recent and not yet universal; check current support. Unsupported browsers
+keep the default leading, so the trim is a progressive enhancement.

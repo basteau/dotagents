@@ -1,6 +1,8 @@
 # Layout mechanics
 
-Recipes for intrinsic grids, the page grid, sibling spacing, overlap, container queries and overflow. Which spacing values to use and where a layout should break are [better-layout](../better-layout.md)'s.
+Recipes for intrinsic grids, the page grid, sibling spacing, overlap, container
+queries and overflow. Which spacing values to use and where a layout should break are
+[better-layout](../better-layout.md)'s.
 
 ## Size intrinsically before adding breakpoints
 
@@ -22,9 +24,13 @@ Recipes for intrinsic grids, the page grid, sibling spacing, overlap, container 
 .with-aside > .main { flex: 999 1 0; min-inline-size: 55%; }
 ```
 
-- `min(100%, 16rem)` keeps a single column from overflowing a container narrower than the minimum.
-- `auto-fit` stretches a short last row across the width; `auto-fill` keeps empty tracks, so cards hold their size in a filtered list.
-- The pair wraps when `.main` would drop below its `min-inline-size`, a share of the container rather than a viewport width. A sticky aside also needs `align-self: start`.
+- `min(100%, 16rem)` keeps a single column from overflowing a container narrower than
+  the minimum.
+- `auto-fit` stretches a short last row across the width; `auto-fill` keeps empty
+  tracks, so cards hold their size in a filtered list.
+- The pair wraps when `.main` would drop below its `min-inline-size`, a share of the
+  container rather than a viewport width. A sticky aside also needs `align-self:
+  start`.
 
 Support: everywhere with grid and flex `gap` (Chrome 84, Firefox 63, Safari 14.1).
 
@@ -55,9 +61,12 @@ Support: everywhere with grid and flex `gap` (Chrome 84, Firefox 63, Safari 14.1
 }
 ```
 
-- Every direct child must be placed, or it lands in the first gutter track. Wrap loose inline content in one element.
-- Change widths by overriding `--content` or `--breakout` on a section, not by writing a new template.
-- Where the authoring system cannot target children, each child sets its own `grid-column`.
+- Every direct child must be placed, or it lands in the first gutter track. Wrap
+  loose inline content in one element.
+- Change widths by overriding `--content` or `--breakout` on a section, not by
+  writing a new template.
+- Where the authoring system cannot target children, each child sets its own
+  `grid-column`.
 
 ## Let the parent own space between children
 
@@ -78,9 +87,14 @@ Support: everywhere with grid and flex `gap` (Chrome 84, Firefox 63, Safari 14.1
 ```
 
 - Keep the `>`; without it the rule reaches nested elements too, down to list items.
-- The flow form counts hidden children and leaves a gap above a hidden first child; `gap` ignores them.
-- Adjust the space where two specific sections meet with a sibling rule, `.hero + .logos` or `.logos:has(+ .cta)`, instead of spacer elements or per-page modifier classes. Add a pair rule only where the default spacing visibly fails.
-- To push one item to the far end of a flex row or column, give it `margin-inline-start: auto` or `margin-block-start: auto` instead of a spacer or `space-between` across several children.
+- The flow form counts hidden children and leaves a gap above a hidden first child;
+  `gap` ignores them.
+- Adjust the space where two specific sections meet with a sibling rule, `.hero +
+  .logos` or `.logos:has(+ .cta)`, instead of spacer elements or per-page modifier
+  classes. Add a pair rule only where the default spacing visibly fails.
+- To push one item to the far end of a flex row or column, give it
+  `margin-inline-start: auto` or `margin-block-start: auto` instead of a spacer or
+  `space-between` across several children.
 
 ## Overlap and align with grid
 
@@ -103,9 +117,11 @@ Support: everywhere with grid and flex `gap` (Chrome 84, Firefox 63, Safari 14.1
 }
 ```
 
-- In a grid stack, later layers paint on top; use `z-index` only to change that order. The container sizes to its largest layer.
+- In a grid stack, later layers paint on top; use `z-index` only to change that
+  order. The container sizes to its largest layer.
 - `place-self` positions a layer in the cell; without it the layer stretches.
-- A subgrid card needs `grid-row: span N` matching its part count, and its own `row-gap`, or it inherits the parent's gap.
+- A subgrid card needs `grid-row: span N` matching its part count, and its own
+  `row-gap`, or it inherits the parent's gap.
 
 Support: `subgrid` in Chrome 117, Firefox 71, Safari 16.
 
@@ -124,11 +140,19 @@ Support: `subgrid` in Chrome 117, Firefox 71, Safari 16.
 }
 ```
 
-- An element cannot query itself; the container is an ancestor. Making stable regions such as `header`, `main`, `aside` and `footer` containers covers most components.
-- Size containment stops the container taking its width from its content. A shrink-to-fit container collapses; [better-layout](../better-layout.md) lists the cases.
+- An element cannot query itself; the container is an ancestor. Making stable regions
+  such as `header`, `main`, `aside` and `footer` containers covers most components.
+- Size containment stops the container taking its width from its content. A
+  shrink-to-fit container collapses; [better-layout](../better-layout.md) lists the
+  cases.
 - A container cannot also be a subgrid of its parent; use separate elements.
-- With no container above it, `cqi` falls back to the small viewport size, so one `cqi` token works on the page and in every slot. Do not register such a token with `@property`: a registered length computes once where it is declared, usually `:root`.
-- Name containers when components nest, so a query reaches the intended ancestor. Style queries, `@container style(--variant: compact)`, are not in every engine; check targets before relying on them.
+- With no container above it, `cqi` falls back to the small viewport size, so one
+  `cqi` token works on the page and in every slot. Do not register such a token with
+  `@property`: a registered length computes once where it is declared, usually
+  `:root`.
+- Name containers when components nest, so a query reaches the intended ancestor.
+  Style queries, `@container style(--variant: compact)`, are not in every engine;
+  check targets before relying on them.
 
 Support: size queries and units in Chrome 105, Firefox 110, Safari 16.
 
@@ -144,8 +168,13 @@ Support: size queries and units in Chrome 105, Firefox 110, Safari 16.
 .banner { overflow-x: clip; } /* cuts overflow without creating a scroll container */
 ```
 
-- `overflow: clip` does not create a scroll container, so `position: sticky` inside it keeps working and nothing can scroll it by script or focus. Use `hidden` or `auto` when a script scrolls the element or it has `resize`.
-- Clip the overflowing element itself; clipping `html` or `body` hides the symptom page-wide.
-- `safe` works on every `align-*`, `justify-*` and `place-*` property. Auto margins on the item give the same safe centering in older engines.
+- `overflow: clip` does not create a scroll container, so `position: sticky` inside
+  it keeps working and nothing can scroll it by script or focus. Use `hidden` or
+  `auto` when a script scrolls the element or it has `resize`.
+- Clip the overflowing element itself; clipping `html` or `body` hides the symptom
+  page-wide.
+- `safe` works on every `align-*`, `justify-*` and `place-*` property. Auto margins
+  on the item give the same safe centering in older engines.
 
-Support: `overflow: clip` in Chrome 90, Firefox 81, Safari 16. `safe` in Chrome 115, Firefox 63, Safari 17.6.
+Support: `overflow: clip` in Chrome 90, Firefox 81, Safari 16. `safe` in Chrome 115,
+Firefox 63, Safari 17.6.

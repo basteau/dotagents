@@ -4,7 +4,10 @@ Line length, wrapping, justification, typographic characters and mixed-direction
 
 ## Measure (line length)
 
-Any unit works. `65ch` measures characters directly, one `ch` being the width of the `0` in the current font, and a pixel or rem cap is just as good. At a `16px` body size the 60–75 character range lands roughly between `560px` and `680px` depending on the font. Recheck the cap if the body font size changes.
+Any unit works. `65ch` measures characters directly, one `ch` being the width of the
+`0` in the current font, and a pixel or rem cap is just as good. At a `16px` body
+size the 60–75 character range lands roughly between `560px` and `680px` depending on
+the font. Recheck the cap if the body font size changes.
 
 ## Wrapping
 
@@ -15,11 +18,15 @@ Any unit works. `65ch` measures characters directly, one `ch` being the width of
 | `overflow-wrap: break-word` | Containers that can hold long words, URLs or IDs | — |
 | `white-space: nowrap` | Labels, badges, values like `10 km` | Anything that can outgrow its container |
 
-A balanced heading keeps its box at full width. Where a hugging box matters, such as a centered pill, set `width: fit-content` too.
+A balanced heading keeps its box at full width. Where a hugging box matters, such as
+a centered pill, set `width: fit-content` too.
 
 ## Justification
 
-Interface text stays at `text-align: start`. Justified text belongs only in editorial layouts, and only with `hyphens: auto` and a correct `lang`, otherwise stretched spaces open rivers down the column. Narrow columns cannot be justified well even with hyphenation.
+Interface text stays at `text-align: start`. Justified text belongs only in editorial
+layouts, and only with `hyphens: auto` and a correct `lang`, otherwise stretched
+spaces open rivers down the column. Narrow columns cannot be justified well even with
+hyphenation.
 
 ```css
 .article-body {
@@ -42,6 +49,13 @@ Interface text stays at `text-align: start`. Justified text belongs only in edit
 
 ## Internationalization
 
-- **Long paragraphs align by their own language.** A one- or two-line snippet follows the surrounding UI's direction. A paragraph of three or more lines aligns to its own script instead, so an English paragraph stays start-aligned LTR even inside an RTL interface. `text-align: start` with the correct `lang` and `dir` on the paragraph element handles this.
-- **Digits keep their order.** A phone number or "541" reads identically in RTL, because the Unicode bidi algorithm keeps digit runs left to right. `<bdi>` repairs a value whose order adjacent RTL text disturbs.
-- **Quotes follow the language.** `<q>` renders the quotation marks the element's `lang` expects, such as `«…»` in French.
+- **Long paragraphs align by their own language.** A one- or two-line snippet follows
+  the surrounding UI's direction. A paragraph of three or more lines aligns to its
+  own script instead, so an English paragraph stays start-aligned LTR even inside an
+  RTL interface. `text-align: start` with the correct `lang` and `dir` on the
+  paragraph element handles this.
+- **Digits keep their order.** A phone number or "541" reads identically in RTL,
+  because the Unicode bidi algorithm keeps digit runs left to right. `<bdi>` repairs
+  a value whose order adjacent RTL text disturbs.
+- **Quotes follow the language.** `<q>` renders the quotation marks the element's
+  `lang` expects, such as `«…»` in French.

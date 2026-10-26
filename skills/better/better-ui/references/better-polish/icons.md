@@ -6,7 +6,8 @@ swaps and morphing belong to [better-animation](../better-animation.md), with re
 
 ## Match icon stroke to text weight
 
-A hairline icon beside semibold text reads as broken; a heavy icon beside regular text shouts.
+A hairline icon beside semibold text reads as broken; a heavy icon beside regular
+text shouts.
 
 | Adjacent text | Rendered stroke width |
 | --- | --- |
@@ -16,7 +17,8 @@ A hairline icon beside semibold text reads as broken; a heavy icon beside regula
 
 The widths are rendered pixels. A 24px-grid icon drawn at 16px scales its stroke by
 16/24, so `stroke-width="2"` paints about `1.33px`. Use the library's absolute-stroke
-option, such as Lucide's `absoluteStrokeWidth`, or set `vector-effect: non-scaling-stroke`
+option, such as Lucide's `absoluteStrokeWidth`, or set `vector-effect:
+non-scaling-stroke`
 on the SVG's shapes.
 
 ```css
@@ -53,11 +55,13 @@ with `currentColor` and let CSS state drive the color. Strip hardcoded fills suc
 ```
 
 Muted icons still carry meaning: an icon that is the only indicator of a control's
-purpose needs `3:1` non-text contrast, measured per [better-colors](../better-colors.md).
+purpose needs `3:1` non-text contrast, measured per
+[better-colors](../better-colors.md).
 
 ## Outline default, fill active
 
-Where a set offers outline and filled variants, use them as a state pair, never interchangeably.
+Where a set offers outline and filled variants, use them as a state pair, never
+interchangeably.
 
 | Variant | Use for |
 | --- | --- |
@@ -72,15 +76,18 @@ such as the active tab, swaps instantly. Values are in
 
 ## Design at render size
 
-- Test every icon at the smallest size it renders, often `16px`. It must stay recognizable there.
+- Test every icon at the smallest size it renders, often `16px`. It must stay
+  recognizable there.
 - Prefer a simplified glyph for small contexts over scaling down detailed artwork.
 - Where the set ships per-size grids such as `16`, `20` and `24`, use the grid that
-  matches the render size. A 24px drawing scaled to 16px lands off the pixel grid and renders soft.
+  matches the render size. A 24px drawing scaled to 16px lands off the pixel grid and
+  renders soft.
 - Always SVG, never raster.
 
 ## Icons in RTL
 
-Under `dir="rtl"`, flip icons whose meaning follows reading direction and leave the rest alone.
+Under `dir="rtl"`, flip icons whose meaning follows reading direction and leave the
+rest alone.
 
 | Flip | Don't flip |
 | --- | --- |
@@ -99,6 +106,7 @@ compound back to unflipped.
 ```
 
 Analyze composite icons part by part. A badge or slash overlay may keep its position
-while the base glyph flips. Spatial RTL layout belongs to [better-layout](../better-layout.md);
+while the base glyph flips. Spatial RTL layout belongs to
+[better-layout](../better-layout.md);
 accessible names for icon-only buttons belong to
 [better-accessibility](../better-accessibility.md).

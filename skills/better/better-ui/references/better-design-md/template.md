@@ -1,6 +1,7 @@
 # DESIGN.md template
 
-A skeleton that follows the [DESIGN.md format](https://github.com/google-labs-code/design.md/blob/main/docs/spec.md)
+A skeleton that follows the [DESIGN.md
+format](https://github.com/google-labs-code/design.md/blob/main/docs/spec.md)
 (`alpha`). Copy the block below into the project root as `DESIGN.md`. Replace
 every `<…>` with a value taken from the code, and give it a source comment.
 Delete sections, tokens and components the project does not have, and list

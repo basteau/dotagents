@@ -1,6 +1,7 @@
 # Copy patterns
 
-Templates for destructive flows and status copy, and recipes for plurals and locale formatting. Adapt the wording to the product's inventory of terms.
+Templates for destructive flows and status copy, and recipes for plurals and locale
+formatting. Adapt the wording to the product's inventory of terms.
 
 ## Destructive flows
 
@@ -12,7 +13,10 @@ Templates for destructive flows and status copy, and recipes for plurals and loc
 | Affects other people | Body names who: "The 8 members of Design lose access." |
 | Account, workspace or repository | Field label: "Type 'acme-web' to confirm". The button stays disabled until it matches |
 
-How long an undo toast stays and when its timer pauses is [better-interaction](../better-interaction/feedback-and-latency.md#transient-feedback)'s; the timing requirement behind it is [better-accessibility](../better-accessibility.md)'s.
+How long an undo toast stays and when its timer pauses is
+[better-interaction](../better-interaction/feedback-and-latency.md#transient-feedback)'s;
+the timing requirement behind it is
+[better-accessibility](../better-accessibility.md)'s.
 
 ## Status copy
 
@@ -24,11 +28,13 @@ How long an undo toast stays and when its timer pauses is [better-interaction](.
 | Unavailable | Why, and what unlocks it, beside the control | "Add a payment method to publish" |
 | Partial | Counts for both outcomes | "9 of 12 files uploaded. Retry 3 failed files" |
 
-Keep in-progress and done strings parallel, so "Saving changes…" resolves to "Changes saved".
+Keep in-progress and done strings parallel, so "Saving changes…" resolves to "Changes
+saved".
 
 ## Plurals and placeholders
 
-Write one message per sentence with its variables inside it, so the translator can move them. ICU MessageFormat, which most i18n libraries read, is the usual syntax:
+Write one message per sentence with its variables inside it, so the translator can
+move them. ICU MessageFormat, which most i18n libraries read, is the usual syntax:
 
 ```text
 inbox.count = {count, plural,
@@ -39,11 +45,14 @@ inbox.count = {count, plural,
 invite.sent = {name} invited you to {project}
 ```
 
-`=0` matches zero exactly. `one` and `other` are plural categories; translators add `few` or `many` where the language needs them. Without a library, pick the category with `new Intl.PluralRules(locale).select(count)`.
+`=0` matches zero exactly. `one` and `other` are plural categories; translators add
+`few` or `many` where the language needs them. Without a library, pick the category
+with `new Intl.PluralRules(locale).select(count)`.
 
 ## Locale formatting
 
-Never hand-build a number, date or list; pass the user's locale to the platform's formatter. On the web that is `Intl`:
+Never hand-build a number, date or list; pass the user's locale to the platform's
+formatter. On the web that is `Intl`:
 
 | Value | Call | `en-US` output |
 | --- | --- | --- |
@@ -53,4 +62,5 @@ Never hand-build a number, date or list; pass the user's locale to the platform'
 | Relative time | `new Intl.RelativeTimeFormat(locale, { numeric: "auto" }).format(-1, "day")` | `yesterday` |
 | List | `new Intl.ListFormat(locale, { type: "conjunction" })` | `Ana, Ben, and Cy` |
 
-`Intl.ListFormat` follows each locale's comma and conjunction rules, so never join names with `", "` and `" and "` by hand.
+`Intl.ListFormat` follows each locale's comma and conjunction rules, so never join
+names with `", "` and `" and "` by hand.

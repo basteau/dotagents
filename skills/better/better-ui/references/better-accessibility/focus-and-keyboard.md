@@ -1,12 +1,19 @@
 # Focus and keyboard
 
-Focus rings, focus not obscured, skip links, tabindex, focus trapping, the APG keyboard patterns and route changes.
+Focus rings, focus not obscured, skip links, tabindex, focus trapping, the APG
+keyboard patterns and route changes.
 
 ## Focus rings
 
-The browser shows `:focus-visible` for keyboard and assistive-tech focus. It suppresses it for mouse clicks on buttons and links but still shows it in text inputs. An `outline: none` (or a utility that sets it) with no visible replacement leaves sighted keyboard users with no way to see where they are.
+The browser shows `:focus-visible` for keyboard and assistive-tech focus. It
+suppresses it for mouse clicks on buttons and links but still shows it in text
+inputs. An `outline: none` (or a utility that sets it) with no visible replacement
+leaves sighted keyboard users with no way to see where they are.
 
-The browser's unmodified indicator adapts to platform and forced-color settings without the author predicting every background. Adding only `outline-offset` preserves it. A custom `outline: 2px solid` with no color renders `currentColor`, which may fail against the colors the outline crosses. The preference order:
+The browser's unmodified indicator adapts to platform and forced-color settings
+without the author predicting every background. Adding only `outline-offset`
+preserves it. A custom `outline: 2px solid` with no color renders `currentColor`,
+which may fail against the colors the outline crosses. The preference order:
 
 ```css
 /* Best: keep the browser ring, just give it breathing room */
@@ -21,13 +28,20 @@ The browser's unmodified indicator adapts to platform and forced-color settings 
 }
 ```
 
-Check the whole perimeter of a custom indicator against every adjacent color it crosses. That means component fills, page surfaces, images, gradients and hover and selected states. A token, brand color or `currentColor` passes only when that rendered check does.
+Check the whole perimeter of a custom indicator against every adjacent color it
+crosses. That means component fills, page surfaces, images, gradients and hover and
+selected states. A token, brand color or `currentColor` passes only when that
+rendered check does.
 
 ### Forced colors
 
-In `forced-colors: active` (Windows High Contrast), keep the default color adjustment or name a system color such as `Highlight`. `forced-color-adjust: none` freezes the authored color, so use it only where you have checked the control stays perceivable.
+In `forced-colors: active` (Windows High Contrast), keep the default color adjustment
+or name a system color such as `Highlight`. `forced-color-adjust: none` freezes the
+authored color, so use it only where you have checked the control stays perceivable.
 
-Forced colors also drop `box-shadow`, so a ring built only from a shadow, including utility `ring` classes, disappears. Keep the shadow if the design wants it and add a transparent outline, which the system repaints in a visible color:
+Forced colors also drop `box-shadow`, so a ring built only from a shadow, including
+utility `ring` classes, disappears. Keep the shadow if the design wants it and add a
+transparent outline, which the system repaints in a visible color:
 
 ```css
 :focus-visible {
@@ -36,11 +50,16 @@ Forced colors also drop `box-shadow`, so a ring built only from a shadow, includ
 }
 ```
 
-Group focus styles with `:focus-within` when a wrapper should light up while an inner input has focus, such as a search box with an icon inside the border.
+Group focus styles with `:focus-within` when a wrapper should light up while an inner
+input has focus, such as a search box with an icon inside the border.
 
 ## Focus not obscured
 
-Sticky chrome hides whatever scrolls under it, including the element that just received focus (2.4.11). Pad the scroll container by the sticky element's height with `scroll-padding-block-start`, and by a sticky footer or cookie banner's height with `scroll-padding-block-end`. The layout recipe is in [better-layout](../better-layout.md).
+Sticky chrome hides whatever scrolls under it, including the element that just
+received focus (2.4.11). Pad the scroll container by the sticky element's height with
+`scroll-padding-block-start`, and by a sticky footer or cookie banner's height with
+`scroll-padding-block-end`. The layout recipe is in
+[better-layout](../better-layout.md).
 
 ## Skip link
 
@@ -65,17 +84,23 @@ Target `<main id="main">` and visually hide the link until focused:
 </body>
 ```
 
-Give in-page anchor targets `scroll-margin-block-start`, such as `80px` under a sticky header, so the target isn't hidden when jumped to.
+Give in-page anchor targets `scroll-margin-block-start`, such as `80px` under a
+sticky header, so the target isn't hidden when jumped to.
 
 ## tabindex rules
 
-- `tabindex="0"`: adds an element to the natural tab order. Only for custom interactive elements that aren't natively focusable.
-- `tabindex="-1"`: focusable via JavaScript only (`el.focus()`). Use for headings you move focus to, modal containers and roving-tabindex members.
-- Positive `tabindex`: never. It hijacks the tab order for the whole page. Fix the DOM order instead.
+- `tabindex="0"`: adds an element to the natural tab order. Only for custom
+  interactive elements that aren't natively focusable.
+- `tabindex="-1"`: focusable via JavaScript only (`el.focus()`). Use for headings you
+  move focus to, modal containers and roving-tabindex members.
+- Positive `tabindex`: never. It hijacks the tab order for the whole page. Fix the
+  DOM order instead.
 
 ### Roving tabindex
 
-Composite widgets, meaning tabs, menus, toolbars and radio groups, occupy one Tab stop. The active item has `tabindex="0"`, all others `tabindex="-1"`, and arrow keys move both focus and the `0`:
+Composite widgets, meaning tabs, menus, toolbars and radio groups, occupy one Tab
+stop. The active item has `tabindex="0"`, all others `tabindex="-1"`, and arrow keys
+move both focus and the `0`:
 
 ```html
 <div role="tablist" aria-label="Account">
@@ -95,11 +120,13 @@ tablist.addEventListener("keydown", (e) => {
 });
 ```
 
-A combobox keeps DOM focus in its input instead. Point `aria-activedescendant` on the input at the `id` of the highlighted option and update it on arrow keys.
+A combobox keeps DOM focus in its input instead. Point `aria-activedescendant` on the
+input at the `id` of the highlighted option and update it on arrow keys.
 
 ## Focus trapping and restoration
 
-Native `<dialog>` with `showModal()` makes everything behind it inert and closes on Escape:
+Native `<dialog>` with `showModal()` makes everything behind it inert and closes on
+Escape:
 
 ```js
 dialog.showModal(); // on open
@@ -107,7 +134,10 @@ dialog.close(); // on close
 trigger.focus(); // return focus explicitly; the opener may have re-rendered
 ```
 
-A custom overlay that can't use `<dialog>` needs `role="dialog"`, `aria-modal="true"` and an accessible name via `aria-labelledby`. Put `inert` on everything behind it, which removes background content from the tab order and from assistive tech in one move:
+A custom overlay that can't use `<dialog>` needs `role="dialog"`, `aria-modal="true"`
+and an accessible name via `aria-labelledby`. Put `inert` on everything behind it,
+which removes background content from the tab order and from assistive tech in one
+move:
 
 ```js
 // On open
@@ -122,13 +152,18 @@ trigger.focus();
 
 Either way:
 
-- On open, focus the first focusable element. For destructive confirmations, focus the least destructive action instead.
-- On close, return focus to the trigger, or to the nearest logical container if the trigger is gone.
-- Keep scrolling inside the dialog from moving the page behind it; containment is in [better-pwa](../better-pwa.md).
+- On open, focus the first focusable element. For destructive confirmations, focus
+  the least destructive action instead.
+- On close, return focus to the trigger, or to the nearest logical container if the
+  trigger is gone.
+- Keep scrolling inside the dialog from moving the page behind it; containment is in
+  [better-pwa](../better-pwa.md).
 
 ## Keyboard patterns (ARIA APG)
 
-Native elements come with these behaviors; custom widgets must implement them. A role is a promise: give something `role="tab"` and users expect the full tab keyboard model.
+Native elements come with these behaviors; custom widgets must implement them. A role
+is a promise: give something `role="tab"` and users expect the full tab keyboard
+model.
 
 | Widget | Keys |
 | --- | --- |
@@ -142,10 +177,17 @@ Native elements come with these behaviors; custom widgets must implement them. A
 Universal rules:
 
 - Escape dismisses whatever opened last: tooltip, then menu, then dialog.
-- Tabs choose activation mode: automatic (panel switches on arrow focus) when panels render instantly, manual (Enter/Space to activate) when switching is expensive.
-- Enter in a single-line text input submits its form natively. In `<textarea>`, Enter inserts a newline, and ⌘/Ctrl+Enter submits only if you implement it.
-- Custom single-key shortcuts must be remappable, disableable or active only while their component has focus (2.1.4), so speech-input users don't trigger them by talking.
+- Tabs choose activation mode: automatic (panel switches on arrow focus) when panels
+  render instantly, manual (Enter/Space to activate) when switching is expensive.
+- Enter in a single-line text input submits its form natively. In `<textarea>`, Enter
+  inserts a newline, and ⌘/Ctrl+Enter submits only if you implement it.
+- Custom single-key shortcuts must be remappable, disableable or active only while
+  their component has focus (2.1.4), so speech-input users don't trigger them by
+  talking.
 
 ## SPA route changes
 
-Client-side navigation doesn't reset focus or announce anything. On route change, update `document.title` to match the new context, then move focus to the new view's `<h1>` (given `tabindex="-1"`) or to `<main>`. Restore scroll position on history traversal with back and forward, and scroll to top on a new navigation.
+Client-side navigation doesn't reset focus or announce anything. On route change,
+update `document.title` to match the new context, then move focus to the new view's
+`<h1>` (given `tabindex="-1"`) or to `<main>`. Restore scroll position on history
+traversal with back and forward, and scroll to top on a new navigation.

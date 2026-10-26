@@ -1,19 +1,28 @@
 # Variable fonts and OpenType
 
-What a font file can do beyond drawing letters and how to reach those abilities from CSS.
+What a font file can do beyond drawing letters and how to reach those abilities from
+CSS.
 
 ## Static vs variable
 
-- **Static font:** one weight and one style per file. Regular, medium and bold is three files.
-- **Variable font:** a whole range in one file. Any value in it works, such as `font-weight: 450`.
+- **Static font:** one weight and one style per file. Regular, medium and bold is
+  three files.
+- **Variable font:** a whole range in one file. Any value in it works, such as
+  `font-weight: 450`.
 
-A variable font is not automatically better. At one or two weights, static files can be smaller. At several weights, optical sizes or custom axes, a variable font usually wins.
+A variable font is not automatically better. At one or two weights, static files can
+be smaller. At several weights, optical sizes or custom axes, a variable font usually
+wins.
 
-Intermediate weights such as `450` or `550` are a refinement, not something the hierarchy depends on. A static fallback rounds them to the nearest face it has, so two roles that differ only by `50` collapse into one.
+Intermediate weights such as `450` or `550` are a refinement, not something the
+hierarchy depends on. A static fallback rounds them to the nearest face it has, so
+two roles that differ only by `50` collapse into one.
 
 ## Disable synthesis narrowly
 
-`font-synthesis: none` disables weight, style, small-cap and position synthesis together. Scope it to an isolated treatment you have verified across the fallback stack, such as a wordmark or an icon font:
+`font-synthesis: none` disables weight, style, small-cap and position synthesis
+together. Scope it to an isolated treatment you have verified across the fallback
+stack, such as a wordmark or an icon font:
 
 ```css
 .brand-wordmark {
@@ -21,11 +30,13 @@ Intermediate weights such as `450` or `550` are a refinement, not something the 
 }
 ```
 
-To disable one mode, use its longhand: `font-synthesis-weight`, `font-synthesis-style`, `font-synthesis-small-caps` or `font-synthesis-position`.
+To disable one mode, use its longhand: `font-synthesis-weight`,
+`font-synthesis-style`, `font-synthesis-small-caps` or `font-synthesis-position`.
 
 ## Axes
 
-Variable-font controls, each with a four-letter tag. A font supports only the axes its designer included.
+Variable-font controls, each with a four-letter tag. A font supports only the axes
+its designer included.
 
 | Axis | Tag | Property | Controls |
 | --- | --- | --- | --- |
@@ -36,11 +47,15 @@ Variable-font controls, each with a four-letter tag. A font supports only the ax
 | Italic | `ital` | `font-style: italic` | True italic forms |
 | Custom | e.g. `GRAD` (grade) | none | Whatever the designer built |
 
-`font-optical-sizing: auto` is the default: sturdier strokes and looser spacing at small sizes, finer detail at large ones. Never set it to `none` as a fix. Optical sizes predate variable fonts, and many families still ship them as separate `Text` and `Display` files instead of an `opsz` axis.
+`font-optical-sizing: auto` is the default: sturdier strokes and looser spacing at
+small sizes, finer detail at large ones. Never set it to `none` as a fix. Optical
+sizes predate variable fonts, and many families still ship them as separate `Text`
+and `Display` files instead of an `opsz` axis.
 
 ## Raw tags only for custom axes
 
-`font-variation-settings` silently does nothing on a non-variable fallback, where `font-weight` still picks the nearest face:
+`font-variation-settings` silently does nothing on a non-variable fallback, where
+`font-weight` still picks the nearest face:
 
 ```css
 /* Good: common axes use the properties */
@@ -61,7 +76,8 @@ Variable-font controls, each with a four-letter tag. A font supports only the ax
 
 ## OpenType features
 
-Unlike axes, features work the same on static and variable fonts. A font ships only the features its designer included.
+Unlike axes, features work the same on static and variable fonts. A font ships only
+the features its designer included.
 
 | Tag | Feature | Default |
 | --- | --- | --- |
@@ -73,9 +89,11 @@ Unlike axes, features work the same on static and variable fonts. A font ships o
 | `ss01`–`ss20` | Stylistic sets (numbered slots) | Off |
 | `cv01`–`cv99` | Character variants (numbered slots) | Off |
 
-Leave the defaults on. Turn ligatures off only on code, and only when the project prefers literal operators: `font-variant-ligatures: none`.
+Leave the defaults on. Turn ligatures off only on code, and only when the project
+prefers literal operators: `font-variant-ligatures: none`.
 
-Common features have a `font-variant-*` property, and `font-feature-settings` is for the rest:
+Common features have a `font-variant-*` property, and `font-feature-settings` is for
+the rest:
 
 ```css
 /* Good: common features use the properties */
@@ -91,7 +109,8 @@ Common features have a `font-variant-*` property, and `font-feature-settings` is
 
 ## Feature declarations replace, never merge
 
-`font-feature-settings` is one value. A descendant that sets it drops every tag it inherited:
+`font-feature-settings` is one value. A descendant that sets it drops every tag it
+inherited:
 
 ```css
 .table { font-feature-settings: "tnum" 1; }
@@ -99,7 +118,9 @@ Common features have a `font-variant-*` property, and `font-feature-settings` is
 .table .id { font-feature-settings: "zero" 1; }
 ```
 
-Two `font-variant-numeric` declarations on one element behave the same way: the later wins. List every value in one declaration instead, `font-variant-numeric: tabular-nums slashed-zero`. When raw tags are unavoidable, repeat the inherited ones.
+Two `font-variant-numeric` declarations on one element behave the same way: the later
+wins. List every value in one declaration instead, `font-variant-numeric:
+tabular-nums slashed-zero`. When raw tags are unavoidable, repeat the inherited ones.
 
 ## Numeric variants
 
@@ -117,15 +138,24 @@ A data column usually wants `lining-nums tabular-nums` in one declaration.
 
 ## Disambiguate characters people retype
 
-Where a reader copies a value by eye, such as a code, a coupon, an API key or a serial, `I`, `l`, `1` and `0`, `O` must not collide. `slashed-zero` covers the zero. Many fonts collect the rest in a disambiguation stylistic set (Inter's `ss02`, for example). Check the font's docs for the slot, and scope it to those values rather than the whole interface.
+Where a reader copies a value by eye, such as a code, a coupon, an API key or a
+serial, `I`, `l`, `1` and `0`, `O` must not collide. `slashed-zero` covers the zero.
+Many fonts collect the rest in a disambiguation stylistic set (Inter's `ss02`, for
+example). Check the font's docs for the slot, and scope it to those values rather
+than the whole interface.
 
 ## Small caps, superscripts, subscripts
 
-- **Small capitals:** uppercase letters drawn at a smaller size. Enable real ones with `font-variant-caps: small-caps`, and track them like uppercase labels.
-- **Superscripts** sit above the normal line, the 2 in x², and **subscripts** below it, as in H₂O. Enable proper glyphs with `font-variant-position`.
+- **Small capitals:** uppercase letters drawn at a smaller size. Enable real ones
+  with `font-variant-caps: small-caps`, and track them like uppercase labels.
+- **Superscripts** sit above the normal line, the 2 in x², and **subscripts** below
+  it, as in H₂O. Enable proper glyphs with `font-variant-position`.
 
-Both require the font to include the glyphs; without them the browser synthesizes shrunken copies.
+Both require the font to include the glyphs; without them the browser synthesizes
+shrunken copies.
 
 ## Stylistic sets and character variants
 
-`ss01` = stylistic set, slot 01. `cv11` = character variant, slot 11. What each slot does differs font to font, which is why they are numbered, not named; check the font's docs before enabling one.
+`ss01` = stylistic set, slot 01. `cv11` = character variant, slot 11. What each slot
+does differs font to font, which is why they are numbered, not named; check the
+font's docs before enabling one.

@@ -93,8 +93,10 @@ raised shadow on a pseudo-element and fade its opacity, which composites cheaply
 }
 ```
 
-A small ring change, such as the shadow-border hover in [surfaces.md](surfaces.md#shadow-rings),
-can transition `box-shadow` directly. Add the opacity transition with the project's timing.
+A small ring change, such as the shadow-border hover in
+[surfaces.md](surfaces.md#shadow-rings),
+can transition `box-shadow` directly. Add the opacity transition with the project's
+timing.
 
 ## Native pseudo-elements
 
@@ -128,7 +130,8 @@ li::marker {
 
 Older engines do not inherit custom properties into `::backdrop`; give `var()` a
 fallback there. Entry and exit animation for dialogs and their backdrop is in
-[better-animation](../better-animation.md). Placeholder contrast and modal focus belong to
+[better-animation](../better-animation.md). Placeholder contrast and modal focus
+belong to
 [better-accessibility](../better-accessibility.md); selection, `::first-line` and other
 text pseudo-elements are in
 [better-typography](../better-typography/details-and-accessibility.md).
@@ -183,7 +186,8 @@ function openLightbox(thumb: HTMLElement, update: () => void) {
 
 A static `view-transition-name` in a rule that matches several cards breaks uniqueness;
 derive names per item (`card-${id}`) or set them only on the active one. Group many
-names under one style with `view-transition-class` where the project's browsers support it.
+names under one style with `view-transition-class` where the project's browsers
+support it.
 
 ### Styling
 
@@ -216,4 +220,5 @@ snapshot layer sits over live content until it finishes.
 
 Commit state synchronously inside the callback, as in
 `document.startViewTransition(() => flushSync(() => setSelected(item)))`, so the new
-snapshot sees it. Where the project's router has built-in view-transition support, use it.
+snapshot sees it. Where the project's router has built-in view-transition support,
+use it.
