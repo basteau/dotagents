@@ -103,11 +103,13 @@ clamp where a boundary must never be crossed. Pass gesture release velocity into
 spring so a fast flick travels faster than a slow one. Smoothing a pointer-tied
 value through a spring adds momentum, but only for decoration, never for data.
 
-Optional, Motion (`motion.dev`): `bounce` is roughly `1 − damping ratio` and pairs
-with `visualDuration` (or `duration`) for response, as in
-`{ type: "spring", bounce: 0.2, visualDuration: 0.3 }` for a drag settle. In
-physics form, `stiffness: 500, damping: 30` (mass 1) gives a ratio near 0.67 and a
-response near 0.28s.
+Optional, Motion (`motion.dev`): time-based springs take `bounce` (`0` is critically
+damped, higher overshoots more, default `0.25`) and `visualDuration`, the time to
+visually reach the target, as in `{ type: "spring", bounce: 0.2, visualDuration: 0.3 }`
+for a drag settle. Setting `stiffness`, `damping` or `mass` overrides `bounce` and
+the durations. In physics form, `stiffness: 500, damping: 30` (mass 1) gives a ratio
+near 0.67 and a response near 0.28s. For CSS, Motion's `spring(visualDuration,
+bounce)` emits a duration plus a `linear()` easing.
 
 ## Rendering cost
 
