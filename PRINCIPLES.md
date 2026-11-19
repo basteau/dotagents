@@ -4,3 +4,4 @@
 - [KISS principle](https://en.wikipedia.org/wiki/KISS_principle)
 - [Unix philosophy](https://en.wikipedia.org/wiki/Unix_philosophy)
 - [Grug Brained Developer](https://grugbrain.dev/)
+- [Rob Pike Errors are values](https://go.dev/blog/errors-are-values)
