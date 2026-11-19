@@ -1,5 +1,0 @@
-interface:
-  display_name: "Better TypeScript"
-  short_description: "TypeScript modeling, boundary parsing, and expected errors"
-policy:
-  allow_implicit_invocation: false
