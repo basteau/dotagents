@@ -22,3 +22,6 @@
 - runtime
   - pnpm + node
   - devenv shell
+- design
+  - paper.design
+  - DESIGN.md [website](https://github.com/google-labs-code/design.md)
