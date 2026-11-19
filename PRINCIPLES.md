@@ -10,3 +10,4 @@
 - [clean-code](https://github.com/labs42io/clean-code-typescript)
 - [Tim Peters The Zen of Python](https://peps.python.org/pep-0020/)
 - [Rob Pike Go Proverbs](https://go-proverbs.github.io/)
+- [Sandi Metz The Wrong Abstraction](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction)
