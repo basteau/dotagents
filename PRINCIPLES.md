@@ -7,3 +7,4 @@
 - [Rob Pike Errors are values](https://go.dev/blog/errors-are-values)
 - [Alexis King Parse, don't validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/) ([Valibot](https://valibot.dev/))
 - [Jimmy Bogard Vertical Slice Architecture](https://www.jimmybogard.com/vertical-slice-architecture/)
+- [clean-code](https://github.com/labs42io/clean-code-typescript)
