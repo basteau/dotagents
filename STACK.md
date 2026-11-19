@@ -1,0 +1,24 @@
+# Tech Stack (combine freely)
+- testing
+  - pest
+  - vitest
+- code quality
+  - mago (php, format + lint + analyze + guard)
+  - ultracite (oxlint + oxfmt) - with dillon mulroy anti-slop preset
+  - shadcn/lint
+- language:
+  - typescript
+  - php
+- framework:
+  - vite + nitro
+  - vue
+  - effect + alchemy + foldkit (ts)
+  - laravel + inertia
+- components:
+  - nuxt/ui
+  - ui-sdk (website)[https://ui-sdk.dev/]
+  - foldkit/ui
+  - shadcn/ui
+- runtime
+  - pnpm + node
+  - devenv shell
