@@ -16,7 +16,7 @@
   - laravel + inertia
 - components:
   - nuxt/ui
-  - ui-sdk (website)[https://ui-sdk.dev/]
+  - ui-sdk ([website](https://ui-sdk.dev/))
   - foldkit/ui
   - shadcn/ui
 - runtime
