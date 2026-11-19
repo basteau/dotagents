@@ -24,4 +24,4 @@
   - devenv shell
 - design
   - paper.design
-  - DESIGN.md [website](https://github.com/google-labs-code/design.md)
+  - DESIGN.md ([repo](https://github.com/google-labs-code/design.md))
