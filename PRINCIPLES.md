@@ -9,3 +9,4 @@
 - [Jimmy Bogard Vertical Slice Architecture](https://www.jimmybogard.com/vertical-slice-architecture/)
 - [clean-code](https://github.com/labs42io/clean-code-typescript)
 - [Tim Peters The Zen of Python](https://peps.python.org/pep-0020/)
+- [Rob Pike Go Proverbs](https://go-proverbs.github.io/)
