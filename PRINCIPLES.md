@@ -22,6 +22,20 @@
 20. Define errors out of existence. Design the API so the special case is handled by the normal path, like a delete that succeeds when the item is already gone. [Ousterhout]
 21. Never fail silently. When something does go wrong, fail loudly and as soon as possible. No empty catch blocks, no swallowed errors and no fallback that hides the failure. [Zen], [Unix], [Go Proverbs]
 
+## Resources
+
+- [John Ousterhout A Philosophy of Software Design][Ousterhout]
+- [KISS principle][KISS]
+- [Unix philosophy][Unix]
+- [Grug Brained Developer][Grug]
+- [Rob Pike Errors are values][Pike]
+- [Alexis King Parse, don't validate][King] ([Valibot])
+- [Jimmy Bogard Vertical Slice Architecture][Bogard]
+- [clean-code]
+- [Tim Peters The Zen of Python][Zen]
+- [Rob Pike Go Proverbs][Go Proverbs]
+- [Sandi Metz The Wrong Abstraction][Metz]
+
 [Ousterhout]: https://web.stanford.edu/~ouster/cgi-bin/book.php
 [KISS]: https://en.wikipedia.org/wiki/KISS_principle
 [Unix]: https://en.wikipedia.org/wiki/Unix_philosophy
