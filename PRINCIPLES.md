@@ -5,3 +5,4 @@
 - [Unix philosophy](https://en.wikipedia.org/wiki/Unix_philosophy)
 - [Grug Brained Developer](https://grugbrain.dev/)
 - [Rob Pike Errors are values](https://go.dev/blog/errors-are-values)
+- [Alexis King Parse, don't validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/) ([Valibot](https://valibot.dev/))
