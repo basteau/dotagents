@@ -11,3 +11,4 @@
 - [exe.dev using-exe-dev](https://github.com/boldsoftware/exe.dev/tree/main/skill)
 - [Foldkit skills](https://github.com/foldkit/foldkit/tree/main/skills)
 - [Vojta Holik good-css](https://github.com/vojtaholik/good-css/tree/main/skills/good-css)
+- [Sébastien Chopin docster](https://github.com/atinux/docster/blob/main/SKILL.md)
